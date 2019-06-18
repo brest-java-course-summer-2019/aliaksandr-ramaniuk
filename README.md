@@ -1,8 +1,9 @@
 # aliaksandr-ramaniuk
 
 
-EmployeesDynamoBrest: 
-Project. Homework. An application for recording internal information about employees of FC Dynamo Brest.
+EmployeesDynamoBrest:
+Project. Homework. 
+An application for recording internal information about employees of FC Dynamo Brest.
 
 
 docs:
