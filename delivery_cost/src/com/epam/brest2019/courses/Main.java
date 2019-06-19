@@ -12,6 +12,7 @@ public class Main {
         System.out.println(newName);
         System.out.println(a);
         System.out.println("aaaaa");
+        System.out.println(a);
 
     }
 
