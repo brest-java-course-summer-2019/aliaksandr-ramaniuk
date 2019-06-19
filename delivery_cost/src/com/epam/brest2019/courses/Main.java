@@ -11,6 +11,7 @@ public class Main {
         Integer a = 12;
         System.out.println(newName);
         System.out.println(a);
+
     }
 
 } 
