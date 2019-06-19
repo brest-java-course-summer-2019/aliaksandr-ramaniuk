@@ -10,6 +10,7 @@ public class Main {
         Integer newName = 12;
         Integer a = 12;
         System.out.println(newName);
+        System.out.println(a);
     }
 
 } 
