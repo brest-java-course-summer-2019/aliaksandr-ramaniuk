@@ -1,34 +1,41 @@
 package com.epam.brest2019.courses;
 
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hi22");
 
+        BigDecimal weight;
+        BigDecimal distance;
 
-        Main main = new Main ();
-        System.out.println(main.getString());
-        System.out.println(main.calc(12f, 13d));
+        BigDecimal pricePerKg = new BigDecimal("30");
+        BigDecimal pricePerKm = new BigDecimal("50");
 
-        BigDecimal a = new BigDecimal("1.01");
-        BigDecimal b = new BigDecimal("0.01");
-        BigDecimal t = a.subtract(b);
-        System.out.println("res: " + t);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the weight in kilograms or 'q' for quit: ");
+        String inputString = scanner.nextLine();
+        if (!inputString.equals("Q")) {
+            weight = new BigDecimal(inputString);
+        } else {
+            System.out.println("\nBye!");
+            return;
+        }
 
+        System.out.println("Enter the distance in kilometers or 'q' for quit: ");
+        inputString = scanner.nextLine();
+        if (!inputString.equals("Q")) {
+            distance = new BigDecimal(inputString);
+        } else {
+            System.out.println("\nBye!");
+            return;
+        }
 
+        System.out.println("Value of weight = " + weight);
+        System.out.println("Value of distance = " + distance);
+
+        BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
+        System.out.println("Price = " + price);
     }
-
-    public String getString(){
-        return "TEST";
-
-    }
-    public  Double calc(Float f, Double d){
-        return  f + d;
-    }
-
-} 
-
+}
