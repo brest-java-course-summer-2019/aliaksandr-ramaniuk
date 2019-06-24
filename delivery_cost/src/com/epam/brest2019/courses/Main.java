@@ -30,7 +30,6 @@ public class Main {
 
         }
         catch (NullPointerException e){System.out.println(">> Error!"); }
-
         scanner.close();
     }
 }
