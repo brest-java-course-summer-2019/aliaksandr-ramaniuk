@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+
+    <style>
+        body{
+              background-color: #ebf0fa
+        }
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        td, th {
+        border: 2px solid #004d80;
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #c1d1f0;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<a href="index.html"><img height="100" width="100" alt="Динамо Брест" src="img/Dynamo_Brest_logo.png"></a>
+<hr>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="роли.html"><button>Роли</button></a></li>
+            <li><a href="пользователи.html"><button>Пользователи</button></a></li>
+        </ul>
+    </nav>
+
+    <h1>
+        <p style="color:#142852">Пользователи</p>
+    </h1>
+
+    <h3>
+        <p style="color:#142852"> Фильтр по дате с:
+            <input id="поле_дата_с:"
+                   type="date"
+                   value="13.09.2018"/>
+            &nbsp&nbsp&nbspпо:
+            <input id="поле_дата_по:"
+                   type="date"
+                   value="13.09.2018"/>
+            &nbsp&nbsp&nbsp&nbsp&nbsp<a href="#"><button>Применить фильтр</button></a>
+        </p>
+        <p style="color:#142852">Фильтр по Фамилии:
+            <input id="поле_отчество:"
+                   type="text"
+                   value=" "/>
+        </p>
+    </h3>
+
+    <ul>
+        <li><a href="пользователь_добавление.html"><button>Добавить пользователя</button></a></li>
+        <li><a href="пользователи.html"><button>Обновить данные</button></a></li>
+    </ul>
+</header>
+
+<section>
+    <table>
+        <tr>
+            <th>Логин</th>
+            <th>ФИО</th>
+            <th>Дата добавления</th>
+            <th>Роль</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Marcel02</td>
+            <td>Марцел Личка</td>
+            <td>01.02.2018</td>
+            <td>Тренер</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td>Kovalchuk01</td>
+            <td>Ковальчук Сергей Петрович</td>
+            <td>01.03.2017</td>
+            <td>Тренер</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        <tr>
+            <td>noiok19</td>
+            <td>Нойок Александр Викторович</td>
+            <td>05.07.2018</td>
+            <td>Игрок</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td>nekhaychik33</td>
+            <td>Нехайчик Павел Александрович</td>
+            <td>01.07.2018</td>
+            <td>Игрок</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td>sava88</td>
+            <td>Сававций Павел Олегович</td>
+            <td>28.12.2017</td>
+            <td>Игрок</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td>milia10</td>
+            <td>Милевский Артём Владимирович</td>
+            <td>12.01.2019</td>
+            <td>Игрок</td>
+            <td>
+                <a href="пользователь_редактирование.html"><button>Редактировать</button></a>
+                <a href="#"><button>Удалить</button></a>
+            </td>
+        </tr>
+    </table>
+</section>
+<p> </p>
+<hr>
+
+
+<footer>
+    <p>&copy; 2019  <img src="img/ball.jpg" alt="мяч" width="25" height="25"></p>
+</footer>
+
+</body>
+</html>

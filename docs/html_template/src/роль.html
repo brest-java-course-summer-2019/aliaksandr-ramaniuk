@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Роль</title>
+
+    <style>
+        body{
+              background-color: #ebf0fa
+        }
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        }
+
+        td, th {
+        border: 2px solid #004d80;
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #c1d1f0;
+        }
+    </style>
+</head>
+
+<body>
+
+<a href="index.html"><img height="100" width="100" alt="Динамо Брест" src="img/Dynamo_Brest_logo.png"></a>
+<hr>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="роли.html"><button>Роли</button></a></li>
+            <li><a href="пользователи.html"><button>Пользователи</button></a></li>
+        </ul>
+    </nav>
+
+    <h1>
+        <p style="color:#142852">Редактирование/Добавление роли</p>
+    </h1>
+    <ul>
+        <li><a href="роли.html"><button>Вернуться</button></a></li>
+        <li><a href="#"><button>Сохранить</button></a></li>
+    </ul>
+</header>
+
+<section>
+    <table>
+        <tr>
+            <th>Наименование роли:</th>
+            <td>
+                <div>
+                    <input id="поле_роль"
+                           type="text"
+                           value="Тренер"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Доступы к таблицам:</th>
+            <td>
+                <div>
+                    <select id="поле_доступы">
+                        <option value="0">Роли</option>
+                        <option value="1">Пользователи</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Права:</th>
+            <td>
+                <div>
+                    <select id="поле_права">
+                        <option value="0">read</option>
+                        <option value="1">write</option>
+                        <option value="2">admin</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <form>
+                <th>Пользователь:</th>
+                <td>
+                    <div>
+                        <select id="поле_пользователь_логин">
+                            <option value="0">dynamo001</option>
+                            <option value="1">dynamo002</option>
+                            <option value="2">dynamo003</option>
+                            <option value="3">dynamo004</option>
+                            <option value="4">dynamo005</option>
+                            <option value="5">dynamo006</option>
+                            <option value="6">dynamo007</option>
+                            <option value="7">dynamo008</option>
+                            <option value="8">dynamo009</option>
+                            <option value="9">VasilyukForeverYoung010</option>
+                            <option value="10">dynamo011</option>
+                            <option value="11">dynamo012</option>
+                            <option value="12">dynamo013</option>
+                        </select>
+                    </div>
+                </td>
+            </form>
+        </tr>
+    </table>
+</section>
+<p> </p>
+<hr>
+
+<footer>
+    <p>&copy; 2019  <img src="img/ball.jpg" alt="мяч" width="25" height="25"></p>
+</footer>
+
+</body>
+</html>

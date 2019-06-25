@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь_добавление</title>
+    <style>
+        body{
+              background-color: #ebf0fa
+        }
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        }
+
+        td, th {
+        border: 2px solid #004d80;
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #c1d1f0;
+        }
+    </style>
+</head>
+
+<body>
+
+<a href="index.html"><img height="100" width="100" alt="Динамо Брест" src="img/Dynamo_Brest_logo.png"></a>
+<hr>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="роли.html"><button>Роли</button></a></li>
+            <li><a href="пользователи.html"><button>Пользователи</button></a></li>
+        </ul>
+    </nav>
+
+    <h1>
+        <p style="color:#142852">Добавление пользователя</p>
+    </h1>
+    <ul>
+        <li><a href="пользователи.html"><button>Вернуться</button></a></li>
+        <li><a href="#"><button>Сохранить</button></a></li>
+    </ul>
+</header>
+
+<section>
+    <table>
+        <tr>
+            <th>Логин:</th>
+            <td>
+                <div>
+                    <input id="поле_логин"
+                           type="text"
+                           value="Kislyak15"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Фамилия:</th>
+            <td>
+                <div>
+                    <input id="поле_фамилия:"
+                           type="text"
+                           value="Кисляк"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Имя:</th>
+            <td>
+                <div>
+                    <input id="поле_имя:"
+                           type="text"
+                           value="Сергей"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Отчество:</th>
+            <td>
+                <div>
+                    <input id="поле_отчество:"
+                           type="text"
+                           value="Викторович"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Дата добавления в систему:</th>
+            <td>
+                <div>
+                    <input id="поле_дата:"
+                           type="date"
+                           value="13.09.2018"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <form>
+            <th>Роль:</th>
+            <td>
+                <div>
+                    <select id="поле_роли">
+                        <option value="0">Администратор</option>
+                        <option value="1">Руководство</option>
+                        <option value="2">Тренер</option>
+                        <option value="3">Игрок</option>
+                        <option value="4">Бухгалтер</option>
+                        <option value="5">Обслуживающий персонал</option>
+                    </select>
+                </div>
+            </td>
+            </form>
+        </tr>
+    </table>
+</section>
+<p> </p>
+<hr>
+
+<footer>
+    <p>&copy; 2019  <img src="img/ball.jpg" alt="мяч" width="25" height="25"></p>
+</footer>
+
+</body>
+</html>
