@@ -1,4 +1,3 @@
-https://travis-ci.org/brest-java-course-summer-2019/aliaksandr-ramaniuk.svg?branch=master
 
 # aliaksandr-ramaniuk
 
