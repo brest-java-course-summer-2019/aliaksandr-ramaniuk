@@ -6,13 +6,23 @@
 
 
     <artifactId>model</artifactId>
-    <packaging>jar</packaging>
 
-    <name>employees dynamo brest</name>
+    <name>Employees Dynamo Brest</name>
 
     <parent>
-        <groupId>com/epam/brest2019/courses</groupId>
-        <artifactId>employees-dynamo-brest</artifactId>
+        <groupId>java.com.epam.brest2019.courses</groupId>
+        <artifactId>employees-Dynamo-Brest</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
+
+
+

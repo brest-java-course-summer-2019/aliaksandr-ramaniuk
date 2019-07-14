@@ -2,6 +2,7 @@
 
 EmployeesDynamoBrest(Project. Homework):
 - An application for recording internal information about employees of FC Dynamo Brest.
+- Homework 1 - Maven
 
 docs(Documentation. Homework):
 - Homework 1 - Specification .pdf - Application specification for accounting internal information about employees of FC Dynamo Brest.
@@ -13,8 +14,5 @@ delivery_cost(Project. Training. Homework):
 - Main.java - Training, git commit.
 - Homework 1 - Main.java. Read the values from the files(resources).
 - Homework 2 - Delivery_cost.
-
-
-
 
 
