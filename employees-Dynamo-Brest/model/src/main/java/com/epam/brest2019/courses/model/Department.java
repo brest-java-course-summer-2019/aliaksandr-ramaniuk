@@ -62,10 +62,10 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", departmentNmae='" + departmentName + '\'' +
-                ", totalEmployees=" + totalEmployees +
-                '}';
+        return "Department{"
+                + "departmentId=" + departmentId
+                + ", departmentNmae='" + departmentName + '\''
+                + ", totalEmployees=" + totalEmployees
+                + '}';
     }
 }
