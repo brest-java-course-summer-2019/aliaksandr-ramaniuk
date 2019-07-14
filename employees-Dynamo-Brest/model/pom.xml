@@ -10,7 +10,7 @@
     <name>Employees Dynamo Brest</name>
 
     <parent>
-        <groupId>com.epam.brest2019.courses</groupId>
+        <groupId>java.com.epam.brest2019.courses</groupId>
         <artifactId>employees-Dynamo-Brest</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
