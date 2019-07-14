@@ -9,8 +9,8 @@ public class DepartmentTest {
 
     @Test
     public void getDepartentId() {
-        department.setDepartmentId(15);
-        Assert.assertTrue(department.getDepartmentId().equals(15));
+        department.setDepartmentId(5);
+        Assert.assertTrue(department.getDepartmentId().equals(5));
     }
 
     @Test
@@ -18,6 +18,4 @@ public class DepartmentTest {
         department.setDepartmentName("Игрок");
         Assert.assertTrue(department.getDepartmentName().equals("Игрок"));
     }
-
-
 }
