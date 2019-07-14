@@ -1,6 +1,5 @@
-package src.test.java.com.epam.brest2019.courses.model;
+package java.com.epam.brest2019.courses.model;
 
-import src.main.java.com.epam.brest2019.courses.model.Department;
 import org.junit.Assert;
 import org.junit.Test;
 

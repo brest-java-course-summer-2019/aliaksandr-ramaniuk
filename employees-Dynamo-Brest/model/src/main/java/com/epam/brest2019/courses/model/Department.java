@@ -1,4 +1,4 @@
-package src.main.java.com.epam.brest2019.courses.model;
+package java.com.epam.brest2019.courses.model;
 
 /**
  * Department model
