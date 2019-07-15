@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-        <groupId>java.com.epam.brest2019.courses</groupId>
-        <artifactId>employees-Dynamo-Brest</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <packaging>pom</packaging>
+    <groupId>java.com.epam.brest2019.courses</groupId>
+    <artifactId>employees-Dynamo-Brest</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-        <name>Employees Dynamo Brest</name>
-        <url>http://www.example.com</url>
+    <name>Employees Dynamo Brest</name>
+    <url>http://www.example.com</url>
 
     <modules>
         <module>model</module>
@@ -22,6 +21,7 @@
             <url>${project.baseUri}</url>
         </site>
     </distributionManagement>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,7 +42,7 @@
 
         <checkstyle.version>8.22</checkstyle.version>
         <jacoco.version>0.8.2</jacoco.version>
-        <jacoco.bundle.coveredratio.minimum>65%</jacoco.bundle.coveredratio.minimum>
+        <jacoco.bundle.coveredratio.minimum>95</jacoco.bundle.coveredratio.minimum>
     </properties>
 
     <dependencyManagement>
@@ -69,7 +69,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -82,13 +81,11 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.version}</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
@@ -104,7 +101,6 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -128,6 +124,7 @@
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>4.3.0</version>
                 </plugin>
+
             </plugins>
 
         </pluginManagement>
@@ -242,6 +239,7 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 
@@ -294,6 +292,7 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </reporting>
 

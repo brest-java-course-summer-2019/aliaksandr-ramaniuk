@@ -8,14 +8,20 @@ public class DepartmentTest {
     Department department = new Department();
 
     @Test
-    public void getDepartentId() {
+    public void getDepartmentId() {
         department.setDepartmentId(5);
         Assert.assertTrue(department.getDepartmentId().equals(5));
     }
 
     @Test
-    public void getDepartentName() {
+    public void getDepartmentName() {
         department.setDepartmentName("Игрок");
         Assert.assertTrue(department.getDepartmentName().equals("Игрок"));
+    }
+
+    @Test
+    public void getTotalEmployees() {
+        department.setTotalEmployees(7);
+        Assert.assertTrue(department.getTotalEmployees().equals(7));
     }
 }

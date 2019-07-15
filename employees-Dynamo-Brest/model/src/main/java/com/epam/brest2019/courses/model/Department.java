@@ -1,7 +1,7 @@
 package java.com.epam.brest2019.courses.model;
 
 /**
- * Department model
+ *  POJO Department for model
  */
 public class Department {
     /**
