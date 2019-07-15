@@ -28,8 +28,8 @@ public class Department {
     /**
      * Set department name
      */
-    public void setDepartmentName(String departmentNmae) {
-        this.departmentName = departmentNmae;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     /**

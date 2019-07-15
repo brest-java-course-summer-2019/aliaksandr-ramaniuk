@@ -1,6 +1,5 @@
 package java.com.epam.brest2019.courses.model;
 
-
 /**
  * Employee model
  */

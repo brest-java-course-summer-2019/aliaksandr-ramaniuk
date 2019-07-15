@@ -42,7 +42,7 @@
 
         <checkstyle.version>8.22</checkstyle.version>
         <jacoco.version>0.8.2</jacoco.version>
-        <jacoco.bundle.coveredratio.minimum>95</jacoco.bundle.coveredratio.minimum>
+        <jacoco.bundle.coveredratio.minimum>65</jacoco.bundle.coveredratio.minimum>
     </properties>
 
     <dependencyManagement>
@@ -124,10 +124,10 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.eluder.coveralls</groupId>
-                    <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>4.3.0</version>
-                </plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.3.0</version>
+                 </plugin>
 
             </plugins>
 
