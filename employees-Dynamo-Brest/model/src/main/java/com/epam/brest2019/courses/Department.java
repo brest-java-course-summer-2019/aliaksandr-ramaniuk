@@ -1,4 +1,4 @@
-package com.epam.brest2019.courses.model;
+package com.epam.brest2019.courses;
 
 /**
  *  POJO Department for model
