@@ -61,6 +61,7 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <pluginManagement>
             <plugins>
@@ -88,6 +89,7 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.version}</version>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
@@ -103,6 +105,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -122,11 +125,10 @@
                 </plugin>
 
                 <plugin>
-                        <groupId>org.eluder.coveralls</groupId>
-                        <artifactId>coveralls-maven-plugin</artifactId>
-                        <version>4.3.0</version>
-                 </plugin>
-
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>4.3.0</version>
+                </plugin>
             </plugins>
 
         </pluginManagement>
@@ -241,7 +243,6 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 
@@ -294,9 +295,7 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </reporting>
 
 </project>
-
