@@ -1,7 +1,7 @@
 package java.com.epam.brest2019.courses.model;
 
 /**
- * Department model
+ *  POJO Department for model
  */
 public class Department {
     /**
@@ -28,8 +28,8 @@ public class Department {
     /**
      * Set department name
      */
-    public void setDepartmentName(String departmentNmae) {
-        this.departmentName = departmentNmae;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     /**
@@ -62,10 +62,10 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", departmentNmae='" + departmentName + '\'' +
-                ", totalEmployees=" + totalEmployees +
-                '}';
+        return "Department{"
+                + "departmentId=" + departmentId
+                + ", departmentNmae='" + departmentName + '\''
+                + ", totalEmployees=" + totalEmployees
+                + '}';
     }
 }
