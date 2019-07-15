@@ -13,6 +13,7 @@
 
     <modules>
         <module>model</module>
+        <module>dao</module>
     </modules>
 
     <distributionManagement>
@@ -21,7 +22,6 @@
             <url>${project.baseUri}</url>
         </site>
     </distributionManagement>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
