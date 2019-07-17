@@ -1,6 +1,6 @@
 language: java
 jdk:
   - oraclejdk8
-before_script: cd employees-Dynamo-Brest/
+before_script: cd employees-dynamo-brest/
 script:
   - mvn clean test coveralls:report
