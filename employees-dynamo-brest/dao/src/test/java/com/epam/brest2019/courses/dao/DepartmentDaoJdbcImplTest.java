@@ -13,6 +13,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
+
 public class DepartmentDaoJdbcImplTest {
 
     @Autowired
