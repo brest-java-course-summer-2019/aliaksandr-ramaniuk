@@ -64,7 +64,7 @@ public class Department {
     public String toString() {
         return "Department{"
                 + "departmentId=" + departmentId
-                + ", departmentNmae='" + departmentName + '\''
+                + ", departmentName='" + departmentName + '\''
                 + ", totalEmployees=" + totalEmployees
                 + '}';
     }

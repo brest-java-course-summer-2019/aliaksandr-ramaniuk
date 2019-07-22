@@ -29,9 +29,37 @@ public class DepartmentDaoJdbcImplTest {
     @Test
     public void addDepartment() {
         Department testDepartment = new Department();
-        testDepartment.setDepartmentName("QA");
+        testDepartment.setDepartmentName("Бухгалтерия");
+
         Department newDepartment = departmentDao.add(testDepartment);
         Assert.assertNotNull(newDepartment.getDepartmentId());
     }
+/*
+    @Test
+    public void updateDepartment() {
+        Department testDepartment = new Department();
+        testDepartment.setDepartmentName("Тест");
+        testDepartment.setDepartmentId(2);
+
+        Department updateDepartment = departmentDao.update(testDepartment);
+        Assert.assertNotNull(updateDepartment);
+        Assert.assertNotNull(updateDepartment.getDepartmentId());
+        Assert.assertEquals("Тест", updateDepartment.getDepartmentName());
+    }
+
+    @Test
+    public void deleteDepartment() {
+        Department testDepartment = new Department();
+        testDepartment.setDepartmentName("Бухгалтерия");
+
+        Department newDepartment = departmentDao.add(testDepartment);
+
+        Department deleteDepartment = departmentDao.delete(testDepartment.getDepartmentId());
+
+        Assert.assertEquals(1, departmentDao.delete(testDepartment.getDepartmentId()));
+       }
+*/
+
+
 
 }

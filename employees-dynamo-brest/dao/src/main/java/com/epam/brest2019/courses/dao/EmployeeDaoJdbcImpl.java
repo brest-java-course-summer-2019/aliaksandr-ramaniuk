@@ -30,7 +30,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Override
     public Employee add(Employee employee) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("login", employee.getLogin());
+        parameters.addValue("login",  employee.getLogin());
         parameters.addValue("firstName", employee.getFirstName());
         parameters.addValue("lastName", employee.getLastName());
         parameters.addValue("patronicName", employee.getPatronicName());

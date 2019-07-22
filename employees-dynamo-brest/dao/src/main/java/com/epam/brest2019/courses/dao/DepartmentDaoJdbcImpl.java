@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+
 @Component
 public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
@@ -21,6 +22,10 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
             "select d.department_id, d.department_name from department d order by 2";
 
     private final static String ADD_DEPARTMENT = "insert into department (department_name) values (:departmentName)";
+
+    private final static String UPDATE_DEPARTMENT = "update department set department_name = :departmentName where department_id = :departmentId";
+
+    private final static String DELETE_DEPARTMENT = "delete from department where department_id = :departmentId";
 
     public DepartmentDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -39,11 +44,20 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void update(Department department) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("departmentName", department.getDepartmentName());
+        parameters.addValue("departmentId", department.getDepartmentId());
+
+        namedParameterJdbcTemplate.update(UPDATE_DEPARTMENT, parameters);
 
     }
 
     @Override
     public void delete(Integer departmentId) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("departmentId", departmentId);
+
+        namedParameterJdbcTemplate.update(DELETE_DEPARTMENT, parameters);
 
     }
 
