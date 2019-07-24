@@ -4,6 +4,20 @@ package com.epam.brest2019.courses.model;
  *  POJO Department for model
  */
 public class Department {
+
+    /**
+     * Constructor with department name.
+     */
+      public Department(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    /**
+     * Constructor without parameters
+     */
+    public Department() {
+    }
+
     /**
      * Department Id
      */
@@ -15,7 +29,7 @@ public class Department {
     /**
      * Total employees in Department
      */
-    private Integer totalEmployees;
+//    private Integer totalEmployees;
 
 
     /**
@@ -35,7 +49,7 @@ public class Department {
     /**
      * Set total employees in Department
      */
-    public void setTotalEmployees(Integer totalEmployees) {
+   /* public void setTotalEmployees(Integer totalEmployees) {
         this.totalEmployees = totalEmployees;
     }
 
@@ -56,16 +70,16 @@ public class Department {
     /**
      * Get total employees in Department
      */
-    public Integer getTotalEmployees() {
+ /*   public Integer getTotalEmployees() {
         return totalEmployees;
     }
-
+*/
     @Override
     public String toString() {
         return "Department{"
                 + "departmentId=" + departmentId
-                + ", departmentNmae='" + departmentName + '\''
-                + ", totalEmployees=" + totalEmployees
+                + ", departmentName='" + departmentName + '\''
+     //           + ", totalEmployees=" + totalEmployees
                 + '}';
     }
 }
