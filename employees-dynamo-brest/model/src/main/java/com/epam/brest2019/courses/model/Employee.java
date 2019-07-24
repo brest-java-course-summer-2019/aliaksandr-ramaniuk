@@ -8,6 +8,28 @@ package com.epam.brest2019.courses.model;
 public class Employee {
 
     /**
+     * Constructor with department id.
+     * Employee login
+     * Employee First Name
+     * Employee Last Name
+     * mployee Patronic Name
+     */
+    public Employee(Integer departmentId, String login, String firstName, String lastName, String patronicName) {
+        this.departmentId = departmentId;
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronicName = patronicName;
+    }
+
+    /**
+     * Constructor without parameters
+     */
+
+    public Employee() {
+    }
+
+    /**
      * Department Id
      */
     private Integer departmentId;
@@ -37,11 +59,6 @@ public class Employee {
      */
     private String patronicName;
 
-    /**
-     * Department Name
-     */
-    private String departmentName;
-
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
@@ -65,10 +82,6 @@ public class Employee {
 
     public void setPatronicName(String patronicName) {
         this.patronicName = patronicName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
     }
 
 
@@ -96,10 +109,6 @@ public class Employee {
         return patronicName;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
 
     @Override
     public String toString() {
@@ -110,7 +119,6 @@ public class Employee {
                 + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\''
                 + ", patronicName='" + patronicName + '\''
-                + ", departmentName='" + departmentName + '\''
                 + '}';
     }
 }

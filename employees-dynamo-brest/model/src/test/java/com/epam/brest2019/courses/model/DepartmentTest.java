@@ -19,9 +19,12 @@ public class DepartmentTest {
         Assert.assertTrue(department.getDepartmentName().equals("Игрок"));
     }
 
+    /*
     @Test
     public void getTotalEmployees() {
         department.setTotalEmployees(7);
         Assert.assertTrue(department.getTotalEmployees().equals(7));
     }
+    */
+
 }

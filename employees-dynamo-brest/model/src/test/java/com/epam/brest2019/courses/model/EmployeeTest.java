@@ -43,10 +43,4 @@ public class EmployeeTest {
         employee.setPatronicName("PatronicName");
         Assert.assertTrue(employee.getPatronicName().equals("PatronicName"));
     }
-
-    @Test
-    public void getDepartmentName() {
-        employee.setDepartmentName("DepartmentName");
-        Assert.assertTrue(employee.getDepartmentName().equals("DepartmentName"));
-    }
 }

@@ -72,12 +72,6 @@
                 <groupId>com.epam.brest2019.courses</groupId>
                 <artifactId>test-db</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.epam.brest2019.courses</groupId>
-                <artifactId>test-db</artifactId>
-                <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
 
