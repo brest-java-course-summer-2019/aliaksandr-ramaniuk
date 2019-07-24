@@ -54,7 +54,14 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void findByEmployeeId() throws Exception {
-
+        Employee testEmployee = employeeDao.findById(employee.getEmployeeId()).get();
+        assertNotNull(employeeDao);
+        assertTrue(testEmployee.getEmployeeId().equals(employee.getEmployeeId()));
+        assertTrue(testEmployee.getDepartmentId().equals(1));
+        assertTrue(testEmployee.getLogin().equals("loginTest"));
+        assertTrue(testEmployee.getFirstName().equals("firstNameTest"));
+        assertTrue(testEmployee.getLastName().equals("lastNameTest"));
+        assertTrue(testEmployee.getPatronicName().equals("patronicNameTest"));
  }
 
     @Test
