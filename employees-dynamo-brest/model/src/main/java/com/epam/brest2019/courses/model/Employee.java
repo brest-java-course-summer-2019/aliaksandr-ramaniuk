@@ -12,7 +12,7 @@ public class Employee {
      * Employee login
      * Employee First Name
      * Employee Last Name
-     * mployee Patronic Name
+     * Employee Patronic Name
      */
     public Employee(Integer departmentId, String login, String firstName, String lastName, String patronicName) {
         this.departmentId = departmentId;
@@ -84,7 +84,6 @@ public class Employee {
         this.patronicName = patronicName;
     }
 
-
     public Integer getDepartmentId() {
         return departmentId;
     }
@@ -108,7 +107,6 @@ public class Employee {
     public String getPatronicName() {
         return patronicName;
     }
-
 
     @Override
     public String toString() {

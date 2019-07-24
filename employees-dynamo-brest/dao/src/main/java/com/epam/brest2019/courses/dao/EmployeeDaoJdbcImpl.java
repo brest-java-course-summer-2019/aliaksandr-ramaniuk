@@ -41,7 +41,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
             "(:login, :firstName, :lastName, :patronicName, :departmentId)";
 
     private static final String UPDATE_EMPLOYEE =
-            "update employee set login = :login, first_name = :firstName, last_name = :lastName, patronic_name = :patronic_name, " +
+            "update employee set login = :login, first_name = :firstName, last_name = :lastName, patronic_name = :patronicName, " +
                     "department_id = :departmentId where employee_id = :employeeId";
 
     private static final String DELETE_EMPLOYEE =
