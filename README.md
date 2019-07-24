@@ -3,6 +3,8 @@
 EmployeesDynamoBrest(Project. Homework):
 - An application for recording internal information about employees of FC Dynamo Brest.
 - Homework 1 - Maven, Build Status, Coverage Status
+- Homework 2 - DAO
+- Homework 3 - DAO + db
 
 docs(Documentation. Homework):
 - Homework 1 - Specification .pdf - Application specification for accounting internal information about employees of FC Dynamo Brest.
