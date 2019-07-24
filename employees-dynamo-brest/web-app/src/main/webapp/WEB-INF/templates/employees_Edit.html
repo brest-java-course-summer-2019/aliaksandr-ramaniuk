@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+
+    <link rel="stylesheet" href="css/style.css"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
 
     <title>Employees_Edit</title>
     </head>
@@ -15,8 +26,10 @@
 <body>
 <header>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
-        <a href="index.html"
-           class="navbar-brand"><img src="img/Dynamo_Brest_logo.png" height="50" width="50"
+        <a href="/" href="index.html"
+           class="navbar-brand"><img src="../../resources/static/img/Dynamo_Brest_logo.png"
+                                     th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
+                                     height="50" width="50"
                                      alt="Динамо Брест"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,6 +140,12 @@
         <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
 </footer>
 
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

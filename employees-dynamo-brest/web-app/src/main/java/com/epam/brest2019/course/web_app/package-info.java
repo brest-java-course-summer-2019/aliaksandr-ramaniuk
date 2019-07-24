@@ -2,7 +2,5 @@
  * Contains web controllers.
  */
 
-
-
-package java.com.epam.brest2019.course.web_app;
+package com.epam.brest2019.course.web_app;
 
