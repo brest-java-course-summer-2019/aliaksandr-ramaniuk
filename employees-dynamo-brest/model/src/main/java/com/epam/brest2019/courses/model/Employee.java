@@ -10,15 +10,15 @@ public class Employee {
     /**
      * Constructor with department id.
      * Employee login
-     * Employee First Name
      * Employee Last Name
+     * Employee First Name
      * Employee Patronic Name
      */
-    public Employee(Integer departmentId, String login, String firstName, String lastName, String patronicName) {
+    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName) {
         this.departmentId = departmentId;
         this.login = login;
-        this.firstName = firstName;
         this.lastName = lastName;
+        this.firstName = firstName;
         this.patronicName = patronicName;
     }
 
@@ -45,14 +45,14 @@ public class Employee {
     private String login;
 
     /**
-     * Employee First Name
-     */
-    private String firstName;
-
-    /**
      * Employee Last Name
      */
     private String lastName;
+
+    /**
+     * Employee First Name
+     */
+    private String firstName;
 
     /**
      * Employee Patronic Name
@@ -72,13 +72,14 @@ public class Employee {
         this.login = login;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public void setPatronicName(String patronicName) {
         this.patronicName = patronicName;
@@ -108,15 +109,15 @@ public class Employee {
         return patronicName;
     }
 
-    @Override
+      @Override
     public String toString() {
-        return "Employee{"
-                + "departmentId=" + departmentId
-                + ", employeeId=" + employeeId
-                + ", login='" + login + '\''
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", patronicName='" + patronicName + '\''
-                + '}';
+        return "Employee{" +
+                "departmentId=" + departmentId +
+                ", employeeId=" + employeeId +
+                ", login='" + login + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", patronicName='" + patronicName + '\'' +
+                '}';
     }
 }

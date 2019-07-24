@@ -1,6 +1,5 @@
 package com.epam.brest2019.courses.dao;
 
-
 import com.epam.brest2019.courses.model.Employee;
 
 import java.util.List;
@@ -31,7 +30,6 @@ public interface EmployeeDao {
     /**
      * Persist new employee.
      */
-
     Employee add(Employee employee);
 
 

@@ -45,7 +45,7 @@ public class DepartmentDaoJdbcImplTest {
     @Test
     public void addDepartment() {
         Department testAddDepartment = new Department();
-            testAddDepartment.setDepartmentName("Группа поддержки");
+        testAddDepartment.setDepartmentName("Группа поддержки");
 
         Department newDepartment = departmentDao.add(testAddDepartment);
         Assert.assertNotNull(newDepartment.getDepartmentId());
@@ -53,23 +53,20 @@ public class DepartmentDaoJdbcImplTest {
 
     @Test
     public void updateDepartment() {
-      Department testNewDepartment = new Department(COACH);
-      testNewDepartment = departmentDao.add(testNewDepartment);
-      testNewDepartment.setDepartmentName(NEW_COACH);
-      departmentDao.update(testNewDepartment);
+        Department testNewDepartment = new Department(COACH);
+        testNewDepartment = departmentDao.add(testNewDepartment);
+        testNewDepartment.setDepartmentName(NEW_COACH);
+        departmentDao.update(testNewDepartment);
 
-      Department testUpdateDepartment = departmentDao.findById(testNewDepartment.getDepartmentId()).get();
-      assertTrue(testNewDepartment.getDepartmentId().equals(testUpdateDepartment.getDepartmentId()));
-      assertTrue(testNewDepartment.getDepartmentName().equals(testUpdateDepartment.getDepartmentName()));
-
-
-
+        Department testUpdateDepartment = departmentDao.findById(testNewDepartment.getDepartmentId()).get();
+        assertTrue(testNewDepartment.getDepartmentId().equals(testUpdateDepartment.getDepartmentId()));
+        assertTrue(testNewDepartment.getDepartmentName().equals(testUpdateDepartment.getDepartmentName()));
     }
 
     @Test
     public void deleteDepartment() {
-       Department testNewDepartment = new Department(COACH);
-       testNewDepartment = departmentDao.add(testNewDepartment);
+        Department testNewDepartment = new Department(COACH);
+        testNewDepartment = departmentDao.add(testNewDepartment);
 
         List<Department> departments = departmentDao.findAll();
         int sizeBefore = departments.size();
