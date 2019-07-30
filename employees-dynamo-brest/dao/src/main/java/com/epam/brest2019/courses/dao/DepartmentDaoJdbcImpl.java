@@ -29,10 +29,11 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final static String SELECT_ALL =
             "SELECT d.department_id, d.department_name FROM department d ORDER BY department_name";
+//          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
 
     private static final String FIND_BY_ID =
             "SELECT department_id, department_name FROM department WHERE department_id = :departmentId";
-
+    //          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d INNER JOIN employee e ON (d.department_id = e.department_id) WHERE department_id = :departmentId";
     private final static String ADD_DEPARTMENT =
             "INSERT INTO department (department_name) VALUES (:departmentName)";
 
@@ -77,7 +78,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
         Optional.of(namedParameterJdbcTemplate.update(DELETE_DEPARTMENT, deletePasameter))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete department from Database!"));
-       }
+    }
 
 
     @Override
@@ -86,7 +87,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 namedParameterJdbcTemplate.query(SELECT_ALL, new DepartmentRowMapper());
         return departments;
     }
-
 
     @Override
     public Optional<Department> findById(Integer departmentId) {

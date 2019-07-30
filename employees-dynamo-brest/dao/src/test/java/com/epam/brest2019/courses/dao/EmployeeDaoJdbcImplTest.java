@@ -93,8 +93,6 @@ public class EmployeeDaoJdbcImplTest {
         assertEquals(updateEmployee.getFirstName(), employee.getFirstName());
         assertEquals(updateEmployee.getPatronicName(), employee.getPatronicName());
         assertEquals(updateEmployee.getDepartmentId(), employee.getDepartmentId());
-
-
     }
 
     @Test
