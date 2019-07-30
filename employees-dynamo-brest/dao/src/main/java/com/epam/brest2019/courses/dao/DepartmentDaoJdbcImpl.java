@@ -87,6 +87,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
         return departments;
     }
 
+
     @Override
     public Optional<Department> findById(Integer departmentId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
@@ -94,6 +95,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 BeanPropertyRowMapper.newInstance(Department.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
+
 
     private class DepartmentRowMapper implements RowMapper<Department> {
         @Override
