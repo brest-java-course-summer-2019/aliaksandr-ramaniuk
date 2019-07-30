@@ -109,15 +109,15 @@ public class Employee {
         return patronicName;
     }
 
-      @Override
+    @Override
     public String toString() {
-        return "Employee{" +
-                "departmentId=" + departmentId +
-                ", employeeId=" + employeeId +
-                ", login='" + login + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronicName='" + patronicName + '\'' +
-                '}';
+        return "Employee {" +
+                "departmentId = " + departmentId
+                + ", employeeId = " + employeeId
+                + ", login = " + login
+                + ", lastName = " + lastName
+                + ", firstName = " + firstName
+                + ", patronicName = " + patronicName
+                + "}";
     }
 }

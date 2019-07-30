@@ -24,25 +24,25 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select employee_id, login, last_name, first_name, patronic_name, department_id from employee order by 2, 3";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id from employee order by 2, 3";
 
     private static final String FIND_BY_ID =
-            "select employee_id, login, last_name, first_name, patronic_name, department_id " +
+            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id " +
                     "from employee where employee_id = :employeeId";
 
     private static final String FIND_BY_DEPARTMENT_ID =
-            "select employee_id, login, last_name, first_name, patronic_name, department_id " +
+            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id " +
                     "from employee where department_id = :departmentId";
 
-    private final static String ADD_EMPLOYEE = "insert into employee (login, last_name, first_name, patronic_name, department_id) values " +
+    private final static String ADD_EMPLOYEE = "INSERT INTO employee (login, last_name, first_name, patronic_name, department_id) values " +
             "(:login, :lastName, :firstName, :patronicName, :departmentId)";
 
     private static final String UPDATE_EMPLOYEE =
-            "update employee set login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, " +
+            "UPDATE employee set login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, " +
                     "department_id = :departmentId where employee_id = :employeeId";
 
     private static final String DELETE_EMPLOYEE =
-            "delete from employee where employee_id = :employeeId";
+            "DELETE from employee where employee_id = :employeeId";
 
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";

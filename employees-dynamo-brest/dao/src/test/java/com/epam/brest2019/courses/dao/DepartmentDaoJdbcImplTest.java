@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -39,7 +40,7 @@ public class DepartmentDaoJdbcImplTest {
         Department testGetDepartmentById = departmentDao.findById(2).get();
         assertNotNull(testGetDepartmentById);
         assertTrue(testGetDepartmentById.getDepartmentId().equals(2));
-        assertTrue(testGetDepartmentById.getDepartmentName().equals(DEVELOPMENT));
+        assertEquals(testGetDepartmentById.getDepartmentName(), DEVELOPMENT);
     }
 
     @Test
@@ -59,8 +60,8 @@ public class DepartmentDaoJdbcImplTest {
         departmentDao.update(testNewDepartment);
 
         Department testUpdateDepartment = departmentDao.findById(testNewDepartment.getDepartmentId()).get();
-        assertTrue(testNewDepartment.getDepartmentId().equals(testUpdateDepartment.getDepartmentId()));
-        assertTrue(testNewDepartment.getDepartmentName().equals(testUpdateDepartment.getDepartmentName()));
+        assertEquals(testNewDepartment.getDepartmentId(), testUpdateDepartment.getDepartmentId());
+        assertEquals(testNewDepartment.getDepartmentName(), testUpdateDepartment.getDepartmentName());
     }
 
     @Test

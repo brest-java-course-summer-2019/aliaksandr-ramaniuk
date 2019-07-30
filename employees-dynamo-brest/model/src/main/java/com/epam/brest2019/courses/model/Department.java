@@ -26,11 +26,6 @@ public class Department {
      * Department name
      */
     private String departmentName;
-    /**
-     * Total employees in Department
-     */
-//    private Integer totalEmployees;
-
 
     /**
      * Set department Id
@@ -44,13 +39,6 @@ public class Department {
      */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
-    }
-
-    /**
-     * Set total employees in Department
-     */
-   /* public void setTotalEmployees(Integer totalEmployees) {
-        this.totalEmployees = totalEmployees;
     }
 
     /**
@@ -70,17 +58,13 @@ public class Department {
     /**
      * Get total employees in Department
      */
- /*   public Integer getTotalEmployees() {
-        return totalEmployees;
-    }
-*/
+
     @Override
     public String toString() {
-        return "Department{"
-                + "departmentId=" + departmentId
-                + ", departmentName='" + departmentName + '\''
-     //           + ", totalEmployees=" + totalEmployees
-                + '}';
+        return "Department {"
+                + "departmentId = " + departmentId
+                + ", departmentName = " + departmentName
+                + "}";
     }
 }
 

@@ -23,13 +23,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.dao = dao;
     }
 
-    @Override
-    public Department add(Department department) {
-        LOGGER.debug("Add department: {}", department);
-        return dao.add(department);
-    }
-
-    @Override
+     @Override
     public void update(Department department) {
         LOGGER.debug("Update department: {}", department);
         dao.update(department);

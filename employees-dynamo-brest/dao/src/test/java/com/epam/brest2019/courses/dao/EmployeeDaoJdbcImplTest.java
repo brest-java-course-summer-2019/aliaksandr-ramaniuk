@@ -3,7 +3,6 @@ package com.epam.brest2019.courses.dao;
 import com.epam.brest2019.courses.model.Employee;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,11 +71,11 @@ public class EmployeeDaoJdbcImplTest {
         Employee employee = new Employee(1, "login002", "lastName002", "firstName002", "patronicName002");
         Employee newEmployee = employeeDao.add(employee);
         assertNotNull(newEmployee.getEmployeeId());
-        assertTrue(newEmployee.getLogin().equals(employee.getLogin()));
-        assertTrue(newEmployee.getLastName().equals(employee.getLastName()));
-        assertTrue(newEmployee.getFirstName().equals(employee.getFirstName()));
-        assertTrue(newEmployee.getPatronicName().equals(employee.getPatronicName()));
-        assertTrue(newEmployee.getDepartmentId().equals(employee.getDepartmentId()));
+        assertEquals(newEmployee.getLogin(), employee.getLogin());
+        assertEquals(newEmployee.getLastName(), employee.getLastName());
+        assertEquals(newEmployee.getFirstName(), employee.getFirstName());
+        assertEquals(newEmployee.getPatronicName(), employee.getPatronicName());
+        assertEquals(newEmployee.getDepartmentId(), employee.getDepartmentId());
         assertTrue((sizeBefore + 1) == employeeDao.findAll().size());
     }
 
@@ -88,12 +87,12 @@ public class EmployeeDaoJdbcImplTest {
         employee.setPatronicName("newPatronicName");
         employeeDao.update(employee);
         Employee updateEmployee = employeeDao.findById(employee.getEmployeeId()).get();
-        assertTrue(updateEmployee.getEmployeeId().equals(employee.getEmployeeId()));
-        assertTrue(updateEmployee.getLogin().equals(employee.getLogin()));
-        assertTrue(updateEmployee.getLastName().equals(employee.getLastName()));
-        assertTrue(updateEmployee.getFirstName().equals(employee.getFirstName()));
-        assertTrue(updateEmployee.getPatronicName().equals(employee.getPatronicName()));
-        assertTrue(updateEmployee.getDepartmentId().equals(employee.getDepartmentId()));
+        assertEquals(updateEmployee.getEmployeeId(), employee.getEmployeeId());
+        assertEquals(updateEmployee.getLogin(), employee.getLogin());
+        assertEquals(updateEmployee.getLastName(), employee.getLastName());
+        assertEquals(updateEmployee.getFirstName(), employee.getFirstName());
+        assertEquals(updateEmployee.getPatronicName(), employee.getPatronicName());
+        assertEquals(updateEmployee.getDepartmentId(), employee.getDepartmentId());
 
 
     }

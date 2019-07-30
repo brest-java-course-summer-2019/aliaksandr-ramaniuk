@@ -28,19 +28,19 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select d.department_id, d.department_name from department d order by 2";
+            "SELECT d.department_id, d.department_name FROM department d ORDER BY department_name";
 
     private static final String FIND_BY_ID =
-            "select department_id, department_name from department where department_id = :departmentId";
+            "SELECT department_id, department_name FROM department WHERE department_id = :departmentId";
 
     private final static String ADD_DEPARTMENT =
-            "insert into department (department_name) values (:departmentName)";
+            "INSERT INTO department (department_name) VALUES (:departmentName)";
 
     private final static String UPDATE_DEPARTMENT =
-            "update department set department_name = :departmentName where department_id = :departmentId";
+            "UPDATE department SET department_name = :departmentName WHERE department_id = :departmentId";
 
     private final static String DELETE_DEPARTMENT =
-            "delete from department where department_id = :departmentId";
+            "DELETE FROM department WHERE department_id = :departmentId";
 
     private static final String DEPARTMENT_ID = "departmentId";
 

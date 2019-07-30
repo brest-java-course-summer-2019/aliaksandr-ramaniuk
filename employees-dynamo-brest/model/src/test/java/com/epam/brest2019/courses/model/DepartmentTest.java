@@ -1,7 +1,9 @@
 package com.epam.brest2019.courses.model;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class DepartmentTest {
 
@@ -10,21 +12,29 @@ public class DepartmentTest {
     @Test
     public void getDepartmentId() {
         department.setDepartmentId(5);
-        Assert.assertTrue(department.getDepartmentId().equals(5));
+        assertTrue(department.getDepartmentId().equals(5));
     }
 
     @Test
     public void getDepartmentName() {
         department.setDepartmentName("Игрок");
-        Assert.assertTrue(department.getDepartmentName().equals("Игрок"));
+        assertEquals(department.getDepartmentName(),"Игрок");
     }
 
-    /*
+    /**
+     * Constructor Department Test
+     */
+    public DepartmentTest() {
+        Department departmentTest = new Department("Тест конструктора");
+        assertEquals(departmentTest.getDepartmentName(), "Тест конструктора");
+    }
+
+
     @Test
-    public void getTotalEmployees() {
-        department.setTotalEmployees(7);
-        Assert.assertTrue(department.getTotalEmployees().equals(7));
+    public void testToString() {
+        department.setDepartmentId(8);
+        department.setDepartmentName("Тест конструктора");
+        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест конструктора}";
+        assertEquals(expectedResponseDepartment, department.toString());
     }
-    */
-
 }

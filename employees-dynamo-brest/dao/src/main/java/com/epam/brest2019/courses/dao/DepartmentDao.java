@@ -10,33 +10,29 @@ import java.util.Optional;
  */
 public interface DepartmentDao {
 
-/**
- * Persist new department.
- */
+    /**
+     * Persist new department.
+     */
     Department add(Department department);
 
-
-/**
- * Update department.
- */
-
+    /**
+     * Update department.
+     */
     void update(Department department);
 
-/**
- * Delete department with specified id.
- */
-
+    /**
+     * Delete department with specified id.
+     */
     void delete(Integer departmentId);
 
-/**
- * Get departments.
- */
-
+    /**
+     * Get departments.
+     */
     List<Department> findAll();
 
     /**
      * Get Department By Id.
-      */
+     */
     Optional<Department> findById(Integer departmentId);
 
 }

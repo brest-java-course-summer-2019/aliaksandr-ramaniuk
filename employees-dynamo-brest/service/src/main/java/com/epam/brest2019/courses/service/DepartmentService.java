@@ -6,14 +6,19 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Department DAO Interface.
+ * Department Service Interface.
  */
 public interface DepartmentService {
 
     /**
-     * Persist new department.
+     * Get all departments.
      */
-    Department add(Department department);
+    List<Department> findAll();
+
+    /**
+     * Get Department By Id.
+     */
+    Optional<Department> findById(Integer departmentId);
 
     /**
      * Update department.
@@ -24,15 +29,5 @@ public interface DepartmentService {
      * Delete department with specified id.
      */
     void delete(Integer departmentId);
-
-    /**
-     * Get departments.
-     */
-    List<Department> findAll();
-
-    /**
-     * Get Department By Id.
-     */
-    Optional<Department> findById(Integer departmentId);
 
 }
