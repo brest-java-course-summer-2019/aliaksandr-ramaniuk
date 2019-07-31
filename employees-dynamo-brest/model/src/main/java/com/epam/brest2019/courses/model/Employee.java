@@ -1,7 +1,7 @@
 package com.epam.brest2019.courses.model;
 
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Employee model
@@ -17,13 +17,13 @@ public class Employee {
      * Employee Patronic Name
      * Employee Date
      */
-    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, Date date) {
+    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, LocalDate localDate) {
         this.departmentId = departmentId;
         this.login = login;
         this.lastName = lastName;
         this.firstName = firstName;
         this.patronicName = patronicName;
-        this.date = date;
+        this.localDate = localDate;
     }
 
     /**
@@ -66,7 +66,7 @@ public class Employee {
      /**
      * Employee date of registration
      */
-    private Date date;
+    private LocalDate localDate;
 
     public Integer getDepartmentId() {
         return departmentId;
@@ -92,8 +92,8 @@ public class Employee {
         return patronicName;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
     public void setDepartmentId(Integer departmentId) {
@@ -120,8 +120,8 @@ public class Employee {
         this.patronicName = patronicName;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class Employee {
                 + ", lastName = " + lastName
                 + ", firstName = " + firstName
                 + ", patronicName = " + patronicName
-                + ", date = " + date
+                + ", localDate = " + localDate
                 + "}";
     }
 }

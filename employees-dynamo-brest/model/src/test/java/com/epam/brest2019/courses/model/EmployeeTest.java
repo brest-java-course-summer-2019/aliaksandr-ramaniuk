@@ -2,6 +2,8 @@ package com.epam.brest2019.courses.model;
 
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -46,27 +48,41 @@ public class EmployeeTest {
         assertEquals(employee.getPatronicName(),"PatronicName");
     }
 
+    @Test
+    public void getDate() {
+        LocalDate localDate = LocalDate.of(2019, 01, 01);
+        LocalDate localDateTest = LocalDate.of(2019, 01, 01);
+        employee.setLocalDate(localDate);
+        assertEquals(employee.getLocalDate(), localDateTest);
+    }
+
     /**
      * Constructor Employee Test
      */
+
     public EmployeeTest() {
-        employee = new Employee(11,"loginTest","LastNameTest", "FirstNameTest", "PatronicNameTest");
+        LocalDate localDate = LocalDate.of(2019, 02, 02);
+        employee = new Employee(11,"loginTest","LastNameTest", "FirstNameTest", "PatronicNameTest", localDate);
         assertTrue(employee.getDepartmentId().equals(11));
         assertEquals(employee.getLogin(),"loginTest");
         assertEquals(employee.getLastName(), "LastNameTest");
         assertEquals(employee.getFirstName(), "FirstNameTest");
         assertEquals(employee.getPatronicName(), "PatronicNameTest");
+        assertEquals(employee.getLocalDate(), localDate);
     }
 
     @Test
     public void testToString() {
+        LocalDate localDate = LocalDate.of(2019, 03, 03);
         employee.setDepartmentId(12);
         employee.setEmployeeId(12);
         employee.setLogin("login");
         employee.setLastName("LastName");
         employee.setFirstName("FirstName");
         employee.setPatronicName("PatronicName");
-        String expectedResponseEmployee = "Employee {departmentId = 12, employeeId = 12, login = login, lastName = LastName, firstName = FirstName, patronicName = PatronicName}";
+        employee.setLocalDate(localDate);
+        String expectedResponseEmployee = "Employee {departmentId = 12, employeeId = 12, login = login, lastName = LastName, firstName = FirstName, patronicName = PatronicName, localDate = 2019-03-03}";
         assertEquals(expectedResponseEmployee, employee.toString());
     }
+
 }
