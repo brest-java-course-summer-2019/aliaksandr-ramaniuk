@@ -14,6 +14,7 @@ CREATE TABLE employee (
     first_name VARCHAR(40) NULL,
     last_name  VARCHAR(40) NULL,
     patronic_name  VARCHAR(40) NULL,
+    local_date  DATE NOT NULL,
     department_id INT NOT NULL,
     PRIMARY KEY (employee_id),
         CONSTRAINT employee_to_department_foreign_key

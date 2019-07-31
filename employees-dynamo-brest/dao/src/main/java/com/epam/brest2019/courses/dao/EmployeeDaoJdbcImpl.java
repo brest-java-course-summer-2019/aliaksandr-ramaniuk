@@ -24,25 +24,25 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id from employee order by 2, 3";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee ORDER BY employee_id";
 
     private static final String FIND_BY_ID =
-            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id " +
-                    "from employee where employee_id = :employeeId";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id " +
+                    "FROM employee WHERE employee_id = :employeeId";
 
     private static final String FIND_BY_DEPARTMENT_ID =
-            "SELECT employee_id, login, last_name, first_name, patronic_name, department_id " +
-                    "from employee where department_id = :departmentId";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id " +
+                    "FROM employee WHERE department_id = :departmentId";
 
-    private final static String ADD_EMPLOYEE = "INSERT INTO employee (login, last_name, first_name, patronic_name, department_id) values " +
-            "(:login, :lastName, :firstName, :patronicName, :departmentId)";
+    private final static String ADD_EMPLOYEE = "INSERT INTO employee (login, last_name, first_name, patronic_name, local_date, department_id ) VALUES " +
+            "(:login, :lastName, :firstName, :patronicName, :localDate, :departmentId)";
 
     private static final String UPDATE_EMPLOYEE =
-            "UPDATE employee set login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, " +
-                    "department_id = :departmentId where employee_id = :employeeId";
+            "UPDATE employee SET login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, " +
+                    "local_date = :localDate, department_id = :departmentId WHERE employee_id = :employeeId";
 
     private static final String DELETE_EMPLOYEE =
-            "DELETE from employee where employee_id = :employeeId";
+            "DELETE FROM employee WHERE employee_id = :employeeId";
 
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";
@@ -84,6 +84,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
         parameters.addValue("lastName", employee.getLastName());
         parameters.addValue("firstName", employee.getFirstName());
         parameters.addValue("patronicName", employee.getPatronicName());
+        parameters.addValue("localDate", employee.getLocalDate());
         parameters.addValue("departmentId", employee.getDepartmentId());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();

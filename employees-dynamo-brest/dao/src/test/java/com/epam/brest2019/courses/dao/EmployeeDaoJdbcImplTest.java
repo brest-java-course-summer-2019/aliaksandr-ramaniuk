@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +29,8 @@ public class EmployeeDaoJdbcImplTest {
 
     @Before
     public void changes() {
-        employee = new Employee(1, "loginTest", "lastNameTest", "firstNameTest", "patronicNameTest");
+        LocalDate localDate = LocalDate.of(2019, 06, 06);
+        employee = new Employee(1, "loginTest", "lastNameTest", "firstNameTest", "patronicNameTest", localDate);
         employee = employeeDao.add(employee);
     }
 
@@ -54,6 +56,8 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void findByEmployeeId() throws Exception {
+        LocalDate testLocalDate = LocalDate.of(2019, 06, 06);
+
         Employee testEmployee = employeeDao.findById(employee.getEmployeeId()).get();
         assertNotNull(employeeDao);
         assertEquals(testEmployee.getEmployeeId(),employee.getEmployeeId());
@@ -62,29 +66,36 @@ public class EmployeeDaoJdbcImplTest {
         assertEquals(testEmployee.getLastName(), "lastNameTest");
         assertEquals(testEmployee.getFirstName(), "firstNameTest");
         assertEquals(testEmployee.getPatronicName(),"patronicNameTest");
+        assertEquals(testEmployee.getLocalDate(),testLocalDate);
  }
 
     @Test
     public void addEmployee() {
+        LocalDate localDate = LocalDate.of(2019, 07, 07);
+
         List<Employee> employees = employeeDao.findAll();
         int sizeBefore = employees.size();
-        Employee employee = new Employee(1, "login002", "lastName002", "firstName002", "patronicName002");
+        Employee employee = new Employee(1, "login002", "lastName002", "firstName002", "patronicName002", localDate);
         Employee newEmployee = employeeDao.add(employee);
         assertNotNull(newEmployee.getEmployeeId());
         assertEquals(newEmployee.getLogin(), employee.getLogin());
         assertEquals(newEmployee.getLastName(), employee.getLastName());
         assertEquals(newEmployee.getFirstName(), employee.getFirstName());
         assertEquals(newEmployee.getPatronicName(), employee.getPatronicName());
+        assertEquals(newEmployee.getLocalDate(), employee.getLocalDate());
         assertEquals(newEmployee.getDepartmentId(), employee.getDepartmentId());
         assertTrue((sizeBefore + 1) == employeeDao.findAll().size());
     }
 
     @Test
     public void update() throws Exception {
+        LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
+
         employee.setLogin("newLogin");
         employee.setFirstName("newFirstName");
         employee.setLastName("newLastName");
         employee.setPatronicName("newPatronicName");
+        employee.setLocalDate(newLocalDate);
         employeeDao.update(employee);
         Employee updateEmployee = employeeDao.findById(employee.getEmployeeId()).get();
         assertEquals(updateEmployee.getEmployeeId(), employee.getEmployeeId());
@@ -92,12 +103,15 @@ public class EmployeeDaoJdbcImplTest {
         assertEquals(updateEmployee.getLastName(), employee.getLastName());
         assertEquals(updateEmployee.getFirstName(), employee.getFirstName());
         assertEquals(updateEmployee.getPatronicName(), employee.getPatronicName());
+        assertEquals(updateEmployee.getLocalDate(), employee.getLocalDate());
         assertEquals(updateEmployee.getDepartmentId(), employee.getDepartmentId());
     }
 
     @Test
     public void delete() throws Exception {
-        Employee employee = new Employee(1, "login002", "firstName002", "lastName002", "patronicName002");
+        LocalDate localDate = LocalDate.of(2019, 07, 07);
+
+        Employee employee = new Employee(1, "login002", "firstName002", "lastName002", "patronicName002", localDate);
         employeeDao.add(employee);
         List<Employee> employees = employeeDao.findAll();
         int sizeBefore = employees.size();
