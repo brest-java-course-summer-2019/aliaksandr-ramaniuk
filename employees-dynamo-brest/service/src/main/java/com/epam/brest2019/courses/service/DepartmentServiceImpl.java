@@ -17,22 +17,11 @@ import java.util.Optional;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+
     private DepartmentDao dao;
 
     public DepartmentServiceImpl(DepartmentDao dao) {
         this.dao = dao;
-    }
-
-     @Override
-    public void update(Department department) {
-        LOGGER.debug("Update department: {}", department);
-        dao.update(department);
-    }
-
-    @Override
-    public void delete(Integer departmentId) {
-        LOGGER.debug("Delete department: {}", departmentId);
-        dao.delete(departmentId);
     }
 
     @Override
@@ -47,5 +36,15 @@ public class DepartmentServiceImpl implements DepartmentService {
         return dao.findById(departmentId);
     }
 
+     @Override
+    public void update(Department department) {
+        LOGGER.debug("Update department: {}", department);
+        dao.update(department);
+    }
 
+    @Override
+    public void delete(Integer departmentId) {
+        LOGGER.debug("Delete department: {}", departmentId);
+        dao.delete(departmentId);
+    }
 }
