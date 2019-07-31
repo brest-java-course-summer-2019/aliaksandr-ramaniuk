@@ -1,6 +1,8 @@
 package com.epam.brest2019.courses.model;
 
 
+import java.sql.Date;
+
 /**
  * Employee model
  */
@@ -13,13 +15,15 @@ public class Employee {
      * Employee Last Name
      * Employee First Name
      * Employee Patronic Name
+     * Employee Date
      */
-    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName) {
+    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, Date date) {
         this.departmentId = departmentId;
         this.login = login;
         this.lastName = lastName;
         this.firstName = firstName;
         this.patronicName = patronicName;
+        this.date = date;
     }
 
     /**
@@ -59,6 +63,38 @@ public class Employee {
      */
     private String patronicName;
 
+     /**
+     * Employee date of registration
+     */
+    private Date date;
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getPatronicName() {
+        return patronicName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
@@ -80,33 +116,12 @@ public class Employee {
         this.firstName = firstName;
     }
 
-
     public void setPatronicName(String patronicName) {
         this.patronicName = patronicName;
     }
 
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getPatronicName() {
-        return patronicName;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
@@ -118,6 +133,7 @@ public class Employee {
                 + ", lastName = " + lastName
                 + ", firstName = " + firstName
                 + ", patronicName = " + patronicName
+                + ", date = " + date
                 + "}";
     }
 }
