@@ -1,4 +1,4 @@
-package com.epam.brest2019.courses.dao;
+package com.epam.brest2019.courses.service;
 
 import com.epam.brest2019.courses.model.Employee;
 
@@ -6,55 +6,57 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Employee DAO Interface.
+ * Employee Service Interface.
  */
 
-public interface EmployeeDao {
+public interface EmployeeService {
 
     /**
-     * Get all employees.
+     * Find all employees.
      *
-     * @return employees List of all departments.
+     * @return employees List of all employees.
      */
     List<Employee> findAll();
 
+
     /**
-     * Get all employees with specified department id.
+     * Find all employees with specified department id (departmentId).
      *
      * @param departmentId department id.
-     * @return departmentId.
+     * @return departmentId list of employees by department id.
      */
     List<Employee> findByDepartmentId(Integer departmentId);
 
+
     /**
-     * Get employee with specified id.
+     * Find employee with specified id (employeeId).
      *
      * @param employeeId employee id.
-     * @return employeeId.
+     * @return employeeId employee by id.
      */
     Optional<Employee> findById(Integer employeeId);
 
+
     /**
-     * Persist new employee.
+     * Add new employee.
      *
-     * @param employee employee.
+     * @param employee Department.
      * @return employee.
      */
     Employee add(Employee employee);
 
+
     /**
      * Update employee.
      *
-     * @param employee employee.
+     * @param employee Employee.
      */
     void update(Employee employee);
 
     /**
-     * Delete employee with specified id.
+     * Delete employee with specified id (employeeId).
      *
      * @param employeeId employee id.
      */
     void delete(Integer employeeId);
-
-
 }

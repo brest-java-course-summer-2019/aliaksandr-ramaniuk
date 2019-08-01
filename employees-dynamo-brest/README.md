@@ -9,3 +9,4 @@ EmployeesDynamoBrest(Project. Homework):
 - Homework 3 - DAO + db (test)
 - Homework 4 - web-app
 - Homework 5 - service (test, logger)
+- Homework 6 - service (test Mockito)---

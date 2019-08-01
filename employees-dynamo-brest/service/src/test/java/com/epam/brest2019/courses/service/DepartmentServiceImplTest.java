@@ -2,24 +2,22 @@ package com.epam.brest2019.courses.service;
 
 import com.epam.brest2019.courses.model.Department;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-service.xml"})
-public class DepartmentServiceImplTest {
 
-    private static final String DEVELOPMENT = "Тренер";
-    private static final String COACH = "Тренерский штаб вратарей";
+public class DepartmentServiceImplTest {
 
     @Autowired
     private DepartmentService departmentService;
@@ -34,31 +32,52 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void findById() {
-        Department testFindById = departmentService.findById(2).get();
+        Department testFindById = departmentService.findById(1).get();
         assertNotNull(testFindById);
-        assertTrue(testFindById.getDepartmentId().equals(2));
-        assertEquals(testFindById.getDepartmentName(), DEVELOPMENT);
+        assertTrue(testFindById.getDepartmentId().equals(1));
+        assertEquals(testFindById.getDepartmentName(), "Администратор");
      }
 
     @Test
-    public void update() {
+    public void add() {
+        int sizeBeforeAdd = departmentService.findAll().size();
+
+        Department testAddDepartment = new Department();
+        testAddDepartment.setDepartmentName("Группа поддержки");
+
+        Department newDepartment = departmentService.add(testAddDepartment);
+        int sizeAfterAdd = departmentService.findAll().size();
+
+        assertNotNull(newDepartment.getDepartmentId());
+        assertEquals(newDepartment.getDepartmentName(), "Группа поддержки");
+        assertEquals(sizeBeforeAdd+1, sizeAfterAdd);
+    }
+
+    @Test public void update() {
         Department testNewDepartment = new Department();
         testNewDepartment.setDepartmentId(2);
-        testNewDepartment.setDepartmentName(COACH);
+        testNewDepartment.setDepartmentName("Новый Тренер");
 
         departmentService.update(testNewDepartment);
 
         Department testUpdateDepartment = departmentService.findById(testNewDepartment.getDepartmentId()).get();
         assertEquals(testNewDepartment.getDepartmentId(), testUpdateDepartment.getDepartmentId());
-        assertEquals(COACH, testUpdateDepartment.getDepartmentName());
+        assertEquals("Новый Тренер", testUpdateDepartment.getDepartmentName());
     }
 
     @Test
     public void delete() {
-        List<Department> departments = departmentService.findAll();
-        int sizeBefore = departments.size();
+        Department testAddDepartment = new Department();
+        testAddDepartment.setDepartmentName("Тест на удаление Department");
 
-        departmentService.delete(2);
-        assertTrue((sizeBefore - 1) == departmentService.findAll().size());
-    }
+        Department deleteDepartment = departmentService.add(testAddDepartment);
+        int sizeBeforeDelete = departmentService.findAll().size();
+
+        departmentService.delete(deleteDepartment.getDepartmentId());
+
+        int sizeAfterDelete = departmentService.findAll().size();
+
+        assertEquals(sizeBeforeDelete-1, sizeAfterDelete);
+      }
+
 }

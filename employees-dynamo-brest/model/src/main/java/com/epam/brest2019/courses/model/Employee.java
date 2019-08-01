@@ -1,6 +1,5 @@
 package com.epam.brest2019.courses.model;
 
-
 import java.time.LocalDate;
 
 /**
@@ -10,12 +9,13 @@ import java.time.LocalDate;
 public class Employee {
 
     /**
-     * Constructor with department id.
-     * Employee login
-     * Employee Last Name
-     * Employee First Name
-     * Employee Patronic Name
-     * Employee Date
+     * Constructor with parameters.
+     *
+     * @param departmentId department id.
+     * @param login        login.
+     * @param firstName    First Name.
+     * @param patronicName Patronic Name.
+     * @param localDate    Date.
      */
     public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, LocalDate localDate) {
         this.departmentId = departmentId;
@@ -27,99 +27,169 @@ public class Employee {
     }
 
     /**
-     * Constructor without parameters
+     * Constructor without parameters.
      */
 
     public Employee() {
     }
 
     /**
-     * Department Id
+     * Department Id.
      */
     private Integer departmentId;
 
     /**
-     * Employee Id
+     * Employee Id.
      */
     private Integer employeeId;
 
     /**
-     * Employee login
+     * Employee login.
      */
     private String login;
 
     /**
-     * Employee Last Name
+     * Employee last name.
      */
     private String lastName;
 
     /**
-     * Employee First Name
+     * Employee first name.
      */
     private String firstName;
 
     /**
-     * Employee Patronic Name
+     * Employee patronic name.
      */
     private String patronicName;
 
-     /**
-     * Employee date of registration
+    /**
+     * Employee date of registration.
      */
     private LocalDate localDate;
 
+    /**
+     * Get department id.
+     *
+     * @return departmentId department by id).
+     */
     public Integer getDepartmentId() {
         return departmentId;
     }
 
+    /**
+     * Get employee id.
+     *
+     * @return employeeId employee by id.
+     */
     public Integer getEmployeeId() {
         return employeeId;
     }
 
+    /**
+     * Get employee login.
+     *
+     * @return login.
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * Get employee lastName.
+     *
+     * @return lastName last name.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Get employee firstName.
+     *
+     * @return firstName first name.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Get employee patronicName.
+     *
+     * @return patronicName patronic name.
+     */
     public String getPatronicName() {
         return patronicName;
     }
 
+    /**
+     * Get date of registration employee.
+     *
+     * @return localDate date of registration employee.
+     */
     public LocalDate getLocalDate() {
         return localDate;
     }
 
+    /**
+     * Set department id.
+     *
+     * @param departmentId department id.
+     */
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 
+    /**
+     * Set employee id.
+     *
+     * @param employeeId employee id.
+     */
     public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
 
+    /**
+     * Set employee login.
+     *
+     * @param login login.
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Set employee lastName.
+     *
+     * @param lastName last name.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Set employee firstName.
+     *
+     * @param firstName first name.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Set employee patronicName.
+     *
+     * @param patronicName patronic name.
+     */
     public void setPatronicName(String patronicName) {
         this.patronicName = patronicName;
     }
 
+    /**
+     * Set date of registration employee.
+     *
+     * @param localDate date.
+     */
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
