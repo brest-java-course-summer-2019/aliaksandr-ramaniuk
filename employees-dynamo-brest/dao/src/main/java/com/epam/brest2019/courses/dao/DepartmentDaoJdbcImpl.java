@@ -28,12 +28,13 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "SELECT d.department_id, d.department_name FROM department d ORDER BY department_name";
+            "SELECT department_id, department_name FROM department ORDER BY department_name";
 //          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
 
     private static final String FIND_BY_ID =
             "SELECT department_id, department_name FROM department WHERE department_id = :departmentId";
-    //          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d INNER JOIN employee e ON (d.department_id = e.department_id) WHERE department_id = :departmentId";
+//          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d INNER JOIN employee e ON (d.department_id = e.department_id) WHERE department_id = :departmentId";
+
     private final static String ADD_DEPARTMENT =
             "INSERT INTO department (department_name) VALUES (:departmentName)";
 
@@ -47,6 +48,21 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     public DepartmentDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
+    @Override
+    public List<Department> findAll() {
+        List<Department> departments =
+                namedParameterJdbcTemplate.query(SELECT_ALL, new DepartmentRowMapper());
+        return departments;
+    }
+
+    @Override
+    public Optional<Department> findById(Integer departmentId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
+        List<Department> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
+                BeanPropertyRowMapper.newInstance(Department.class));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     @Override
@@ -67,10 +83,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 .orElseThrow(() -> new RuntimeException("Failed to update department in Database!"));
     }
 
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
-    }
-
     @Override
     public void delete(Integer departmentId) {
         MapSqlParameterSource deletePasameter = new MapSqlParameterSource();
@@ -80,23 +92,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 .orElseThrow(() -> new RuntimeException("Failed to delete department from Database!"));
     }
 
-
-    @Override
-    public List<Department> findAll() {
-        List<Department> departments =
-                namedParameterJdbcTemplate.query(SELECT_ALL, new DepartmentRowMapper());
-        return departments;
-    }
-
-    @Override
-    public Optional<Department> findById(Integer departmentId) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
-        List<Department> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
-                BeanPropertyRowMapper.newInstance(Department.class));
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
-    }
-
-
     private class DepartmentRowMapper implements RowMapper<Department> {
         @Override
         public Department mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -105,6 +100,10 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
             department.setDepartmentName(resultSet.getString("department_name"));
             return department;
         }
+    }
+
+    private boolean successfullyUpdated(int numRowsUpdated) {
+        return numRowsUpdated > 0;
     }
 
 }

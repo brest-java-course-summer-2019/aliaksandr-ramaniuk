@@ -41,36 +41,38 @@ public class EmployeeDaoJdbcImplTest {
 
 
     @Test
-    public void findAllEmployees() {
+    public void findAll() {
         List<Employee> employees = employeeDao.findAll();
+
         assertNotNull(employees);
         assertTrue(employees.size() > 0);
     }
 
     @Test
     public void findByDepartmentId() throws Exception {
-        List<Employee> employees = employeeDao.findByDepartmentId(1);
+        List<Employee> employees = employeeDao.findByDepartmentId(3);
         assertNotNull(employeeDao);
         assertTrue(employees.size() > 0);
+        assertEquals(employees.size(), 3);
     }
 
     @Test
-    public void findByEmployeeId() throws Exception {
+    public void findById() {
         LocalDate testLocalDate = LocalDate.of(2019, 06, 06);
 
         Employee testEmployee = employeeDao.findById(employee.getEmployeeId()).get();
         assertNotNull(employeeDao);
-        assertEquals(testEmployee.getEmployeeId(),employee.getEmployeeId());
+        assertEquals(testEmployee.getEmployeeId(), employee.getEmployeeId());
         assertTrue(testEmployee.getDepartmentId().equals(1));
-        assertEquals(testEmployee.getLogin(),"loginTest");
+        assertEquals(testEmployee.getLogin(), "loginTest");
         assertEquals(testEmployee.getLastName(), "lastNameTest");
         assertEquals(testEmployee.getFirstName(), "firstNameTest");
-        assertEquals(testEmployee.getPatronicName(),"patronicNameTest");
-        assertEquals(testEmployee.getLocalDate(),testLocalDate);
- }
+        assertEquals(testEmployee.getPatronicName(), "patronicNameTest");
+        assertEquals(testEmployee.getLocalDate(), testLocalDate);
+    }
 
     @Test
-    public void addEmployee() {
+    public void add() {
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
         List<Employee> employees = employeeDao.findAll();
@@ -95,8 +97,11 @@ public class EmployeeDaoJdbcImplTest {
         employee.setFirstName("newFirstName");
         employee.setLastName("newLastName");
         employee.setPatronicName("newPatronicName");
+        employee.setDepartmentId(2);
         employee.setLocalDate(newLocalDate);
+
         employeeDao.update(employee);
+
         Employee updateEmployee = employeeDao.findById(employee.getEmployeeId()).get();
         assertEquals(updateEmployee.getEmployeeId(), employee.getEmployeeId());
         assertEquals(updateEmployee.getLogin(), employee.getLogin());
@@ -108,7 +113,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void delete() {
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
         Employee employee = new Employee(1, "login002", "firstName002", "lastName002", "patronicName002", localDate);

@@ -2,7 +2,6 @@ package com.epam.brest2019.courses.dao;
 
 import com.epam.brest2019.courses.model.Department;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,24 +35,29 @@ public class DepartmentDaoJdbcImplTest {
     }
 
     @Test
-    public void getDepartmentById() {
-        Department testGetDepartmentById = departmentDao.findById(2).get();
-        assertNotNull(testGetDepartmentById);
-        assertTrue(testGetDepartmentById.getDepartmentId().equals(2));
-        assertEquals(testGetDepartmentById.getDepartmentName(), DEVELOPMENT);
+    public void findById() {
+        Department testFindDepartmentById = departmentDao.findById(2).get();
+        assertNotNull(testFindDepartmentById);
+        assertTrue(testFindDepartmentById.getDepartmentId().equals(2));
+        assertEquals(testFindDepartmentById.getDepartmentName(), DEVELOPMENT);
     }
 
     @Test
-    public void addDepartment() {
+    public void add() {
+        int sizeBeforeAdd = departmentDao.findAll().size();
+
         Department testAddDepartment = new Department();
         testAddDepartment.setDepartmentName("Группа поддержки");
 
         Department newDepartment = departmentDao.add(testAddDepartment);
-        Assert.assertNotNull(newDepartment.getDepartmentId());
+        int sizeAfterAdd = departmentDao.findAll().size();
+
+        assertNotNull(newDepartment.getDepartmentId());
+        assertEquals(sizeBeforeAdd + 1, sizeAfterAdd);
     }
 
     @Test
-    public void updateDepartment() {
+    public void update() {
         Department testNewDepartment = new Department(COACH);
         testNewDepartment = departmentDao.add(testNewDepartment);
         testNewDepartment.setDepartmentName(NEW_COACH);
@@ -65,14 +69,15 @@ public class DepartmentDaoJdbcImplTest {
     }
 
     @Test
-    public void deleteDepartment() {
+    public void delete() {
         Department testNewDepartment = new Department(COACH);
         testNewDepartment = departmentDao.add(testNewDepartment);
 
-        List<Department> departments = departmentDao.findAll();
-        int sizeBefore = departments.size();
+        int sizeBeforeDelete = departmentDao.findAll().size();
         departmentDao.delete(testNewDepartment.getDepartmentId());
-        assertTrue((sizeBefore - 1) == departmentDao.findAll().size());
+        int sizeAfterDelete = departmentDao.findAll().size();
+
+        assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
     }
 
 }

@@ -14,6 +14,5 @@ INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, 
 INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (7, 'dir02', 'Краснобаев', 'Максим','', '2019-01-07', 4);
 INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (8, 'buh01', 'Рапатюк', 'Сергей','Николаевич', '2019-01-08', 5);
 INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (9, 'rab01', 'Рогалечич', 'Дмитрий','Валерьевич', '2019-01-09', 6);
-INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (10, 'rab02', 'Хруцкий', 'Дмитрий','Юрьевич', '2019-01-10', 6);
-
-
+INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (10, 'rab02', 'Хруцкий', 'Александр','Юрьевич', '2019-01-10', 6);
+INSERT INTO employee (employee_id, login, last_name, first_name, patronic_name, local_date, department_id) VALUES (11, 'rab03', 'Хруцкий', 'Дмитрий','Юрьевич', '2019-01-10', 6);
