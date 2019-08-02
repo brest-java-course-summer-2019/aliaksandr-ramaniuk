@@ -40,8 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Optional<Employee> findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: {}", employeeId);
-        return Optional.of(employeeDao.findById(employeeId).orElseThrow(()
-                -> new RuntimeException("Failed to find employee from Database")));
+        return employeeDao.findById(employeeId);
+
     }
 
     @Override
