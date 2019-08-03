@@ -10,8 +10,9 @@ public class Department {
      *
      * @param departmentName department name.
      */
-    public Department(String departmentName) {
+    public Department(String departmentName, Integer countEmployeesInDepartment) {
         this.departmentName = departmentName;
+        this.countEmployeesInDepartment = countEmployeesInDepartment;
     }
 
     /**
@@ -80,6 +81,7 @@ public class Department {
     public String getDepartmentName() {
         return departmentName;
     }
+
 
     /**
      * Get the number of employees in the department.
