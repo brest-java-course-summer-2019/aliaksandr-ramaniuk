@@ -69,6 +69,97 @@ public class Employee {
     private LocalDate localDate;
 
     /**
+     * Number of employees in all departments.
+     */
+    private Integer totalCountEmployeesInAllDepartments;
+
+    /**
+     * Filter employee by second name.
+     */
+    private String filterBySecondName;
+
+    /**
+     * Set department id.
+     *
+     * @param departmentId department id.
+     */
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    /**
+     * Set employee id.
+     *
+     * @param employeeId employee id.
+     */
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    /**
+     * Set employee login.
+     *
+     * @param login login.
+     */
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    /**
+     * Set employee lastName.
+     *
+     * @param lastName last name.
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Set employee firstName.
+     *
+     * @param firstName first name.
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Set employee patronicName.
+     *
+     * @param patronicName patronic name.
+     */
+    public void setPatronicName(String patronicName) {
+        this.patronicName = patronicName;
+    }
+
+    /**
+     * Set date of registration employee.
+     *
+     * @param localDate date.
+     */
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
+    }
+
+    /**
+     * Set the number of employees in all departments.
+     *
+     * @param totalCountEmployeesInAllDepartments total count employees in all departments.
+     */
+    public void setTotalCountEmployeesInAllDepartments(Integer totalCountEmployeesInAllDepartments) {
+        this.totalCountEmployeesInAllDepartments = totalCountEmployeesInAllDepartments;
+    }
+
+    /**
+     * Set filter employee by second name.
+     *
+     * @param filterBySecondName filter employee by second name.
+     */
+    public void setFilterBySecondName(String filterBySecondName) {
+        this.filterBySecondName = filterBySecondName;
+    }
+
+    /**
      * Get department id.
      *
      * @return departmentId department by id).
@@ -132,66 +223,21 @@ public class Employee {
     }
 
     /**
-     * Set department id.
+     * Get the number of employees in all departments.
      *
-     * @param departmentId department id.
+     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
      */
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public Integer getTotalCountEmployeesInAllDepartments() {
+        return totalCountEmployeesInAllDepartments;
     }
 
     /**
-     * Set employee id.
+     * Get filter employee by second name.
      *
-     * @param employeeId employee id.
+     * @return filterBySecondName filter employee by second name.
      */
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    /**
-     * Set employee login.
-     *
-     * @param login login.
-     */
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    /**
-     * Set employee lastName.
-     *
-     * @param lastName last name.
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * Set employee firstName.
-     *
-     * @param firstName first name.
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Set employee patronicName.
-     *
-     * @param patronicName patronic name.
-     */
-    public void setPatronicName(String patronicName) {
-        this.patronicName = patronicName;
-    }
-
-    /**
-     * Set date of registration employee.
-     *
-     * @param localDate date.
-     */
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
+    public String getFilterBySecondName() {
+        return filterBySecondName;
     }
 
     @Override

@@ -27,16 +27,13 @@ public class DepartmentTest {
         assertTrue(department.getCountEmployeesInDepartment().equals(10));
     }
 
-
     /**
      * Constructor Department Test
      */
     public DepartmentTest() {
-        Department departmentTest = new Department("Тест конструктора", 8);
+        Department departmentTest = new Department("Тест конструктора");
         assertEquals(departmentTest.getDepartmentName(), "Тест конструктора");
-        assertTrue(departmentTest.getCountEmployeesInDepartment().equals(8));
      }
-
 
     @Test
     public void testToString() {

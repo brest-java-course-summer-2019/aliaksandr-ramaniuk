@@ -10,9 +10,8 @@ public class Department {
      *
      * @param departmentName department name.
      */
-    public Department(String departmentName, Integer countEmployeesInDepartment) {
+    public Department(String departmentName) {
         this.departmentName = departmentName;
-        this.countEmployeesInDepartment = countEmployeesInDepartment;
     }
 
     /**
