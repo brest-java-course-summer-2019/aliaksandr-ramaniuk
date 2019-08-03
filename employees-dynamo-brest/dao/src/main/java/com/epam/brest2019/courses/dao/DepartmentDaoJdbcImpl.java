@@ -22,6 +22,8 @@ import java.util.Optional;
  * Department DAO Interface implementation.
  */
 
+// java -jar ~/soft/h2/bin/h2-1.4.199.jar
+
 @Component
 public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
@@ -33,7 +35,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private static final String FIND_BY_ID =
             "SELECT department_id, department_name FROM department WHERE department_id = :departmentId";
-//          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d INNER JOIN employee e ON (d.department_id = e.department_id) WHERE department_id = :departmentId";
 
     private final static String ADD_DEPARTMENT =
             "INSERT INTO department (department_name) VALUES (:departmentName)";
