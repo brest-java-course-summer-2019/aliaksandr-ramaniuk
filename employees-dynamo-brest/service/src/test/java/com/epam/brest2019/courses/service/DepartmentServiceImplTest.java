@@ -88,6 +88,4 @@ public class DepartmentServiceImplTest {
         assertTrue(departments.size() > 0);
         assertEquals(departments.size(), 6);
     }
-
-
 }
