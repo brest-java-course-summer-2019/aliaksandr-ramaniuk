@@ -63,9 +63,9 @@ public class EmployeeTest {
     }
 
     @Test
-    public void getFilterBySecondName(){
-        employee.setFilterBySecondName("Василюк");
-        assertEquals(employee.getFilterBySecondName(), "Василюк");
+    public void getFilterByLastName(){
+        employee.setFilterByLastName("Василюк");
+        assertEquals(employee.getFilterByLastName(), "Василюк");
     }
 
     /**

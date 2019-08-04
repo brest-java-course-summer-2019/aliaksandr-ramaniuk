@@ -124,4 +124,22 @@ public class EmployeeDaoJdbcImplTest {
         assertTrue((sizeBefore - 1) == employeeDao.findAll().size());
     }
 
+    public void filterEmployee(){
+        List<Employee> employees = employeeDao.filterEmployee("Нехайчик");
+
+        assertNotNull(employees);
+        assertTrue(employees.size() > 0);
+
+
+    }
+/*
+    @Test
+    public void findByDepartmentId() throws Exception {
+        List<Employee> employees = employeeDao.findByDepartmentId(3);
+        assertNotNull(employeeDao);
+        assertTrue(employees.size() > 0);
+        assertEquals(employees.size(), 3);
+    }
+*/
+
 }

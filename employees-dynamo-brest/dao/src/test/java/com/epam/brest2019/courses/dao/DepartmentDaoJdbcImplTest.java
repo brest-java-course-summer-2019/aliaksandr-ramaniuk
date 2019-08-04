@@ -81,8 +81,8 @@ public class DepartmentDaoJdbcImplTest {
     }
 
     @Test
-    public void findAllCountEmployeesInDepartment(){
-            List <Department> departments = departmentDao.findAllCountEmployeesInDepartment();
+    public void findAllCountEmployeesInDepartment() {
+        List<Department> departments = departmentDao.findAllCountEmployeesInDepartment();
 
         assertNotNull(departments);
         assertTrue(departments.size() > 0);

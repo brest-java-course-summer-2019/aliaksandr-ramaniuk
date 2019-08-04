@@ -74,9 +74,9 @@ public class Employee {
     private Integer totalCountEmployeesInAllDepartments;
 
     /**
-     * Filter employee by second name.
+     * Filter employee by last name.
      */
-    private String filterBySecondName;
+    private String filterByLastName;
 
     /**
      * Set department id.
@@ -151,12 +151,12 @@ public class Employee {
     }
 
     /**
-     * Set filter employee by second name.
+     * Set filter employee by last name.
      *
-     * @param filterBySecondName filter employee by second name.
+     * @param filterByLastName filter employee by last name.
      */
-    public void setFilterBySecondName(String filterBySecondName) {
-        this.filterBySecondName = filterBySecondName;
+    public void setFilterByLastName(String filterByLastName) {
+        this.filterByLastName = filterByLastName;
     }
 
     /**
@@ -232,12 +232,12 @@ public class Employee {
     }
 
     /**
-     * Get filter employee by second name.
+     * Get filter employee by last name.
      *
-     * @return filterBySecondName filter employee by second name.
+     * @return filterByLastName filter employee by last name.
      */
-    public String getFilterBySecondName() {
-        return filterBySecondName;
+    public String getFilterByLastName() {
+        return filterByLastName;
     }
 
     @Override
