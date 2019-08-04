@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -49,7 +50,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void findByDepartmentId() throws Exception {
+    public void findByDepartmentId() {
         List<Employee> employees = employeeDao.findByDepartmentId(3);
         assertNotNull(employeeDao);
         assertTrue(employees.size() > 0);
@@ -90,7 +91,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
         employee.setLogin("newLogin");
@@ -124,30 +125,18 @@ public class EmployeeDaoJdbcImplTest {
         assertTrue((sizeBefore - 1) == employeeDao.findAll().size());
     }
 
-    /*   @Test
-       public void filterEmployee(){
-         / List<Employee> employees = employeeDao.filterEmployee("Нехайчик");
-
-           assertNotNull(employees);
-           assertTrue(employees.size() > 0);
-
-
-       }
-
-   */
     @Test
     public void totalCountOfEmployees() {
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        return namedParameterJdbcTemplate.queryForObject(
+        int totalCountOfEmployees = employeeDao.totalCountOfEmployees();
 
-
-        @Test
-        public void findByDepartmentId () throws Exception {
-            List<Employee> employees = employeeDao.findByDepartmentId(3);
-            assertNotNull(employeeDao);
-            assertTrue(employees.size() > 0);
-            assertEquals(employees.size(), 3);
-        }
-
-
+        assertNotNull(totalCountOfEmployees);
+        //assertEquals(totalCountOfEmployees, 12);
     }
+
+    @Test
+    public void filterEmployee() {
+        List<Employee> employees = employeeDao.filterEmployee("last");
+
+        assertNotNull(employees);
+    }
+}
