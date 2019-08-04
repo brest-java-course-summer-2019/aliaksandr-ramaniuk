@@ -80,4 +80,14 @@ public class DepartmentServiceImplTest {
         assertEquals(sizeBeforeDelete-1, sizeAfterDelete);
       }
 
+    @Test
+    public void findAllCountEmployeesInDepartment(){
+        List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
+
+        assertNotNull(departments);
+        assertTrue(departments.size() > 0);
+        assertEquals(departments.size(), 6);
+    }
+
+
 }

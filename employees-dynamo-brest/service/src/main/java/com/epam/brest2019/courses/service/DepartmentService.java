@@ -47,4 +47,11 @@ public interface DepartmentService {
      */
     void delete(Integer departmentId);
 
+    /**
+     * Find all departments with the count of employees in each department.
+     *
+     * @return findAllCountEmployeesInDepartment list of all departments with the count of employees in each department.
+     */
+    List<Department> findAllCountEmployeesInDepartment();
+
 }
