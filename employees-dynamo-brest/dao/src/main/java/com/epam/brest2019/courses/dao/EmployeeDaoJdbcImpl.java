@@ -51,7 +51,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     private static final String FIND_BY_LAST_NAME =
             "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee " +
-                    "WHERE LAST_NAME LIKE '%" + "last_name = :lastName" + "%'";
+                    "WHERE last_name LIKE '%last_name = :lastName%'";
 
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";

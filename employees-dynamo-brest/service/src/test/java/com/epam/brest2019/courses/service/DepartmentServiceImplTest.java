@@ -24,7 +24,7 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void findAll() {
-       List<Department> departments = departmentService.findAll();
+        List<Department> departments = departmentService.findAll();
 
         assertNotNull(departments);
         assertTrue(departments.size() > 0);
@@ -36,7 +36,7 @@ public class DepartmentServiceImplTest {
         assertNotNull(testFindById);
         assertTrue(testFindById.getDepartmentId().equals(1));
         assertEquals(testFindById.getDepartmentName(), "Администратор");
-     }
+    }
 
     @Test
     public void add() {
@@ -50,10 +50,11 @@ public class DepartmentServiceImplTest {
 
         assertNotNull(newDepartment.getDepartmentId());
         assertEquals(newDepartment.getDepartmentName(), "Группа поддержки");
-        assertEquals(sizeBeforeAdd+1, sizeAfterAdd);
+        assertEquals(sizeBeforeAdd + 1, sizeAfterAdd);
     }
 
-    @Test public void update() {
+    @Test
+    public void update() {
         Department testNewDepartment = new Department();
         testNewDepartment.setDepartmentId(2);
         testNewDepartment.setDepartmentName("Новый Тренер");
@@ -77,11 +78,11 @@ public class DepartmentServiceImplTest {
 
         int sizeAfterDelete = departmentService.findAll().size();
 
-        assertEquals(sizeBeforeDelete-1, sizeAfterDelete);
-      }
+        assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
+    }
 
     @Test
-    public void findAllCountEmployeesInDepartment(){
+    public void findAllCountEmployeesInDepartment() {
         List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
 
         assertNotNull(departments);

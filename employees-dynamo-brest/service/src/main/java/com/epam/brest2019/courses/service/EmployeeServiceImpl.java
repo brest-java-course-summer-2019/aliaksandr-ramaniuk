@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findByDepartmentId(Integer departmentId) {
-        LOGGER.debug("Find all employees with specified department id: {}, departmentId", departmentId);
+        LOGGER.debug("Find all employees with specified department id: {}", departmentId);
         return employeeDao.findByDepartmentId(departmentId);
     }
 
@@ -60,4 +60,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOGGER.debug("Delete employee with specified id: {}", employeeId);
         employeeDao.delete(employeeId);
     }
+
+    @Override
+    public int totalCountOfEmployees(){
+        LOGGER.debug("Get the number of employees in all departments");
+       return employeeDao.totalCountOfEmployees();
+    }
+
+    @Override
+    public List<Employee> filterEmployee(String lastName){
+        LOGGER.debug("Get filter employees by last name: {}", lastName);
+        return  employeeDao.filterEmployee(lastName);
+    }
+
+
 }

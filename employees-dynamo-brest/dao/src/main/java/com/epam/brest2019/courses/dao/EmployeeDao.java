@@ -64,9 +64,9 @@ public interface EmployeeDao {
     int totalCountOfEmployees();
 
     /**
-     * Get filter employee by last name.
+     * Get filter employees by last name.
      * @param lastName last name.
-     * @return employee.
+     * @return employees.
      */
     List<Employee> filterEmployee(String lastName);
 
