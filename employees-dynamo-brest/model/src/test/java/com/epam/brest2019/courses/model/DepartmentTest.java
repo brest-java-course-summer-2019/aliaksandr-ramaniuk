@@ -18,7 +18,13 @@ public class DepartmentTest {
     @Test
     public void getDepartmentName() {
         department.setDepartmentName("Игрок");
-        assertEquals(department.getDepartmentName(),"Игрок");
+        assertEquals(department.getDepartmentName(), "Игрок");
+    }
+
+    @Test
+    public void getCountEmployeesInDepartment() {
+        department.setCountEmployeesInDepartment(10);
+        assertTrue(department.getCountEmployeesInDepartment().equals(10));
     }
 
     /**
@@ -27,14 +33,14 @@ public class DepartmentTest {
     public DepartmentTest() {
         Department departmentTest = new Department("Тест конструктора");
         assertEquals(departmentTest.getDepartmentName(), "Тест конструктора");
-    }
-
+     }
 
     @Test
     public void testToString() {
         department.setDepartmentId(8);
         department.setDepartmentName("Тест конструктора");
-        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест конструктора}";
+        department.setCountEmployeesInDepartment(3);
+        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест конструктора, countEmployeesInDepartment = 3}";
         assertEquals(expectedResponseDepartment, department.toString());
     }
 }

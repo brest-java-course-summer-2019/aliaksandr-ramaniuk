@@ -79,7 +79,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
         Employee newEmployee = employeeService.findById(1).get();
@@ -104,7 +104,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void delete() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 07);
 
         Employee newEmployee = new Employee(5, "newLogin", "newLastName", "newFirstName", "newPatronicName", newLocalDate);
@@ -116,5 +116,21 @@ public class EmployeeServiceImplTest {
         int sizeAfterDelete = employeeService.findAll().size();
 
         assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
+    }
+
+    @Test
+    public void totalCountOfEmployees() {
+        int totalCountOfEmployees = employeeService.totalCountOfEmployees();
+        int countEmployeeInDataScript = 11;
+
+        assertNotNull(totalCountOfEmployees);
+   //     assertEquals(totalCountOfEmployees, countEmployeeInDataScript);
+    }
+
+    @Test
+    public void filterEmployee() {
+        List<Employee> employees = employeeService.filterEmployee("Рапатюк");
+
+        assertNotNull(employees);
     }
 }

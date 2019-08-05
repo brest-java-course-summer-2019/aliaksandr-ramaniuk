@@ -14,7 +14,7 @@ public interface EmployeeDao {
     /**
      * Get all employees.
      *
-     * @return employees List of all departments.
+     * @return employees list of all departments.
      */
     List<Employee> findAll();
 
@@ -56,5 +56,18 @@ public interface EmployeeDao {
      */
     void delete(Integer employeeId);
 
+    /**
+     * Get the number of employees in all departments.
+     *
+     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
+     */
+    int totalCountOfEmployees();
+
+    /**
+     * Get filter employees by last name.
+     * @param lastName last name.
+     * @return employees.
+     */
+    List<Employee> filterEmployee(String lastName);
 
 }

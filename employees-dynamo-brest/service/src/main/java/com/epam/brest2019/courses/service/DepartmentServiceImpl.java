@@ -53,4 +53,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         LOGGER.debug("Delete department with specified id: {}", departmentId);
         departmentDao.delete(departmentId);
     }
+
+    @Override
+    public List<Department> findAllCountEmployeesInDepartment(){
+        LOGGER.debug("Find all departments with the count of employees in each department");
+        return departmentDao.findAllCountEmployeesInDepartment();
+    }
 }

@@ -30,6 +30,12 @@ public class Department {
      */
     private String departmentName;
 
+
+    /**
+     * Number of employees in the department.
+     */
+    private Integer countEmployeesInDepartment;
+
     /**
      * Set department id (departmentId).
      *
@@ -46,6 +52,15 @@ public class Department {
      */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    /**
+     * Set the number of employees in the department.
+     *
+     * @param countEmployeesInDepartment count employees in department.
+     */
+    public void setCountEmployeesInDepartment(Integer countEmployeesInDepartment) {
+        this.countEmployeesInDepartment = countEmployeesInDepartment;
     }
 
     /**
@@ -66,11 +81,22 @@ public class Department {
         return departmentName;
     }
 
+
+    /**
+     * Get the number of employees in the department.
+     *
+     * @return countEmployeesInDepartment count employees in department.
+     */
+    public Integer getCountEmployeesInDepartment() {
+        return countEmployeesInDepartment;
+    }
+
     @Override
     public String toString() {
         return "Department {"
                 + "departmentId = " + departmentId
                 + ", departmentName = " + departmentName
+                + ", countEmployeesInDepartment = " + countEmployeesInDepartment
                 + "}";
     }
 }

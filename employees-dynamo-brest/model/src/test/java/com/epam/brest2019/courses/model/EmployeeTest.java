@@ -56,6 +56,18 @@ public class EmployeeTest {
         assertEquals(employee.getLocalDate(), localDateTest);
     }
 
+    @Test
+    public void getTotalCountEmployeesInAllDepartments(){
+        employee.setTotalCountEmployeesInAllDepartments(15);
+        assertTrue(employee.getTotalCountEmployeesInAllDepartments().equals(15));
+    }
+
+    @Test
+    public void getFilterByLastName(){
+        employee.setFilterByLastName("Василюк");
+        assertEquals(employee.getFilterByLastName(), "Василюк");
+    }
+
     /**
      * Constructor Employee Test
      */
@@ -84,5 +96,4 @@ public class EmployeeTest {
         String expectedResponseEmployee = "Employee {departmentId = 12, employeeId = 12, login = login, lastName = LastName, firstName = FirstName, patronicName = PatronicName, localDate = 2019-03-03}";
         assertEquals(expectedResponseEmployee, employee.toString());
     }
-
 }

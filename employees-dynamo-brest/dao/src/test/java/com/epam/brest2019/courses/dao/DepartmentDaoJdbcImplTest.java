@@ -80,4 +80,11 @@ public class DepartmentDaoJdbcImplTest {
         assertEquals(sizeBeforeDelete - 1, sizeAfterDelete);
     }
 
+    @Test
+    public void findAllCountEmployeesInDepartment() {
+        List<Department> departments = departmentDao.findAllCountEmployeesInDepartment();
+
+        assertNotNull(departments);
+        assertTrue(departments.size() > 0);
+    }
 }

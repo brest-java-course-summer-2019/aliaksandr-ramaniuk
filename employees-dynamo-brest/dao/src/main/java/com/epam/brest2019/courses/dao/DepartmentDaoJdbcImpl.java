@@ -22,6 +22,8 @@ import java.util.Optional;
  * Department DAO Interface implementation.
  */
 
+// java -jar ~/soft/h2/bin/h2-1.4.199.jar
+
 @Component
 public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
@@ -29,11 +31,9 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final static String SELECT_ALL =
             "SELECT department_id, department_name FROM department ORDER BY department_name";
-//          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
 
     private static final String FIND_BY_ID =
             "SELECT department_id, department_name FROM department WHERE department_id = :departmentId";
-//          "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d INNER JOIN employee e ON (d.department_id = e.department_id) WHERE department_id = :departmentId";
 
     private final static String ADD_DEPARTMENT =
             "INSERT INTO department (department_name) VALUES (:departmentName)";
@@ -43,6 +43,10 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final static String DELETE_DEPARTMENT =
             "DELETE FROM department WHERE department_id = :departmentId";
+
+    private final static String SELECT_ALL_COUNT_EMPLOYEES_IN_DEPARTMENT =
+            "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
+
 
     private static final String DEPARTMENT_ID = "departmentId";
 
@@ -92,6 +96,12 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
                 .orElseThrow(() -> new RuntimeException("Failed to delete department from Database!"));
     }
 
+    public List<Department> findAllCountEmployeesInDepartment(){
+        List<Department> departments = namedParameterJdbcTemplate.query(SELECT_ALL_COUNT_EMPLOYEES_IN_DEPARTMENT,
+                BeanPropertyRowMapper.newInstance(Department.class));
+        return departments;
+    }
+
     private class DepartmentRowMapper implements RowMapper<Department> {
         @Override
         public Department mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -101,6 +111,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
             return department;
         }
     }
+
 
     private boolean successfullyUpdated(int numRowsUpdated) {
         return numRowsUpdated > 0;
