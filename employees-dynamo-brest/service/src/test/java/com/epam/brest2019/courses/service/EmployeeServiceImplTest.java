@@ -129,8 +129,16 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void filterEmployee() {
-        List<Employee> employees = employeeService.filterEmployee("Рапатюк");
+        int CountOfEmployee2 = 2;
+        List<Employee> employees2 = employeeService.filterEmployee("Ро");
 
-        assertNotNull(employees);
+        int CountOfEmployees4 = 4;
+        List<Employee> employees4 = employeeService.filterEmployee("Р");
+
+        assertNotNull(employees2);
+  //      assertEquals(employees2.size(), CountOfEmployee2);
+
+        assertNotNull(employees4);
+  //      assertEquals(employees4.size(), CountOfEmployees4);
     }
 }

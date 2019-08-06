@@ -40,7 +40,6 @@ public class EmployeeDaoJdbcImplTest {
         employeeDao.delete(employee.getEmployeeId());
     }
 
-
     @Test
     public void findAll() {
         List<Employee> employees = employeeDao.findAll();
@@ -77,9 +76,12 @@ public class EmployeeDaoJdbcImplTest {
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
         List<Employee> employees = employeeDao.findAll();
-        int sizeBefore = employees.size();
+        int sizeBeforeAdd = employees.size();
         Employee employee = new Employee(1, "login002", "lastName002", "firstName002", "patronicName002", localDate);
         Employee newEmployee = employeeDao.add(employee);
+
+        List<Employee> employeesAfterAdd = employeeDao.findAll();
+        int sizeAfterAdd = employeesAfterAdd.size();
         assertNotNull(newEmployee.getEmployeeId());
         assertEquals(newEmployee.getLogin(), employee.getLogin());
         assertEquals(newEmployee.getLastName(), employee.getLastName());
@@ -87,7 +89,7 @@ public class EmployeeDaoJdbcImplTest {
         assertEquals(newEmployee.getPatronicName(), employee.getPatronicName());
         assertEquals(newEmployee.getLocalDate(), employee.getLocalDate());
         assertEquals(newEmployee.getDepartmentId(), employee.getDepartmentId());
-        assertTrue((sizeBefore + 1) == employeeDao.findAll().size());
+        assertTrue(sizeAfterAdd - sizeBeforeAdd == 1);
     }
 
     @Test
@@ -130,13 +132,15 @@ public class EmployeeDaoJdbcImplTest {
         int totalCountOfEmployees = employeeDao.totalCountOfEmployees();
 
         assertNotNull(totalCountOfEmployees);
-        //assertEquals(totalCountOfEmployees, 12);
+  //      assertEquals(totalCountOfEmployees, 12);
     }
 
     @Test
     public void filterEmployee() {
-        List<Employee> employees = employeeDao.filterEmployee("last");
+        int CountOfEmployees = 2;
+        List<Employee> employees = employeeDao.filterEmployee("Ро");
 
         assertNotNull(employees);
+        assertEquals(employees.size(), CountOfEmployees);
     }
 }

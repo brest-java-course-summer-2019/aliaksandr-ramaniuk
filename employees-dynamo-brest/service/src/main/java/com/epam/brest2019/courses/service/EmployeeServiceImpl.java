@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int totalCountOfEmployees(){
         LOGGER.debug("Get the number of employees in all departments");
-       return employeeDao.totalCountOfEmployees();
+        return employeeDao.totalCountOfEmployees();
     }
 
     @Override
@@ -72,6 +72,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOGGER.debug("Get filter employees by last name: {}", lastName);
         return  employeeDao.filterEmployee(lastName);
     }
-
-
 }
