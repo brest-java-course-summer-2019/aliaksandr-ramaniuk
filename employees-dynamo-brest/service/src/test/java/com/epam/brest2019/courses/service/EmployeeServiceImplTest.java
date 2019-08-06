@@ -83,7 +83,6 @@ public class EmployeeServiceImplTest {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
         Employee newEmployee = employeeService.findById(1).get();
-
         newEmployee.setLogin("newLogin");
         newEmployee.setFirstName("newFirstName");
         newEmployee.setLastName("newLastName");
