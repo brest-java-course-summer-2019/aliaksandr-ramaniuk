@@ -45,7 +45,8 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
             "DELETE FROM department WHERE department_id = :departmentId";
 
     private final static String SELECT_ALL_COUNT_EMPLOYEES_IN_DEPARTMENT =
-            "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
+            "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN " +
+                    "employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
 
 
     private static final String DEPARTMENT_ID = "departmentId";

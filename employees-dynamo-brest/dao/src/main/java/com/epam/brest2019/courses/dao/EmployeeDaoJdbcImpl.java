@@ -26,7 +26,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee ORDER BY employee_id";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id " +
+                    "FROM employee ORDER BY employee_id";
 
     private static final String FIND_BY_ID =
             "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id " +
@@ -36,7 +37,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
             "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id " +
                     "FROM employee WHERE department_id = :departmentId";
 
-    private final static String ADD_EMPLOYEE = "INSERT INTO employee (login, last_name, first_name, patronic_name, local_date, department_id ) VALUES " +
+    private final static String ADD_EMPLOYEE = "INSERT INTO employee (login, last_name, first_name, " +
+            "patronic_name, local_date, department_id ) VALUES " +
             "(:login, :lastName, :firstName, :patronicName, :localDate, :departmentId)";
 
     private static final String UPDATE_EMPLOYEE =

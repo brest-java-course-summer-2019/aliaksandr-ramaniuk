@@ -5,6 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Human Resources Test DB Module</name>
+
     <parent>
         <artifactId>employees-dynamo-brest</artifactId>
         <groupId>com.epam.brest2019.courses</groupId>
@@ -39,7 +41,6 @@
     </dependencies>
 
     <build>
-
         <plugins>
             <!-- Embedded Jetty HTTP Server for testing web application -->
             <plugin>
