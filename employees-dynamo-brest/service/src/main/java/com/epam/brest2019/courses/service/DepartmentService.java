@@ -3,7 +3,6 @@ package com.epam.brest2019.courses.service;
 import com.epam.brest2019.courses.model.Department;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Department Service Interface.
@@ -23,7 +22,7 @@ public interface DepartmentService {
      * @param departmentId department id (departmentId).
      * @return departmentId department by id.
      */
-    Optional<Department> findById(Integer departmentId);
+    Department findById(Integer departmentId);
 
     /**
      * Add new department.
@@ -31,12 +30,13 @@ public interface DepartmentService {
      * @param department Department.
      * @return department.
      */
-    Department add(Department department);
+//    Department add(Department department);
 
     /**
      * Update department.
      *
      * @param department department.
+     * @return department.
      */
     void update(Department department);
 

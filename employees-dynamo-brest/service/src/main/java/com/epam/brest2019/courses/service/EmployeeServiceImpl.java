@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Employee Service Interface implementation.
@@ -37,18 +36,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> findById(Integer employeeId) {
+    public Employee findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: {}", employeeId);
-        return employeeDao.findById(employeeId);
-
+        return employeeDao.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Failed to get employee from Database"));
     }
-
+/*
     @Override
     public Employee add(Employee employee) {
         LOGGER.debug("Add new employee: {}", employee);
         return employeeDao.add(employee);
     }
-
+*/
     @Override
     public void update(Employee employee) {
         LOGGER.debug("Update employee: {}", employee);

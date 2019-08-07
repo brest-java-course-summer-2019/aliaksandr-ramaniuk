@@ -37,6 +37,7 @@ public interface DepartmentDao {
      * Update department.
      *
      * @param department department.
+     * @return department.
      */
     void update(Department department);
 

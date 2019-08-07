@@ -32,7 +32,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void findByDepartmentId() throws Exception {
+    public void findByDepartmentId() {
         List<Employee> employees = employeeService.findByDepartmentId(2);
         assertNotNull(employeeService);
         assertTrue(employees.size() > 0);
@@ -43,7 +43,7 @@ public class EmployeeServiceImplTest {
     public void findById() {
         LocalDate testLocalDate = LocalDate.of(2019, 01, 05);
 
-        Employee testEmployee = employeeService.findById(5).get();
+        Employee testEmployee = employeeService.findById(5);
         assertNotNull(employeeService);
         assertTrue(testEmployee.getDepartmentId().equals(3));
         assertTrue(testEmployee.getEmployeeId().equals(5));
@@ -53,7 +53,7 @@ public class EmployeeServiceImplTest {
         assertEquals(testEmployee.getPatronicName(), "Александрович");
         assertEquals(testEmployee.getLocalDate(), testLocalDate);
     }
-
+/*
     @Test
     public void addEmployee() {
         LocalDate localDate = LocalDate.of(2019, 07, 07);
@@ -77,12 +77,12 @@ public class EmployeeServiceImplTest {
         List<Employee> TotalEmployeeInDepartment = employeeService.findByDepartmentId(1);
         assertEquals(TotalEmployeeInDepartment.size(), 2);
     }
-
+*/
     @Test
     public void update() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
-        Employee newEmployee = employeeService.findById(1).get();
+        Employee newEmployee = employeeService.findById(1);
         newEmployee.setLogin("newLogin");
         newEmployee.setFirstName("newFirstName");
         newEmployee.setLastName("newLastName");
@@ -91,7 +91,7 @@ public class EmployeeServiceImplTest {
         newEmployee.setLocalDate(newLocalDate);
 
         employeeService.update(newEmployee);
-        Employee updateEmployee = employeeService.findById(newEmployee.getEmployeeId()).get();
+        Employee updateEmployee = employeeService.findById(newEmployee.getEmployeeId());
 
         assertEquals(updateEmployee.getEmployeeId(), newEmployee.getEmployeeId());
         assertEquals(updateEmployee.getLogin(), newEmployee.getLogin());
@@ -107,7 +107,7 @@ public class EmployeeServiceImplTest {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 07);
 
         Employee newEmployee = new Employee(5, "newLogin", "newLastName", "newFirstName", "newPatronicName", newLocalDate);
-        employeeService.add(newEmployee);
+   //     employeeService.add(newEmployee);
 
         int sizeBeforeDelete = employeeService.findAll().size();
 

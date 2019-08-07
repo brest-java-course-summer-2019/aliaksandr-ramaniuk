@@ -16,40 +16,86 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@ExtendWith(MockitoExtension.class)
 public class DepartmentServiceMockTest {
 
     @Mock
-    private DepartmentDao dao;
+    private DepartmentDao departmentDao;
 
     @Captor
     private ArgumentCaptor<Department> departmentCaptor;
 
     @InjectMocks
-    private DepartmentServiceImpl service;
+    private DepartmentServiceImpl departmentService;
 
     @AfterEach
     void after() {
-        Mockito.verifyNoMoreInteractions(dao);
+        Mockito.verifyNoMoreInteractions(departmentDao);
     }
 
     @Test
     void findAll() {
+        Mockito.when(departmentDao.findAll()).thenReturn(Collections.singletonList(testMethod()));
+        List<Department> resultTest = departmentService.findAll();
 
-        Mockito.when(dao.findAll()).thenReturn(Collections.singletonList(testClass()));
+        assertNotNull(resultTest);
+        assertTrue(resultTest.size() > 0);
+        assertEquals(1, resultTest.size());
 
-        List<Department> result = service.findAll();
-
-        assertNotNull(result);
-        assertEquals(1, result.size());
-
-        Mockito.verify(dao).findAll();
+        Mockito.verify(departmentDao).findAll();
     }
 
 
-    private Department testClass() {
+    @Test
+    public void findById() {
+        int departmentId = 1;
+
+        Mockito.when(departmentDao.findById(departmentId)).thenReturn(Optional.of(testMethod()));
+        Department department = departmentService.findById(departmentId);
+
+        assertNotNull(department);
+        assertEquals("departmentNameTest", department.getDepartmentName());
+
+        Mockito.verify(departmentDao).findById(departmentId);
+    }
+
+    @Test
+    public void update() {
+        departmentService.update(testMethod());
+
+        Mockito.verify(departmentDao).update(departmentCaptor.capture());
+
+        Department department = departmentCaptor.getValue();
+        assertNotNull(department);
+        assertEquals("departmentNameTest", department.getDepartmentName());
+        assertTrue(department.getDepartmentId().equals(1));
+    }
+
+    @Test
+    void delete() {
+        int departmentId = 1;
+        departmentService.delete(departmentId);
+        Mockito.verify(departmentDao).delete(departmentId);
+    }
+
+    @Test
+    void findAllCountEmployeesInDepartment() {
+
+        Mockito.when(departmentDao.findAllCountEmployeesInDepartment()).thenReturn(Collections.singletonList(testMethod()));
+        List<Department> resultTest = departmentService.findAllCountEmployeesInDepartment();
+
+        assertNotNull(resultTest);
+        assertTrue(resultTest.size() > 0);
+        assertEquals(resultTest.size(), 1);
+
+        Mockito.verify(departmentDao).findAllCountEmployeesInDepartment();
+    }
+
+    private Department testMethod() {
         Department department = new Department();
         department.setDepartmentName("departmentNameTest");
         department.setDepartmentId(1);

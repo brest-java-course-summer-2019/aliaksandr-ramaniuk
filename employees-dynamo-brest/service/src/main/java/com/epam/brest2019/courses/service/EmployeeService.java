@@ -3,7 +3,7 @@ package com.epam.brest2019.courses.service;
 import com.epam.brest2019.courses.model.Employee;
 
 import java.util.List;
-import java.util.Optional;
+
 
 /**
  * Employee Service Interface.
@@ -34,7 +34,7 @@ public interface EmployeeService {
      * @param employeeId employee id.
      * @return employeeId employee by id.
      */
-    Optional<Employee> findById(Integer employeeId);
+    Employee findById(Integer employeeId);
 
 
     /**
@@ -43,13 +43,14 @@ public interface EmployeeService {
      * @param employee Department.
      * @return employee.
      */
-    Employee add(Employee employee);
+  //  Employee add(Employee employee);
 
 
     /**
      * Update employee.
      *
      * @param employee Employee.
+     * @return employee.
      */
     void update(Employee employee);
 

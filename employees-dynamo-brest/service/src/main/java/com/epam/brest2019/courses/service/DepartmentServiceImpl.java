@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Department Service Interface implementation.
@@ -31,17 +30,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Optional<Department> findById(Integer departmentId) {
+    public Department findById(Integer departmentId) {
         LOGGER.debug("Find department with specified id: {}", departmentId);
-        return departmentDao.findById(departmentId);
+        return departmentDao.findById(departmentId)
+                .orElseThrow(() -> new RuntimeException("Failed to get department from Database"));
     }
-
+/*
     @Override
     public Department add(Department department) {
         LOGGER.debug("Add new department: {}", department);
         return departmentDao.add(department);
     }
-
+*/
     @Override
     public void update(Department department) {
         LOGGER.debug("Update department: {}", department);
@@ -55,7 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> findAllCountEmployeesInDepartment(){
+    public List<Department> findAllCountEmployeesInDepartment() {
         LOGGER.debug("Find all departments with the count of employees in each department");
         return departmentDao.findAllCountEmployeesInDepartment();
     }
