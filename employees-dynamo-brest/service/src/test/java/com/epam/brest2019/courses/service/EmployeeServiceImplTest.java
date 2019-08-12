@@ -53,7 +53,7 @@ public class EmployeeServiceImplTest {
         assertEquals(testEmployee.getPatronicName(), "Александрович");
         assertEquals(testEmployee.getLocalDate(), testLocalDate);
     }
-/*
+
     @Test
     public void addEmployee() {
         LocalDate localDate = LocalDate.of(2019, 07, 07);
@@ -77,7 +77,7 @@ public class EmployeeServiceImplTest {
         List<Employee> TotalEmployeeInDepartment = employeeService.findByDepartmentId(1);
         assertEquals(TotalEmployeeInDepartment.size(), 2);
     }
-*/
+
     @Test
     public void update() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);

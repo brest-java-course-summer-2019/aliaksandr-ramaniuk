@@ -89,10 +89,10 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Override
     public Employee add(Employee employee) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("login", employee.getLogin());
-        parameters.addValue("lastName", employee.getLastName());
-        parameters.addValue("firstName", employee.getFirstName());
-        parameters.addValue("patronicName", employee.getPatronicName());
+        parameters.addValue("login", employee.getLogin().toLowerCase());
+        parameters.addValue("lastName", employee.getLastName().toUpperCase());
+        parameters.addValue("firstName", employee.getFirstName().toUpperCase());
+        parameters.addValue("patronicName", employee.getPatronicName().toUpperCase());
         parameters.addValue("localDate", employee.getLocalDate());
         parameters.addValue("departmentId", employee.getDepartmentId());
 
@@ -125,7 +125,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> filterEmployee(String lastName) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName + "%");
+        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName.toUpperCase() + "%");
         List<Employee> resultsFilter = namedParameterJdbcTemplate.query(FIND_BY_LAST_NAME, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 

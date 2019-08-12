@@ -35,13 +35,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.findById(departmentId)
                 .orElseThrow(() -> new RuntimeException("Failed to get department from Database"));
     }
-/*
+
     @Override
     public Department add(Department department) {
         LOGGER.debug("Add new department: {}", department);
         return departmentDao.add(department);
     }
-*/
+
     @Override
     public void update(Department department) {
         LOGGER.debug("Update department: {}", department);

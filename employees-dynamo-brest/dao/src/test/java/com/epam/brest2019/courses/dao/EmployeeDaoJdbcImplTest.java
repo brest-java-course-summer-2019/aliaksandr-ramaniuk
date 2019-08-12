@@ -2,11 +2,10 @@ package com.epam.brest2019.courses.dao;
 
 import com.epam.brest2019.courses.model.Employee;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,31 +13,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
-
+@Rollback
 public class EmployeeDaoJdbcImplTest {
 
     @Autowired
     EmployeeDao employeeDao;
-
-    private Employee employee;
-
-    @Before
-    public void changes() {
-        LocalDate localDate = LocalDate.of(2019, 06, 06);
-        employee = new Employee(1, "loginTest", "lastNameTest", "firstNameTest", "patronicNameTest", localDate);
-        employee = employeeDao.add(employee);
-    }
-
-    @After
-    public void cleanChanges() {
-        employeeDao.delete(employee.getEmployeeId());
-    }
 
     @Test
     public void findAll() {
@@ -58,16 +42,15 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void findById() {
-        LocalDate testLocalDate = LocalDate.of(2019, 06, 06);
+        LocalDate testLocalDate = LocalDate.of(2019, 01, 01);
 
-        Employee testEmployee = employeeDao.findById(employee.getEmployeeId()).get();
+        Employee testEmployee = employeeDao.findById(1).get();
         assertNotNull(employeeDao);
-        assertEquals(testEmployee.getEmployeeId(), employee.getEmployeeId());
         assertTrue(testEmployee.getDepartmentId().equals(1));
-        assertEquals(testEmployee.getLogin(), "loginTest");
-        assertEquals(testEmployee.getLastName(), "lastNameTest");
-        assertEquals(testEmployee.getFirstName(), "firstNameTest");
-        assertEquals(testEmployee.getPatronicName(), "patronicNameTest");
+        assertEquals(testEmployee.getLogin(), "romanukalex");
+        assertEquals(testEmployee.getLastName(), "РОМАНЮК");
+        assertEquals(testEmployee.getFirstName(), "АЛЕКСАНДР");
+        assertEquals(testEmployee.getPatronicName(), "НИКОЛАЕВИЧ");
         assertEquals(testEmployee.getLocalDate(), testLocalDate);
     }
 
@@ -95,6 +78,8 @@ public class EmployeeDaoJdbcImplTest {
     @Test
     public void update() {
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
+
+        Employee employee = employeeDao.findById(3).get();
 
         employee.setLogin("newLogin");
         employee.setFirstName("newFirstName");
@@ -132,13 +117,13 @@ public class EmployeeDaoJdbcImplTest {
         int totalCountOfEmployees = employeeDao.totalCountOfEmployees();
 
         assertNotNull(totalCountOfEmployees);
-  //      assertEquals(totalCountOfEmployees, 12);
+ //       assertEquals(totalCountOfEmployees, 11);
     }
 
     @Test
     public void filterEmployee() {
         int CountOfEmployees = 2;
-        List<Employee> employees = employeeDao.filterEmployee("Ро");
+        List<Employee> employees = employeeDao.filterEmployee("РО");
 
         assertNotNull(employees);
         assertEquals(employees.size(), CountOfEmployees);

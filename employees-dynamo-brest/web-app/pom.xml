@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>Human Resources Test DB Module</name>
+    <name>Employees Dynamo Brest WEB-APP</name>
 
     <parent>
         <artifactId>employees-dynamo-brest</artifactId>

@@ -41,13 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Failed to get employee from Database"));
     }
-/*
+
     @Override
     public Employee add(Employee employee) {
         LOGGER.debug("Add new employee: {}", employee);
         return employeeDao.add(employee);
     }
-*/
+
     @Override
     public void update(Employee employee) {
         LOGGER.debug("Update employee: {}", employee);

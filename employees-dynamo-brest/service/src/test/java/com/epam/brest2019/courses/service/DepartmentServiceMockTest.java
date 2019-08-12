@@ -64,6 +64,22 @@ public class DepartmentServiceMockTest {
     }
 
     @Test
+    public void add() {
+
+        Department departmentAdd = new Department("NAME", "read");
+
+        Mockito.when(departmentDao.add(departmentAdd)).thenReturn(departmentAdd);
+
+        Department department = departmentService.add(departmentAdd);
+
+        assertNotNull(department);
+        assertEquals("NAME", department.getDepartmentName());
+
+        Mockito.verify(departmentDao, Mockito.times(1)).add(departmentAdd);
+
+    }
+
+    @Test
     public void update() {
         departmentService.update(testMethod());
 

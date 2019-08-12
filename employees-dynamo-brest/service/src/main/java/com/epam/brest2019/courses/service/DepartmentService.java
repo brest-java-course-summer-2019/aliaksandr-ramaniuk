@@ -30,7 +30,7 @@ public interface DepartmentService {
      * @param department Department.
      * @return department.
      */
-//    Department add(Department department);
+    Department add(Department department);
 
     /**
      * Update department.

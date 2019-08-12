@@ -1,6 +1,7 @@
 package com.epam.brest2019.courses.service;
 
 import com.epam.brest2019.courses.dao.EmployeeDao;
+import com.epam.brest2019.courses.model.Department;
 import com.epam.brest2019.courses.model.Employee;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -82,24 +83,23 @@ public class EmployeeServiceMockTest {
         Mockito.verify(employeeDao).findById(employeeId);
     }
 
-    /*
-        @Test
-        public void add() {
+    @Test
+    public void add() {
 
-            Employee employeeAdd = new Employee();
-            employeeAdd.setLastName("LastNameAdd");
+        Employee employeeAdd = new Employee();
+        employeeAdd.setLastName("LastNameAdd");
 
-            Mockito.when(employeeDao.add(employeeAdd)).thenReturn(employeeAdd);
+        Mockito.when(employeeDao.add(employeeAdd)).thenReturn(employeeAdd);
 
-            employeeService.add(employeeAdd);
+        Employee employee = employeeService.add(employeeAdd);
 
-            assertNotNull(employeeAdd);
-            assertNotNull(employeeAdd);
-            assertEquals("LastNameAdd", employeeService.add(employeeAdd).getLastName());
+        assertNotNull(employee);
+        assertEquals("LastNameAdd", employee.getLastName());
 
-            Mockito.verify(employeeDao).add(employeeAdd);
-        }
-    */
+        Mockito.verify(employeeDao).add(employeeAdd);
+    }
+
+
     @Test
     public void update() {
         employeeService.update(testMethod());

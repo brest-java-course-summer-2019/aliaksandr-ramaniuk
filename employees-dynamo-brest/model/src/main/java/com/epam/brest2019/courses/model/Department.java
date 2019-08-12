@@ -9,9 +9,11 @@ public class Department {
      * Constructor with parameter.
      *
      * @param departmentName department name.
+     * @param departmentAccessRights department access rights.
      */
-    public Department(String departmentName) {
+    public Department(String departmentName, String departmentAccessRights) {
         this.departmentName = departmentName;
+        this.departmentAccessRights = departmentAccessRights;
     }
 
     /**
@@ -29,6 +31,11 @@ public class Department {
      * Department name.
      */
     private String departmentName;
+
+    /**
+     * DepartmentAccessRights.
+     */
+    private String departmentAccessRights;
 
 
     /**
@@ -52,6 +59,15 @@ public class Department {
      */
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    /**
+     * Set department access rights.
+     *
+     * @param departmentAccessRights department access rights.
+     */
+    public void setDepartmentAccessRights(String departmentAccessRights) {
+        this.departmentAccessRights = departmentAccessRights;
     }
 
     /**
@@ -81,6 +97,14 @@ public class Department {
         return departmentName;
     }
 
+    /**
+     * Get department access rights.
+     *
+     * @return departmentAccessRights department access rights.
+     */
+    public String getDepartmentAccessRights() {
+        return departmentAccessRights;
+    }
 
     /**
      * Get the number of employees in the department.
@@ -96,6 +120,7 @@ public class Department {
         return "Department {"
                 + "departmentId = " + departmentId
                 + ", departmentName = " + departmentName
+                + ", departmentAccessRights = " + departmentAccessRights
                 + ", countEmployeesInDepartment = " + countEmployeesInDepartment
                 + "}";
     }

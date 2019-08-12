@@ -22,6 +22,12 @@ public class DepartmentTest {
     }
 
     @Test
+    public void getDepartmentAccessRights() {
+        department.setDepartmentAccessRights("Read");
+        assertEquals(department.getDepartmentAccessRights(), "Read");
+    }
+
+    @Test
     public void getCountEmployeesInDepartment() {
         department.setCountEmployeesInDepartment(10);
         assertTrue(department.getCountEmployeesInDepartment().equals(10));
@@ -31,16 +37,19 @@ public class DepartmentTest {
      * Constructor Department Test
      */
     public DepartmentTest() {
-        Department departmentTest = new Department("Тест конструктора");
-        assertEquals(departmentTest.getDepartmentName(), "Тест конструктора");
+        Department departmentTest = new Department("Тест конструктора name", "Тест конструктора read");
+
+        assertEquals(departmentTest.getDepartmentName(), "Тест конструктора name");
+        assertEquals(departmentTest.getDepartmentAccessRights(), "Тест конструктора read");
      }
 
     @Test
     public void testToString() {
         department.setDepartmentId(8);
-        department.setDepartmentName("Тест конструктора");
+        department.setDepartmentName("Тест testToString");
+        department.setDepartmentAccessRights("Read");
         department.setCountEmployeesInDepartment(3);
-        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест конструктора, countEmployeesInDepartment = 3}";
+        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест testToString, departmentAccessRights = Read, countEmployeesInDepartment = 3}";
         assertEquals(expectedResponseDepartment, department.toString());
     }
 }
