@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -70,5 +71,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> filterEmployee(String lastName){
         LOGGER.debug("Get filter employees by last name: {}", lastName);
         return  employeeDao.filterEmployee(lastName);
+    }
+
+    @Override
+    public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
+        LOGGER.debug("Get filter employees by date: {}, {}", localDates, localDates);
+        return  employeeDao.filterEmployeeByDate(localDates);
     }
 }
