@@ -75,7 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
-        LOGGER.debug("Get filter employees by date: {}, {}", localDates, localDates);
+        LOGGER.debug("Get filter employees by date: {}", localDates, localDates);
         return  employeeDao.filterEmployeeByDate(localDates);
     }
 }

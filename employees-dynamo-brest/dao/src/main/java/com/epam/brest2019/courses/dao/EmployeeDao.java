@@ -77,7 +77,7 @@ public interface EmployeeDao {
      * @param localDates local date second value.
      * @return employees.
      */
-    List<Employee> filterEmployeeByDate(LocalDate... localDates);
+    List<Employee> filterEmployeeByDate(LocalDate...  localDates);
 
 }
 

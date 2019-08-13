@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -150,12 +151,28 @@ public class EmployeeServiceMockTest {
         Mockito.verify(employeeDao).filterEmployee(lastName);
     }
 
+    @Test
+    public  void filterEmployeeByDate() {
+        LocalDate localDate1 = LocalDate.of(2019, 01, 1);
+        LocalDate localDate2 = LocalDate.of(2019, 01, 10);
+
+        Mockito.when(employeeDao.filterEmployeeByDate(localDate1, localDate2)).thenReturn(Collections.singletonList(testMethod()));
+
+        List<Employee> employees = employeeService.filterEmployeeByDate(localDate1, localDate2);
+
+        assertNotNull(employees);
+        assertTrue(employees.size() > 0);
+
+        Mockito.verify(employeeDao).filterEmployeeByDate(localDate1, localDate2);
+    }
 
     private Employee testMethod() {
+        LocalDate localDate = LocalDate.of(2019, 01, 07);
 
         Employee employee = new Employee();
         employee.setLastName("LastName");
         employee.setEmployeeId(1);
+        employee.setLocalDate(localDate);
         return employee;
     }
 }

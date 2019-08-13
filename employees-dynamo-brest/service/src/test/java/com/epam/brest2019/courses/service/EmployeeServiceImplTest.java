@@ -129,15 +129,26 @@ public class EmployeeServiceImplTest {
     @Test
     public void filterEmployee() {
         int CountOfEmployee2 = 2;
-        List<Employee> employees2 = employeeService.filterEmployee("Ро");
+        List<Employee> employees2 = employeeService.filterEmployee("РО");
 
-        int CountOfEmployees4 = 4;
-        List<Employee> employees4 = employeeService.filterEmployee("Р");
+        int CountOfEmployees1 = 1;
+        List<Employee> employees1 = employeeService.filterEmployee("РОМАНЮК");
 
         assertNotNull(employees2);
-  //      assertEquals(employees2.size(), CountOfEmployee2);
+        assertEquals(employees2.size(), CountOfEmployee2);
 
-        assertNotNull(employees4);
-  //      assertEquals(employees4.size(), CountOfEmployees4);
+        assertNotNull(employees1);
+        assertEquals(employees1.size(), CountOfEmployees1);
+    }
+
+    @Test
+    public  void filterEmployeeByDate() {
+        LocalDate localDate1 = LocalDate.of(2019, 01, 1);
+        LocalDate localDate2 = LocalDate.of(2019, 01, 10);
+
+        List<Employee> employees = employeeService.filterEmployeeByDate(localDate1, localDate2);
+
+        assertNotNull(employees);
+        assertEquals(employees.size(), 11);
     }
 }

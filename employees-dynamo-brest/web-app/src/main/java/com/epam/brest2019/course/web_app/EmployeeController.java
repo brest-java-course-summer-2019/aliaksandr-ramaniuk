@@ -20,12 +20,22 @@ public class EmployeeController {
     }
 
     /**
-     * Goto employee page.
+     * Goto employees_Add page.
      *
      * @return view name
      */
-    @GetMapping(value = "/employee")
-    public final String employee() {
-        return "employee";
+    @GetMapping(value = "/employees_Add")
+    public final String employeesAdd() {
+        return "employees_Add";
+    }
+
+    /**
+     * Goto employees_Edit page.
+     *
+     * @return view name
+     */
+    @GetMapping(value = "/employees_Edit")
+    public final String employeesEdit() {
+        return "employees_Edit";
     }
 }

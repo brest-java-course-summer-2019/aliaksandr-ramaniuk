@@ -54,16 +54,15 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     private static final String FIND_BY_LAST_NAME =
             "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee "
-                  + "WHERE last_name LIKE :lastName";
+                    + "WHERE last_name LIKE :lastName";
 
     private static final String DATE_FILTER =
             "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id "
-                    + "FROM employee WHERE LOCAL_DATE BETWEEN :localDates and :localDates";
+                    + "FROM employee WHERE LOCAL_DATE BETWEEN :localDate1 and :localDate2";
 
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String LAST_NAME = "lastName";
-    private static final String LOCAL_DATES = "localDates";
 
     public EmployeeDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -141,12 +140,16 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
 
-        SqlParameterSource namedParameters = null;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
 
+        int i = 1;
         for (LocalDate localDate : localDates) {
-                namedParameters = new MapSqlParameterSource(LOCAL_DATES, "'" + localDate + "'");
+            String LOCAL_DATE = "localDate" + i;
+            parameters.addValue(LOCAL_DATE, localDate);
+            i++;
         }
-        List<Employee> resultsFilter = namedParameterJdbcTemplate.query(DATE_FILTER, namedParameters,
+
+        List<Employee> resultsFilter = namedParameterJdbcTemplate.query(DATE_FILTER, parameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 
         return resultsFilter;
