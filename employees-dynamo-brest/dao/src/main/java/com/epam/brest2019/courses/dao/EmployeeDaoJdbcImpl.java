@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -42,8 +43,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
             "(:login, :lastName, :firstName, :patronicName, :localDate, :departmentId)";
 
     private static final String UPDATE_EMPLOYEE =
-            "UPDATE employee SET login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, " +
-                    "local_date = :localDate, department_id = :departmentId WHERE employee_id = :employeeId";
+            "UPDATE employee SET login = :login, last_name = :lastName, first_name = :firstName, patronic_name = :patronicName, "
+                    + "local_date = :localDate, department_id = :departmentId WHERE employee_id = :employeeId";
 
     private static final String DELETE_EMPLOYEE =
             "DELETE FROM employee WHERE employee_id = :employeeId";
@@ -52,8 +53,12 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
             "SELECT COUNT (employee_id) FROM employee";
 
     private static final String FIND_BY_LAST_NAME =
-            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee " +
-                    "WHERE last_name LIKE :lastName";
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id FROM employee "
+                    + "WHERE last_name LIKE :lastName";
+
+    private static final String DATE_FILTER =
+            "SELECT employee_id, login, last_name, first_name, patronic_name, local_date, department_id "
+                    + "FROM employee WHERE LOCAL_DATE BETWEEN :localDate1 and :localDate2";
 
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";
@@ -127,6 +132,24 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     public List<Employee> filterEmployee(String lastName) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName.toUpperCase() + "%");
         List<Employee> resultsFilter = namedParameterJdbcTemplate.query(FIND_BY_LAST_NAME, namedParameters,
+                BeanPropertyRowMapper.newInstance(Employee.class));
+
+        return resultsFilter;
+    }
+
+    @Override
+    public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+
+        int i = 1;
+        for (LocalDate localDate : localDates) {
+            String LOCAL_DATE = "localDate" + i;
+            parameters.addValue(LOCAL_DATE, localDate);
+            i++;
+        }
+
+        List<Employee> resultsFilter = namedParameterJdbcTemplate.query(DATE_FILTER, parameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 
         return resultsFilter;

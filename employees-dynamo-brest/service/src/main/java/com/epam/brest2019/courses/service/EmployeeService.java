@@ -2,6 +2,7 @@ package com.epam.brest2019.courses.service;
 
 import com.epam.brest2019.courses.model.Employee;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -74,4 +75,12 @@ public interface EmployeeService {
      * @return employees.
      */
     List<Employee> filterEmployee(String lastName);
+
+    /**
+     * Get filter employees by date.
+     * @param localDates local date first value.
+     * @param localDates local date second value.
+     * @return employees.
+     */
+    List<Employee> filterEmployeeByDate(LocalDate... localDates);
 }
