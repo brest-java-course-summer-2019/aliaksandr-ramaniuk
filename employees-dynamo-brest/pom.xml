@@ -14,11 +14,13 @@
 
     <modules>
         <module>model</module>
+        <module>dao-api</module>
         <module>dao</module>
+        <module>service-api</module>
         <module>service</module>
         <module>web-app</module>
         <module>test-db</module>
-
+        <module>rest-app</module>
     </modules>
 
     <distributionManagement>
@@ -56,28 +58,42 @@
 
         <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
         <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
+        <jackson-databind.version>2.9.8</jackson-databind.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
-                <groupId>com.epam.brest2019.courses</groupId>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
                 <artifactId>model</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.epam.brest2019.courses</groupId>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
+                <artifactId>dao-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
                 <artifactId>dao</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.epam.brest2019.courses</groupId>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.summer.courses2019</groupId>
                 <artifactId>test-db</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
-
 
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -94,26 +110,13 @@
                 <artifactId>spring-beans</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
@@ -124,7 +127,6 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.199</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -162,6 +164,13 @@
                 <version>4.0.0</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -184,7 +193,11 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
@@ -195,6 +208,18 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>2.0.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -291,7 +316,7 @@
                             <contextPath>/</contextPath>
                         </webApp>
                         <httpConnector>
-                            <port>8080</port>
+                            <port>8090</port>
                         </httpConnector>
                     </configuration>
                 </plugin>

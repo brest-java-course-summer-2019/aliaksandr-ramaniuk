@@ -31,26 +31,26 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department findById(Integer departmentId) {
-        LOGGER.debug("Find department with specified id: {}", departmentId);
+        LOGGER.debug("Find department with specified id: ({})", departmentId);
         return departmentDao.findById(departmentId)
                 .orElseThrow(() -> new RuntimeException("Failed to get department from Database"));
     }
 
     @Override
     public Department add(Department department) {
-        LOGGER.debug("Add new department: {}", department);
+        LOGGER.debug("Add new department: ({})", department);
         return departmentDao.add(department);
     }
 
     @Override
     public void update(Department department) {
-        LOGGER.debug("Update department: {}", department);
+        LOGGER.debug("Update department: ({})", department);
         departmentDao.update(department);
     }
 
     @Override
     public void delete(Integer departmentId) {
-        LOGGER.debug("Delete department with specified id: {}", departmentId);
+        LOGGER.debug("Delete department with specified id: ({})", departmentId);
         departmentDao.delete(departmentId);
     }
 

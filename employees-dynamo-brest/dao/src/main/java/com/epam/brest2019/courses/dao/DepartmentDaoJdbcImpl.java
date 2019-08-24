@@ -1,6 +1,7 @@
 package com.epam.brest2019.courses.dao;
 
 import com.epam.brest2019.courses.model.Department;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -25,26 +26,27 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private final static String SELECT_ALL =
-            "SELECT department_id, department_name, department_access_rights FROM department ORDER BY department_name";
+    @Value("${department.findAll}")
+    private String findAllSql;
 
-    private static final String FIND_BY_ID =
-            "SELECT department_id, department_name, department_access_rights FROM department WHERE department_id = :departmentId";
+    @Value("${department.findById}")
+    private String findByIdSql;
 
-    private final static String ADD_DEPARTMENT =
-            "INSERT INTO department (department_name, department_access_rights) VALUES (:departmentName, :departmentAccessRights)";
+    @Value("${department.add}")
+    private String addSql;
 
-    private final static String UPDATE_DEPARTMENT =
-            "UPDATE department SET department_name = :departmentName, department_access_rights = :departmentAccessRights WHERE department_id = :departmentId";
+    @Value("${department.update}")
+    private String updateSql;
 
-    private final static String DELETE_DEPARTMENT =
-            "DELETE FROM department WHERE department_id = :departmentId";
+    @Value("${department.delete}")
+    private String deleteSql;
 
-    private final static String SELECT_ALL_COUNT_EMPLOYEES_IN_DEPARTMENT =
-            "SELECT d.department_id, d.department_name, COUNT(e.employee_id) FROM department d NATURAL JOIN " +
-                    "employee e GROUP BY d.department_id ORDER BY COUNT(e.employee_id)";
+    @Value("${department.findAllCountEmployeesInDepartment}")
+    private String findAllCountEmployeesInDepartmentSql;
 
     private static final String DEPARTMENT_ID = "departmentId";
+    private static final String DEPARTMENT_NAME = "departmentName";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = "departmentAccessRights";
 
     public DepartmentDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -53,14 +55,14 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     @Override
     public List<Department> findAll() {
         List<Department> departments =
-                namedParameterJdbcTemplate.query(SELECT_ALL, BeanPropertyRowMapper.newInstance(Department.class));
+                namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(Department.class));
         return departments;
     }
 
     @Override
     public Optional<Department> findById(Integer departmentId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
-        List<Department> results = namedParameterJdbcTemplate.query(FIND_BY_ID, namedParameters,
+        List<Department> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Department.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
@@ -68,18 +70,18 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     @Override
     public Department add(Department department) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("departmentName", department.getDepartmentName().toUpperCase());
-        parameters.addValue("departmentAccessRights", department.getDepartmentAccessRights().toLowerCase());
+        parameters.addValue(DEPARTMENT_NAME, department.getDepartmentName().toUpperCase());
+        parameters.addValue(DEPARTMENT_ACCESS_RIGHTS, department.getDepartmentAccessRights().toLowerCase());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(ADD_DEPARTMENT, parameters, generatedKeyHolder);
+        namedParameterJdbcTemplate.update(addSql, parameters, generatedKeyHolder);
         department.setDepartmentId(generatedKeyHolder.getKey().intValue());
         return department;
     }
 
     @Override
     public void update(Department department) {
-        Optional.of(namedParameterJdbcTemplate.update(UPDATE_DEPARTMENT, new BeanPropertySqlParameterSource(department)))
+        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to update department in Database!"));
     }
@@ -88,13 +90,13 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     public void delete(Integer departmentId) {
         MapSqlParameterSource deletePasameter = new MapSqlParameterSource();
         deletePasameter.addValue(DEPARTMENT_ID, departmentId);
-        Optional.of(namedParameterJdbcTemplate.update(DELETE_DEPARTMENT, deletePasameter))
+        Optional.of(namedParameterJdbcTemplate.update(deleteSql, deletePasameter))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete department from Database!"));
     }
 
-    public List<Department> findAllCountEmployeesInDepartment(){
-        List<Department> departments = namedParameterJdbcTemplate.query(SELECT_ALL_COUNT_EMPLOYEES_IN_DEPARTMENT,
+    public List<Department> findAllCountEmployeesInDepartment() {
+        List<Department> departments = namedParameterJdbcTemplate.query(findAllCountEmployeesInDepartmentSql,
                 BeanPropertyRowMapper.newInstance(Department.class));
         return departments;
     }
