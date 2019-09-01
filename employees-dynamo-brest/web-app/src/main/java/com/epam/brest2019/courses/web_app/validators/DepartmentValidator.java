@@ -27,7 +27,7 @@ public class DepartmentValidator implements Validator {
 
         if (StringUtils.hasLength(department.getDepartmentName())
                 && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
-            errors.rejectValue("departmentName", "departmentName.maxSize40");
+            errors.rejectValue(DEPARTMENT_NAME, "departmentName.maxSize40");
         }
     }
 }
