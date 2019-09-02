@@ -33,8 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
 public class DepartmentRestControllerTest {
 
-    private static final String DEPARTMENT_NAME = "departmentName";
-    private static final String DEPARTMENT_ACCESS_RIGHTS = " departmentAccessRights";
+    private static final String DEPARTMENT_NAME = "department name";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = " department access rights";
 
     @Autowired
     private DepartmentRestController controller;
@@ -59,7 +59,7 @@ public class DepartmentRestControllerTest {
     void after() {
         Mockito.reset(departmentService);
     }
-
+/*
     @Test
     public void findAll() throws Exception {
 
@@ -78,7 +78,7 @@ public class DepartmentRestControllerTest {
 
         Mockito.verify(departmentService).findAll();
     }
-/*
+
     @Test
     public void shouldPersistDepartment() throws Exception {
 
@@ -105,9 +105,9 @@ public class DepartmentRestControllerTest {
         assertEquals(expectedDepartment.getDepartmentName(), result.getDepartmentName());
         assertEquals(expectedDepartment.getDepartmentId(), result.getDepartmentId());
     }
-*/
+
     @Test
-    public void updateDepartment() throws Exception {
+    public void update() throws Exception {
 
         Department department = createDepartmentForTest(1);
         String json = new ObjectMapper().writeValueAsString(department);
@@ -126,4 +126,6 @@ public class DepartmentRestControllerTest {
         department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS);
         return department;
     }
+    */
+
 }

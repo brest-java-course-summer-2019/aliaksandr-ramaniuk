@@ -24,8 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceMockTest {
 
-    private static final String LAST_NAME = "LastName";
-    private static final String ADD_LAST_NAME = "addLastName";
+    private static final String LAST_NAME = "last name";
+    private static final String ADD_LAST_NAME = "add last name";
 
     @Mock
     private EmployeeDao employeeDao;
@@ -44,7 +44,7 @@ public class EmployeeServiceMockTest {
     @Test
     public void findAll() {
 
-        Mockito.when(employeeDao.findAll()).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(employeeDao.findAll()).thenReturn(Collections.singletonList(createEmployeeForTest()));
         List<Employee> employees = employeeService.findAll();
 
         assertNotNull(employees);
@@ -59,7 +59,7 @@ public class EmployeeServiceMockTest {
 
         int departmentId = 1;
 
-        Mockito.when(employeeDao.findByDepartmentId(departmentId)).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(employeeDao.findByDepartmentId(departmentId)).thenReturn(Collections.singletonList(createEmployeeForTest()));
         List<Employee> employees = employeeService.findByDepartmentId(departmentId);
 
         assertNotNull(employees);
@@ -74,7 +74,7 @@ public class EmployeeServiceMockTest {
 
         int employeeId = 1;
 
-        Mockito.when(employeeDao.findById(employeeId)).thenReturn(Optional.of(testMethod()));
+        Mockito.when(employeeDao.findById(employeeId)).thenReturn(Optional.of(createEmployeeForTest()));
 
         Employee employees = employeeService.findById(employeeId);
 
@@ -104,7 +104,7 @@ public class EmployeeServiceMockTest {
 
     @Test
     public void update() {
-        employeeService.update(testMethod());
+        employeeService.update(createEmployeeForTest());
 
         Mockito.verify(employeeDao).update(employeeCaptor.capture());
 
@@ -139,7 +139,7 @@ public class EmployeeServiceMockTest {
 
     @Test
     public void filterEmployee() {
-        Mockito.when(employeeDao.filterEmployee(LAST_NAME)).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(employeeDao.filterEmployee(LAST_NAME)).thenReturn(Collections.singletonList(createEmployeeForTest()));
 
         List<Employee> employees = employeeService.filterEmployee(LAST_NAME);
 
@@ -154,7 +154,7 @@ public class EmployeeServiceMockTest {
         LocalDate localDate1 = LocalDate.of(2019, 01, 1);
         LocalDate localDate2 = LocalDate.of(2019, 01, 10);
 
-        Mockito.when(employeeDao.filterEmployeeByDate(localDate1, localDate2)).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(employeeDao.filterEmployeeByDate(localDate1, localDate2)).thenReturn(Collections.singletonList(createEmployeeForTest()));
 
         List<Employee> employees = employeeService.filterEmployeeByDate(localDate1, localDate2);
 
@@ -164,7 +164,7 @@ public class EmployeeServiceMockTest {
         Mockito.verify(employeeDao).filterEmployeeByDate(localDate1, localDate2);
     }
 
-    private Employee testMethod() {
+    private Employee createEmployeeForTest() {
         LocalDate localDate = LocalDate.of(2019, 01, 07);
 
         Employee employee = new Employee();

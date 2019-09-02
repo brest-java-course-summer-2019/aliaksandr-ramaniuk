@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceMockTest {
 
-    private static final String DEPARTMENT_NAME = "departmentName";
-    private static final String ADD_DEPARTMENT_NAME = "addDepartmentName";
-    private static final String DEPARTMENT_ACCESS_RIGHTS = " departmentAccessRights";
+    private static final String DEPARTMENT_NAME = "department name";
+    private static final String ADD_DEPARTMENT_NAME = "addDepartment name";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = "department access rights";
 
     @Mock
     private DepartmentDao departmentDao;
@@ -43,7 +43,7 @@ public class DepartmentServiceMockTest {
 
     @Test
     void findAll() {
-        Mockito.when(departmentDao.findAll()).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(departmentDao.findAll()).thenReturn(Collections.singletonList(createDepartmentForTest()));
         List<Department> resultTest = departmentService.findAll();
 
         assertNotNull(resultTest);
@@ -57,7 +57,7 @@ public class DepartmentServiceMockTest {
     public void findById() {
         int departmentId = 1;
 
-        Mockito.when(departmentDao.findById(departmentId)).thenReturn(Optional.of(testMethod()));
+        Mockito.when(departmentDao.findById(departmentId)).thenReturn(Optional.of(createDepartmentForTest()));
         Department department = departmentService.findById(departmentId);
 
         assertNotNull(department);
@@ -83,7 +83,7 @@ public class DepartmentServiceMockTest {
 
     @Test
     public void update() {
-        departmentService.update(testMethod());
+        departmentService.update(createDepartmentForTest());
 
         Mockito.verify(departmentDao).update(departmentCaptor.capture());
 
@@ -103,7 +103,7 @@ public class DepartmentServiceMockTest {
     @Test
     void findAllCountEmployeesInDepartment() {
 
-        Mockito.when(departmentDao.findAllCountEmployeesInDepartment()).thenReturn(Collections.singletonList(testMethod()));
+        Mockito.when(departmentDao.findAllCountEmployeesInDepartment()).thenReturn(Collections.singletonList(createDepartmentForTest()));
         List<Department> resultTest = departmentService.findAllCountEmployeesInDepartment();
 
         assertNotNull(resultTest);
@@ -113,7 +113,7 @@ public class DepartmentServiceMockTest {
         Mockito.verify(departmentDao).findAllCountEmployeesInDepartment();
     }
 
-    private Department testMethod() {
+    private Department createDepartmentForTest() {
         Department department = new Department();
         department.setDepartmentName(DEPARTMENT_NAME);
         department.setDepartmentId(1);
