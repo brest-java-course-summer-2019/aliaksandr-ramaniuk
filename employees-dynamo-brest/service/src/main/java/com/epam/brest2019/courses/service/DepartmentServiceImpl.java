@@ -17,6 +17,8 @@ import java.util.List;
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
+    private static final String FAILED_TO_GET_DEPARTMENT = "Failed to get department from Database by id";
+
     private final static Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
     private DepartmentDao departmentDao;
@@ -35,7 +37,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department findById(Integer departmentId) {
         LOGGER.debug("Find department with specified id: ({})", departmentId);
         return departmentDao.findById(departmentId)
-                .orElseThrow(() -> new RuntimeException("Failed to get department from Database"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_GET_DEPARTMENT));
     }
 
     @Override

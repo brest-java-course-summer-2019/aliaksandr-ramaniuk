@@ -20,6 +20,13 @@ import static org.junit.Assert.assertTrue;
 
 public class EmployeeServiceImplTest {
 
+    private static final String LOGIN_ADD = "login add";
+    private static final String LOGIN_UPDATE = "login update";
+    private static final String LOGIN_DELETE = "login delete";
+    private static final String LAST_NAME = "lastName";
+    private static final String FIRST_NAME = "firstName";
+    private static final String PATRONIC_NAME = "patronicName";
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -41,27 +48,32 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void findById() {
+        int departmentId = 3;
+        int employeeId = 5;
+
         LocalDate testLocalDate = LocalDate.of(2019, 01, 05);
 
-        Employee testEmployee = employeeService.findById(5);
+        Employee testEmployee = employeeService.findById(employeeId);
         assertNotNull(employeeService);
-        assertTrue(testEmployee.getDepartmentId().equals(3));
-        assertTrue(testEmployee.getEmployeeId().equals(5));
+        assertTrue(testEmployee.getDepartmentId().equals(departmentId));
+        assertTrue(testEmployee.getEmployeeId().equals(employeeId));
         assertEquals(testEmployee.getLogin(), "nekhaychik33");
-        assertEquals(testEmployee.getLastName(), "Нехайчик");
-        assertEquals(testEmployee.getFirstName(), "Павел");
-        assertEquals(testEmployee.getPatronicName(), "Александрович");
+        assertEquals(testEmployee.getLastName(), "НЕХАЙЧИК");
+        assertEquals(testEmployee.getFirstName(), "ПАВЕЛ");
+        assertEquals(testEmployee.getPatronicName(), "АЛЕКСАНДРОВИЧ");
         assertEquals(testEmployee.getLocalDate(), testLocalDate);
     }
 
     @Test
     public void addEmployee() {
+        int departmentId = 1;
+
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
         List<Employee> employeesSize = employeeService.findAll();
         int sizeBeforeAdd = employeesSize.size();
 
-        Employee newEmployee = new Employee(1, "login002", "lastName002", "firstName002", "patronicName002", localDate);
+        Employee newEmployee = new Employee(departmentId, LOGIN_ADD, LAST_NAME, FIRST_NAME, PATRONIC_NAME, localDate);
         Employee AddEmployee = employeeService.add(newEmployee);
         int sizeAfterAdd = employeesSize.size();
 
@@ -80,14 +92,17 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void update() {
+        int departmentId = 1;
+        int employeeId = 1;
+
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
-        Employee newEmployee = employeeService.findById(1);
-        newEmployee.setLogin("newLogin");
-        newEmployee.setFirstName("newFirstName");
-        newEmployee.setLastName("newLastName");
-        newEmployee.setPatronicName("newPatronicName");
-        newEmployee.setDepartmentId(1);
+        Employee newEmployee = employeeService.findById(employeeId);
+        newEmployee.setLogin(LOGIN_UPDATE);
+        newEmployee.setFirstName(FIRST_NAME);
+        newEmployee.setLastName(LAST_NAME);
+        newEmployee.setPatronicName(PATRONIC_NAME);
+        newEmployee.setDepartmentId(departmentId);
         newEmployee.setLocalDate(newLocalDate);
 
         employeeService.update(newEmployee);
@@ -104,10 +119,13 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void delete() {
+        int departmentId = 5;
+
         LocalDate newLocalDate = LocalDate.of(2019, 07, 07);
 
-        Employee newEmployee = new Employee(5, "newLogin", "newLastName", "newFirstName", "newPatronicName", newLocalDate);
-   //     employeeService.add(newEmployee);
+        Employee newEmployee = new Employee(departmentId, LOGIN_DELETE, LAST_NAME, FIRST_NAME, PATRONIC_NAME, newLocalDate);
+
+        employeeService.add(newEmployee);
 
         int sizeBeforeDelete = employeeService.findAll().size();
 
@@ -123,7 +141,7 @@ public class EmployeeServiceImplTest {
         int countEmployeeInDataScript = 11;
 
         assertNotNull(totalCountOfEmployees);
-   //     assertEquals(totalCountOfEmployees, countEmployeeInDataScript);
+        //     assertEquals(totalCountOfEmployees, countEmployeeInDataScript);
     }
 
     @Test
@@ -142,7 +160,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public  void filterEmployeeByDate() {
+    public void filterEmployeeByDate() {
         LocalDate localDate1 = LocalDate.of(2019, 01, 1);
         LocalDate localDate2 = LocalDate.of(2019, 01, 10);
 

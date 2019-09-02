@@ -20,6 +20,11 @@ import static org.junit.Assert.assertTrue;
 @Rollback
 public class DepartmentServiceImplTest {
 
+    private static final String DEPARTMENT_NAME = "АДМИНИСТРАТОР";
+    private static final String DEPARTMENT_NAME_ADD = "NEW DEPARTMENT";
+    private static final String DEPARTMENT_ACCESS_RIGHTS_ADMIN = "admin";
+    private static final String DEPARTMENT_ACCESS_RIGHTS_READ = "read";
+
     @Autowired
     private DepartmentService departmentService;
 
@@ -31,15 +36,15 @@ public class DepartmentServiceImplTest {
         assertTrue(departments.size() > 0);
     }
 
-
     @Test
     public void findById() {
-        Department testFindById = departmentService.findById(1);
-        assertNotNull(testFindById);
-        assertTrue(testFindById.getDepartmentId().equals(1));
-        assertEquals(testFindById.getDepartmentName(), "АДМИНИСТРАТОР");
-        assertEquals(testFindById.getDepartmentAccessRights(), "admin");
+        int departmentId = 1;
 
+        Department testFindById = departmentService.findById(departmentId);
+        assertNotNull(testFindById);
+        assertTrue(testFindById.getDepartmentId().equals(departmentId));
+        assertEquals(testFindById.getDepartmentName(), DEPARTMENT_NAME);
+        assertEquals(testFindById.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS_ADMIN);
     }
 
     @Test
@@ -47,38 +52,40 @@ public class DepartmentServiceImplTest {
         int sizeBeforeAdd = departmentService.findAll().size();
 
         Department testAddDepartment = new Department();
-        testAddDepartment.setDepartmentName("ГРУППА ПОДДЕРЖКИ");
-        testAddDepartment.setDepartmentAccessRights("read");
+        testAddDepartment.setDepartmentName(DEPARTMENT_NAME_ADD);
+        testAddDepartment.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS_READ);
 
         Department newDepartment = departmentService.add(testAddDepartment);
         int sizeAfterAdd = departmentService.findAll().size();
 
         assertNotNull(newDepartment.getDepartmentId());
-        assertEquals(newDepartment.getDepartmentName(), "ГРУППА ПОДДЕРЖКИ");
-        assertEquals(newDepartment.getDepartmentAccessRights(), "read");
+        assertEquals(newDepartment.getDepartmentName(), DEPARTMENT_NAME_ADD);
+        assertEquals(newDepartment.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS_READ);
         assertEquals(sizeBeforeAdd + 1, sizeAfterAdd);
     }
 
     @Test
     public void update() {
+        int departmentId = 2;
+
         Department testNewDepartment = new Department();
-        testNewDepartment.setDepartmentId(2);
-        testNewDepartment.setDepartmentName("НОВЫЙ ТРЕНЕР");
-        testNewDepartment.setDepartmentAccessRights("read");
+        testNewDepartment.setDepartmentId(departmentId);
+        testNewDepartment.setDepartmentName(DEPARTMENT_NAME_ADD);
+        testNewDepartment.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS_READ);
 
         departmentService.update(testNewDepartment);
 
         Department testUpdateDepartment = departmentService.findById(testNewDepartment.getDepartmentId());
         assertEquals(testNewDepartment.getDepartmentId(), testUpdateDepartment.getDepartmentId());
-        assertEquals("НОВЫЙ ТРЕНЕР", testUpdateDepartment.getDepartmentName());
-        assertEquals("read", testUpdateDepartment.getDepartmentAccessRights());
+        assertEquals(DEPARTMENT_NAME_ADD, testUpdateDepartment.getDepartmentName());
+        assertEquals(DEPARTMENT_ACCESS_RIGHTS_READ, testUpdateDepartment.getDepartmentAccessRights());
     }
 
     @Test
     public void delete() {
         Department testAddDepartment = new Department();
-        testAddDepartment.setDepartmentName("Тест на удаление Department");
-        testAddDepartment.setDepartmentAccessRights("read");
+        testAddDepartment.setDepartmentName(DEPARTMENT_NAME_ADD);
+        testAddDepartment.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS_READ);
 
         departmentService.add(testAddDepartment);
         int sizeBeforeDelete = departmentService.findAll().size();

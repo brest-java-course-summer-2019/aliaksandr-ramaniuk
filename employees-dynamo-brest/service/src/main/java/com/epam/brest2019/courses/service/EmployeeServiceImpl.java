@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private static final String FAILED_TO_GET_EMPLOYEE = "Failed to get employee from Database by id";
+
     private final static Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     private EmployeeDao employeeDao;
@@ -40,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
         return employeeDao.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Failed to get employee from Database"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_GET_EMPLOYEE));
     }
 
     @Override
