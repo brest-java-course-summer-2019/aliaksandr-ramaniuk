@@ -20,9 +20,9 @@ import static org.junit.Assert.assertTrue;
 @Rollback
 public class DepartmentDaoJdbcImplTest {
 
-    private static final String DEVELOPMENT = "ТРЕНЕР";
-    private static final String COACH = "ТРЕНЕРСКИЙ ШТАБ ВРАТАРЕЙ";
-    private static final String NEW_COACH = "НОВЫЙ ТРЕНЕРСКИЙ ШТАБ ВРАТАРЕЙ";
+    private static final String DEPARTMENT = "ТРЕНЕР";
+    private static final String NEW_DEPARTMENT = "NEW DEPARTMENT";
+    private static final String UPDATE_DEPARTMENT = "UPDATE DEPARTMENT";
     private static final String ACCESS_RIGHTS = "read";
 
     @Autowired
@@ -40,7 +40,7 @@ public class DepartmentDaoJdbcImplTest {
         Department testFindDepartmentById = departmentDao.findById(2).get();
         assertNotNull(testFindDepartmentById);
         assertTrue(testFindDepartmentById.getDepartmentId().equals(2));
-        assertEquals(testFindDepartmentById.getDepartmentName(), DEVELOPMENT);
+        assertEquals(testFindDepartmentById.getDepartmentName(), DEPARTMENT);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class DepartmentDaoJdbcImplTest {
         int sizeBeforeAdd = departmentDao.findAll().size();
 
         Department testAddDepartment = new Department();
-        testAddDepartment.setDepartmentName(COACH);
+        testAddDepartment.setDepartmentName(NEW_DEPARTMENT);
         testAddDepartment.setDepartmentAccessRights(ACCESS_RIGHTS);
 
         Department newDepartment = departmentDao.add(testAddDepartment);
@@ -60,9 +60,9 @@ public class DepartmentDaoJdbcImplTest {
 
     @Test
     public void update() {
-        Department testNewDepartment = new Department(COACH, ACCESS_RIGHTS);
+        Department testNewDepartment = new Department(NEW_DEPARTMENT, ACCESS_RIGHTS);
         departmentDao.add(testNewDepartment);
-        testNewDepartment.setDepartmentName(NEW_COACH);
+        testNewDepartment.setDepartmentName(UPDATE_DEPARTMENT);
         departmentDao.update(testNewDepartment);
 
         Department testUpdateDepartment = departmentDao.findById(testNewDepartment.getDepartmentId()).get();
@@ -72,7 +72,7 @@ public class DepartmentDaoJdbcImplTest {
 
     @Test
     public void delete() {
-        Department testNewDepartment = new Department(COACH, ACCESS_RIGHTS);
+        Department testNewDepartment = new Department(NEW_DEPARTMENT, ACCESS_RIGHTS);
         departmentDao.add(testNewDepartment);
 
         int sizeBeforeDelete = departmentDao.findAll().size();

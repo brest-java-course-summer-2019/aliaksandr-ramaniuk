@@ -54,7 +54,6 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Value("${employee.filterEmployeeByDate}")
     private String filterEmployeeByDateSql;
 
-
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String LOGIN = "login";
@@ -62,7 +61,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private static final String FIRST_NAME = "firstName";
     private static final String PATRONIC_NAME = "patronicName";
     private static final String LOCAL_DATE = "localDate";
-
+    private static final String FAILED_TO_UPDATE = "Failed to update employee in Database!";
+    private static final String FAILED_TO_DELETE = "Failed to delete employee from Database!";
 
     public EmployeeDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -111,7 +111,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     public void update(Employee employee) {
         Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(employee)))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update employee in Database"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_UPDATE));
     }
 
     @Override
@@ -120,7 +120,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
         mapSqlParameterSource.addValue(EMPLOYEE_ID, employeeId);
         Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete employee from Database"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_DELETE));
     }
 
     @Override

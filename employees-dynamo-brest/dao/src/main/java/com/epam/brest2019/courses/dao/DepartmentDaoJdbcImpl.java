@@ -47,6 +47,8 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String DEPARTMENT_NAME = "departmentName";
     private static final String DEPARTMENT_ACCESS_RIGHTS = "departmentAccessRights";
+    private static final String FAILED_TO_UPDATE = "Failed to update department in Database!";
+    private static final String FAILED_TO_DELETE = "Failed to delete department from Database!";
 
     public DepartmentDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -83,7 +85,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     public void update(Department department) {
         Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update department in Database!"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_UPDATE));
     }
 
     @Override
@@ -92,7 +94,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
         deletePasameter.addValue(DEPARTMENT_ID, departmentId);
         Optional.of(namedParameterJdbcTemplate.update(deleteSql, deletePasameter))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete department from Database!"));
+                .orElseThrow(() -> new RuntimeException(FAILED_TO_DELETE));
     }
 
     public List<Department> findAllCountEmployeesInDepartment() {

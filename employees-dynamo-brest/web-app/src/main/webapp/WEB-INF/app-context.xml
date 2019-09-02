@@ -72,7 +72,7 @@
 
     <bean id="messageSource"
          class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-         p:basename="/WEB-INF/messages">
+         p:basename="/WEB-INF/messages/messages">
    </bean>
 
 </beans>
