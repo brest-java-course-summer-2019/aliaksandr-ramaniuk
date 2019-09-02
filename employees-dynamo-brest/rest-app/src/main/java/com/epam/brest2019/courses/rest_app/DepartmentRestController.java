@@ -72,6 +72,4 @@ public class DepartmentRestController {
         LOGGER.debug("Find all departments with the count of employees in each department");
         return departmentService.findAllCountEmployeesInDepartment();
     }
-
-
 }

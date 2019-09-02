@@ -1,7 +1,6 @@
 package com.epam.brest2019.courses.service;
 
 import com.epam.brest2019.courses.dao.EmployeeDao;
-import com.epam.brest2019.courses.model.Department;
 import com.epam.brest2019.courses.model.Employee;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceMockTest {
+
+    private static final String LAST_NAME = "LastName";
+    private static final String ADD_LAST_NAME = "addLastName";
 
     @Mock
     private EmployeeDao employeeDao;
@@ -67,7 +69,6 @@ public class EmployeeServiceMockTest {
         Mockito.verify(employeeDao).findByDepartmentId(departmentId);
     }
 
-
     @Test
     public void findById() {
 
@@ -79,7 +80,7 @@ public class EmployeeServiceMockTest {
 
         assertNotNull(employees);
         assertTrue(employees.getEmployeeId().equals(employeeId));
-        assertEquals(employees.getLastName(), "LastName");
+        assertEquals(employees.getLastName(), LAST_NAME);
 
         Mockito.verify(employeeDao).findById(employeeId);
     }
@@ -88,14 +89,14 @@ public class EmployeeServiceMockTest {
     public void add() {
 
         Employee employeeAdd = new Employee();
-        employeeAdd.setLastName("LastNameAdd");
+        employeeAdd.setLastName(ADD_LAST_NAME);
 
         Mockito.when(employeeDao.add(employeeAdd)).thenReturn(employeeAdd);
 
         Employee employee = employeeService.add(employeeAdd);
 
         assertNotNull(employee);
-        assertEquals("LastNameAdd", employee.getLastName());
+        assertEquals(ADD_LAST_NAME, employee.getLastName());
 
         Mockito.verify(employeeDao).add(employeeAdd);
     }
@@ -109,13 +110,12 @@ public class EmployeeServiceMockTest {
 
         Employee employees = employeeCaptor.getValue();
         assertNotNull(employees);
-        assertEquals("LastName", employees.getLastName());
+        assertEquals(LAST_NAME, employees.getLastName());
         assertTrue(employees.getEmployeeId().equals(1));
     }
 
     @Test
     public void delete() {
-
         int employeeId = 1;
 
         employeeService.delete(employeeId);
@@ -139,20 +139,18 @@ public class EmployeeServiceMockTest {
 
     @Test
     public void filterEmployee() {
-        String lastName = "LastName";
+        Mockito.when(employeeDao.filterEmployee(LAST_NAME)).thenReturn(Collections.singletonList(testMethod()));
 
-        Mockito.when(employeeDao.filterEmployee(lastName)).thenReturn(Collections.singletonList(testMethod()));
-
-        List<Employee> employees = employeeService.filterEmployee(lastName);
+        List<Employee> employees = employeeService.filterEmployee(LAST_NAME);
 
         assertNotNull(employees);
         assertTrue(employees.size() > 0);
 
-        Mockito.verify(employeeDao).filterEmployee(lastName);
+        Mockito.verify(employeeDao).filterEmployee(LAST_NAME);
     }
 
     @Test
-    public  void filterEmployeeByDate() {
+    public void filterEmployeeByDate() {
         LocalDate localDate1 = LocalDate.of(2019, 01, 1);
         LocalDate localDate2 = LocalDate.of(2019, 01, 10);
 
@@ -170,7 +168,7 @@ public class EmployeeServiceMockTest {
         LocalDate localDate = LocalDate.of(2019, 01, 07);
 
         Employee employee = new Employee();
-        employee.setLastName("LastName");
+        employee.setLastName(LAST_NAME);
         employee.setEmployeeId(1);
         employee.setLocalDate(localDate);
         return employee;

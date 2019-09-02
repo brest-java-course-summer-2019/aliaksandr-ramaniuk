@@ -23,6 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceMockTest {
 
+    private static final String DEPARTMENT_NAME = "departmentName";
+    private static final String ADD_DEPARTMENT_NAME = "addDepartmentName";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = " departmentAccessRights";
+
     @Mock
     private DepartmentDao departmentDao;
 
@@ -49,7 +53,6 @@ public class DepartmentServiceMockTest {
         Mockito.verify(departmentDao).findAll();
     }
 
-
     @Test
     public void findById() {
         int departmentId = 1;
@@ -58,7 +61,7 @@ public class DepartmentServiceMockTest {
         Department department = departmentService.findById(departmentId);
 
         assertNotNull(department);
-        assertEquals("departmentNameTest", department.getDepartmentName());
+        assertEquals(DEPARTMENT_NAME, department.getDepartmentName());
 
         Mockito.verify(departmentDao).findById(departmentId);
     }
@@ -66,17 +69,16 @@ public class DepartmentServiceMockTest {
     @Test
     public void add() {
 
-        Department departmentAdd = new Department("NAME", "read");
+        Department departmentAdd = new Department(ADD_DEPARTMENT_NAME, DEPARTMENT_ACCESS_RIGHTS);
 
         Mockito.when(departmentDao.add(departmentAdd)).thenReturn(departmentAdd);
 
         Department department = departmentService.add(departmentAdd);
 
         assertNotNull(department);
-        assertEquals("NAME", department.getDepartmentName());
+        assertEquals(ADD_DEPARTMENT_NAME, department.getDepartmentName());
 
         Mockito.verify(departmentDao, Mockito.times(1)).add(departmentAdd);
-
     }
 
     @Test
@@ -87,7 +89,7 @@ public class DepartmentServiceMockTest {
 
         Department department = departmentCaptor.getValue();
         assertNotNull(department);
-        assertEquals("departmentNameTest", department.getDepartmentName());
+        assertEquals(DEPARTMENT_NAME, department.getDepartmentName());
         assertTrue(department.getDepartmentId().equals(1));
     }
 
@@ -113,7 +115,7 @@ public class DepartmentServiceMockTest {
 
     private Department testMethod() {
         Department department = new Department();
-        department.setDepartmentName("departmentNameTest");
+        department.setDepartmentName(DEPARTMENT_NAME);
         department.setDepartmentId(1);
         return department;
     }
