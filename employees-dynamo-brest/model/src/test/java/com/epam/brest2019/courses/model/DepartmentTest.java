@@ -7,49 +7,47 @@ import static org.junit.Assert.assertEquals;
 
 public class DepartmentTest {
 
+    private static final Integer DEPARTMENT_ID = 8;
+    private static final String DEPARTMENT_NAME = "department name";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = "department access rights";
+
     Department department = new Department();
 
     @Test
     public void getDepartmentId() {
-        department.setDepartmentId(5);
-        assertTrue(department.getDepartmentId().equals(5));
+        department.setDepartmentId(DEPARTMENT_ID);
+        assertTrue(department.getDepartmentId().equals(DEPARTMENT_ID));
     }
 
     @Test
     public void getDepartmentName() {
-        department.setDepartmentName("Игрок");
-        assertEquals(department.getDepartmentName(), "Игрок");
+        department.setDepartmentName(DEPARTMENT_NAME);
+        assertEquals(department.getDepartmentName(), DEPARTMENT_NAME);
     }
 
     @Test
     public void getDepartmentAccessRights() {
-        department.setDepartmentAccessRights("Read");
-        assertEquals(department.getDepartmentAccessRights(), "Read");
-    }
-
-    @Test
-    public void getCountEmployeesInDepartment() {
-        department.setCountEmployeesInDepartment(10);
-        assertTrue(department.getCountEmployeesInDepartment().equals(10));
+        department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS);
+        assertEquals(department.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS);
     }
 
     /**
      * Constructor Department Test
      */
     public DepartmentTest() {
-        Department departmentTest = new Department("Тест конструктора name", "Тест конструктора read");
+        Department departmentTest = new Department(DEPARTMENT_NAME, DEPARTMENT_ACCESS_RIGHTS);
 
-        assertEquals(departmentTest.getDepartmentName(), "Тест конструктора name");
-        assertEquals(departmentTest.getDepartmentAccessRights(), "Тест конструктора read");
+        assertEquals(departmentTest.getDepartmentName(), DEPARTMENT_NAME);
+        assertEquals(departmentTest.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS);
      }
 
     @Test
     public void testToString() {
-        department.setDepartmentId(8);
-        department.setDepartmentName("Тест testToString");
-        department.setDepartmentAccessRights("Read");
-        department.setCountEmployeesInDepartment(3);
-        String expectedResponseDepartment = "Department {departmentId = 8, departmentName = Тест testToString, departmentAccessRights = Read, countEmployeesInDepartment = 3}";
+        department.setDepartmentId(DEPARTMENT_ID);
+        department.setDepartmentName(DEPARTMENT_NAME);
+        department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS);
+        String expectedResponseDepartment = "Department {departmentId = " + DEPARTMENT_ID + ", departmentName = "
+                + DEPARTMENT_NAME + ", departmentAccessRights = " + DEPARTMENT_ACCESS_RIGHTS + "}";
         assertEquals(expectedResponseDepartment, department.toString());
     }
 }

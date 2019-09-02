@@ -69,16 +69,6 @@ public class Employee {
     private LocalDate localDate;
 
     /**
-     * Number of employees in all departments.
-     */
-    private Integer totalCountEmployeesInAllDepartments;
-
-    /**
-     * Filter employee by last name.
-     */
-    private String filterByLastName;
-
-    /**
      * Set department id.
      *
      * @param departmentId department id.
@@ -142,24 +132,6 @@ public class Employee {
     }
 
     /**
-     * Set the number of employees in all departments.
-     *
-     * @param totalCountEmployeesInAllDepartments total count employees in all departments.
-     */
-    public void setTotalCountEmployeesInAllDepartments(Integer totalCountEmployeesInAllDepartments) {
-        this.totalCountEmployeesInAllDepartments = totalCountEmployeesInAllDepartments;
-    }
-
-    /**
-     * Set filter employee by last name.
-     *
-     * @param filterByLastName filter employee by last name.
-     */
-    public void setFilterByLastName(String filterByLastName) {
-        this.filterByLastName = filterByLastName;
-    }
-
-    /**
      * Get department id.
      *
      * @return departmentId department by id).
@@ -220,24 +192,6 @@ public class Employee {
      */
     public LocalDate getLocalDate() {
         return localDate;
-    }
-
-    /**
-     * Get the number of employees in all departments.
-     *
-     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
-     */
-    public Integer getTotalCountEmployeesInAllDepartments() {
-        return totalCountEmployeesInAllDepartments;
-    }
-
-    /**
-     * Get filter employee by last name.
-     *
-     * @return filterByLastName filter employee by last name.
-     */
-    public String getFilterByLastName() {
-        return filterByLastName;
     }
 
     @Override
