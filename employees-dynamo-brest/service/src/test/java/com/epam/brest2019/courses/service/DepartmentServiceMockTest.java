@@ -96,6 +96,7 @@ public class DepartmentServiceMockTest {
     @Test
     void delete() {
         int departmentId = 1;
+
         departmentService.delete(departmentId);
         Mockito.verify(departmentDao).delete(departmentId);
     }
@@ -114,9 +115,11 @@ public class DepartmentServiceMockTest {
     }
 
     private Department createDepartmentForTest() {
+        int departmentId = 1;
+
         Department department = new Department();
         department.setDepartmentName(DEPARTMENT_NAME);
-        department.setDepartmentId(1);
+        department.setDepartmentId(departmentId);
         return department;
     }
 }
