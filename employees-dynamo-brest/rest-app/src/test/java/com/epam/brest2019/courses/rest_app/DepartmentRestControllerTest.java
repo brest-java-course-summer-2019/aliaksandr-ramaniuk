@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
 public class DepartmentRestControllerTest {
 
-    private static final String DEPARTMENT_NAME = "department name";
-    private static final String DEPARTMENT_ACCESS_RIGHTS = " department access rights";
+    private static final String DEPARTMENT_NAME = "departmentName";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = " departmentAccessRights";
 
     @Autowired
     private DepartmentRestController controller;
@@ -43,6 +44,7 @@ public class DepartmentRestControllerTest {
     private DepartmentService departmentService;
 
     ObjectMapper objectMapper = new ObjectMapper();
+
 
     private MockMvc mockMvc;
 
@@ -59,25 +61,43 @@ public class DepartmentRestControllerTest {
     void after() {
         Mockito.reset(departmentService);
     }
-/*
+
+
     @Test
     public void findAll() throws Exception {
 
         Mockito.when(departmentService.findAll()).thenReturn(Arrays.asList(createDepartmentForTest(0), createDepartmentForTest(1)));
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/departments")
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-        ).andExpect(MockMvcResultMatchers.status().isOk())
+                MockMvcRequestBuilders
+                        .get("/departments")
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentName", Matchers.is("departmentName0")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentId", Matchers.is(0)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentName", Matchers.is("departmentName1")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentId", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS)))
         ;
 
         Mockito.verify(departmentService).findAll();
     }
+
+    @Test
+    public void findById() throws Exception {
+        int departmentId = 1;
+
+        Mockito.when(departmentService.findById(departmentId)).thenReturn(Optional.of(createDepartmentForTest(departmentId)));
+
+
+    }
+
+
+
+
+
 
     @Test
     public void shouldPersistDepartment() throws Exception {
@@ -105,7 +125,7 @@ public class DepartmentRestControllerTest {
         assertEquals(expectedDepartment.getDepartmentName(), result.getDepartmentName());
         assertEquals(expectedDepartment.getDepartmentId(), result.getDepartmentId());
     }
-
+/*
     @Test
     public void update() throws Exception {
 
@@ -118,6 +138,7 @@ public class DepartmentRestControllerTest {
                 .content(json)
         ).andExpect(status().isAccepted());
     }
+ */
 
     private Department createDepartmentForTest(int index) {
         Department department = new Department();
@@ -126,6 +147,6 @@ public class DepartmentRestControllerTest {
         department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS);
         return department;
     }
-    */
+
 
 }
