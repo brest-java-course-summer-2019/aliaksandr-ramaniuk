@@ -42,7 +42,7 @@ public class DepartmentRestController {
 
     @GetMapping(value = "/departments/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Department findById(@PathVariable Integer departmentId) {
+    public Department findById(@PathVariable ("id") Integer departmentId) {
         LOGGER.debug("Find department with specified id: ({})", departmentId);
         return departmentService.findById(departmentId);
     }

@@ -24,9 +24,9 @@ import java.util.Collection;
  */
 
 @RestController
-public class EmployeeRestCotroller {
+public class EmployeeRestController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestCotroller.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestController.class);
 
     @Autowired
     private EmployeeService employeeService;
