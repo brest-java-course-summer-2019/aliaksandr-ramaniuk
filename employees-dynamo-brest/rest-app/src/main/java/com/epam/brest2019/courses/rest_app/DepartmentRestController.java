@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.List;
 
 
@@ -35,7 +34,7 @@ public class DepartmentRestController {
     private DepartmentService departmentService;
 
     @GetMapping(value = "/departments")
-    public Collection<Department> findAll() {
+    public List<Department> findAll() {
         LOGGER.debug("Find all departments");
         return departmentService.findAll();
     }

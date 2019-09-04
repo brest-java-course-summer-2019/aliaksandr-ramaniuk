@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Employee Rest controller.
@@ -32,7 +33,7 @@ public class EmployeeRestController {
     private EmployeeService employeeService;
 
     @GetMapping(value = "/employees")
-    public Collection<Employee> findAll() {
+    public List<Employee> findAll() {
         LOGGER.debug("Find all employees");
         return employeeService.findAll();
     }
