@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
+//import java.util.Collection;
+//import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -38,16 +39,16 @@ public class EmployeeRestController {
         return employeeService.findAll();
     }
 
-    @GetMapping(value = "/employees/{employeeId}")
+    @GetMapping(value = "/employees/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Employee findById(@PathVariable Integer employeeId) {
+    public Employee findById(@PathVariable ("id") Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
         return employeeService.findById(employeeId);
     }
 
-    @GetMapping(value = "/employees/{departmentId}")
+    @GetMapping(value = "/employees/departmentId")
     @ResponseStatus(value = HttpStatus.OK)
-    public Collection<Employee> findByDepartmentId(@PathVariable Integer departmentId) {
+    public List<Employee> findByDepartmentId(@PathVariable ("departmentId") Integer departmentId) {
         LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
         return employeeService.findByDepartmentId(departmentId);
     }
@@ -78,9 +79,19 @@ public class EmployeeRestController {
         LOGGER.debug("Get the number of employees in all departments");
         return employeeService.totalCountOfEmployees();
     }
+/*
+    @GetMapping(value = "/employees/lastName")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Employee> filterEmployee(@PathVariable String lastName) {
+        LOGGER.debug("Get filter employees by last name: ({})", lastName);
+        return employeeService.filterEmployee(lastName);
+    }
 
-    // filterEmployee
-
-    //filterEmployeeByDate
-
+    @GetMapping(value = "/employees/localDates")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Employee> filterEmployeeByDate(@PathVariable LocalDate... localDates) {
+        LOGGER.debug("Get filter employees by date: ({})", localDates, localDates);
+        return employeeService.filterEmployeeByDate(localDates);
+    }
+*/
 }

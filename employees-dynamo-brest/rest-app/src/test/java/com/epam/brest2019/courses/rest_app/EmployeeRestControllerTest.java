@@ -30,6 +30,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -81,17 +82,17 @@ public class EmployeeRestControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].departmentId", Matchers.is(1)))
                 .andExpect(jsonPath("$[0].employeeId", Matchers.is(1)))
-                .andExpect(jsonPath("$[0].login", Matchers.is(LOGIN+1)))
-                .andExpect(jsonPath("$[0].lastName", Matchers.is(LAST_NAME+1)))
-                .andExpect(jsonPath("$[0].firstName", Matchers.is(FIRST_NAME+1)))
-                .andExpect(jsonPath("$[0].patronicName", Matchers.is(PATRONIC_NAME+1)))
+                .andExpect(jsonPath("$[0].login", Matchers.is(LOGIN + 1)))
+                .andExpect(jsonPath("$[0].lastName", Matchers.is(LAST_NAME + 1)))
+                .andExpect(jsonPath("$[0].firstName", Matchers.is(FIRST_NAME + 1)))
+                .andExpect(jsonPath("$[0].patronicName", Matchers.is(PATRONIC_NAME + 1)))
                 .andExpect(jsonPath("$[1].departmentId", Matchers.is(2)))
                 .andExpect(jsonPath("$[1].employeeId", Matchers.is(2)))
-                .andExpect(jsonPath("$[1].login", Matchers.is(LOGIN+2)))
-                .andExpect(jsonPath("$[1].lastName", Matchers.is(LAST_NAME+2)))
-                .andExpect(jsonPath("$[1].firstName", Matchers.is(FIRST_NAME+2)))
-                .andExpect(jsonPath("$[1].patronicName", Matchers.is(PATRONIC_NAME+2)))
-         ;
+                .andExpect(jsonPath("$[1].login", Matchers.is(LOGIN + 2)))
+                .andExpect(jsonPath("$[1].lastName", Matchers.is(LAST_NAME + 2)))
+                .andExpect(jsonPath("$[1].firstName", Matchers.is(FIRST_NAME + 2)))
+                .andExpect(jsonPath("$[1].patronicName", Matchers.is(PATRONIC_NAME + 2)))
+        ;
 
         Mockito.verify(employeeService).findAll();
         Mockito.verifyNoMoreInteractions(employeeService);
@@ -101,7 +102,7 @@ public class EmployeeRestControllerTest {
     @Test
     public void findById() throws Exception {
         int employeeId = 1;
-/*
+
         Mockito.when(employeeService.findById(employeeId)).thenReturn(createEmployeeForTest(employeeId));
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -110,23 +111,50 @@ public class EmployeeRestControllerTest {
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId"). value(employeeId))
-                .andExpect(jsonPath("$.login", Matchers.is(LOGIN+employeeId)))
-                .andExpect(jsonPath("$.lastName", Matchers.is(LAST_NAME+employeeId)))
-                .andExpect(jsonPath("$.firstName", Matchers.is(FIRST_NAME+employeeId)))
-                .andExpect(jsonPath("$.patronicName", Matchers.is(PATRONIC_NAME+employeeId)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employeeId").value(employeeId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.login").value(LOGIN + employeeId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Matchers.is(LAST_NAME + employeeId)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is(FIRST_NAME + employeeId)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.patronicName", Matchers.is(PATRONIC_NAME + employeeId)))
         ;
 
         Mockito.verify(employeeService).findById(employeeId);
-*/
+        Mockito.verifyNoMoreInteractions(employeeService);
+
     }
 
+   // @Test
+    public void findByDepartmentId() throws Exception {
+        int departmentId = 1;
+
+        Mockito.when(employeeService.findByDepartmentId(departmentId)).thenReturn(Arrays.asList(createEmployeeForTest(1)));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/employees/departmentId", departmentId)
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0].departmentId", Matchers.is(1)))
+                .andExpect(jsonPath("$[0].employeeId", Matchers.is(1)))
+                .andExpect(jsonPath("$[0].login", Matchers.is(LOGIN + 1)))
+                .andExpect(jsonPath("$[0].lastName", Matchers.is(LAST_NAME + 1)))
+                .andExpect(jsonPath("$[0].firstName", Matchers.is(FIRST_NAME + 1)))
+                .andExpect(jsonPath("$[0].patronicName", Matchers.is(PATRONIC_NAME + 1)))
+        ;
+
+        Mockito.verify(employeeService).findByDepartmentId(departmentId);
+        Mockito.verifyNoMoreInteractions(employeeService);
+    }
 
     @Test
     public void add() throws Exception {
+        int employeeId = 1;
+
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/employee_Add")
-                .content(asJsonString(new Employee ()))
+                .content(asJsonString(createEmployeeForTest(employeeId)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -148,7 +176,7 @@ public class EmployeeRestControllerTest {
 
         Employee employee = createEmployeeForTest(employeeId);
         String json = new ObjectMapper().writeValueAsString(employee);
-   /*
+
         mockMvc.perform(MockMvcRequestBuilders
                 .put("/employee_Edit")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -156,9 +184,6 @@ public class EmployeeRestControllerTest {
                 .content(json)
         ).andExpect(status().isAccepted())
         ;
-
-
-    */
     }
 
     @Test
@@ -177,6 +202,26 @@ public class EmployeeRestControllerTest {
         Mockito.verify(employeeService, times(1)).delete(employeeId);
         Mockito.verifyNoMoreInteractions(employeeService);
     }
+
+    @Test
+    public void totalCountOfEmployees() throws Exception {
+        int totalCountOfEmployees = 2;
+
+        Mockito.when(employeeService.totalCountOfEmployees()).thenReturn(totalCountOfEmployees);
+
+        employeeService.totalCountOfEmployees();
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/employees")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        ;
+
+        Mockito.verify(employeeService).totalCountOfEmployees();
+    }
+
 
     private Employee createEmployeeForTest(int employeeId) {
         Employee employee = new Employee();

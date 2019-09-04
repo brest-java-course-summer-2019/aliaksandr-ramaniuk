@@ -94,7 +94,7 @@ public class DepartmentRestControllerTest {
     public void findById() throws Exception {
         int departmentId = 1;
 
-        Mockito.when(departmentService.findById(departmentId)).thenReturn(createDepartmentForTest(1));
+        Mockito.when(departmentService.findById(departmentId)).thenReturn(createDepartmentForTest(departmentId));
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/departments/{id}", departmentId)
