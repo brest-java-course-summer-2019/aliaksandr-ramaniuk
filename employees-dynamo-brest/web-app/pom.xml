@@ -82,6 +82,12 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <webAppSourceDirectory>src/main/webapp/WEB-INF/templates</webAppSourceDirectory>
+                    <httpConnector>
+                        <port>8095</port>
+                    </httpConnector>
+                </configuration>
             </plugin>
         </plugins>
     </build>

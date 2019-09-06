@@ -45,7 +45,7 @@ public class DepartmentController {
     @GetMapping(value = "/department/{id}")
     public final String gotoEditDepartmentPage(@PathVariable Integer departmentId, Model model) {
 
-        LOGGER.debug("gotoEditDepartmentPage({},{})", departmentId, model);
+        LOGGER.debug("Go to edit department page({},{})", departmentId, model);
         Department department = departmentService.findById(departmentId);
         model.addAttribute("department", department);
         return "department";

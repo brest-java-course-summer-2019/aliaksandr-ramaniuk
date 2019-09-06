@@ -315,11 +315,11 @@
                         <webApp>
                             <contextPath>/</contextPath>
                         </webApp>
-                        <httpConnector>
-                            <port>8080</port>
-                        </httpConnector>
-                        <stopKey>stop</stopKey>
-                        <stopPort>8081</stopPort>
+                        <!--<httpConnector>-->
+                            <!--<port>8080</port>-->
+                        <!--</httpConnector>-->
+                        <!--<stopKey>stop</stopKey>-->
+                        <!--<stopPort>8081</stopPort>-->
                     </configuration>
                 </plugin>
             </plugins>
@@ -513,12 +513,6 @@
                             <report>javadoc</report>
                         </reports>
                     </reportSet>
-                    <!--<reportSet>-->
-                    <!--<id>aggregate</id>-->
-                    <!--<reports>-->
-                    <!--<report>aggregate</report>-->
-                    <!--</reports>-->
-                    <!--</reportSet>-->
                 </reportSets>
             </plugin>
 

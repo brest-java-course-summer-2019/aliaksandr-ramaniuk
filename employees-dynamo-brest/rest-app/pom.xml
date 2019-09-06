@@ -86,10 +86,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <httpConnector>
-                        <port>8090</port>
+                        <port>8096</port>
                     </httpConnector>
-                    <stopKey>stop</stopKey>
-                    <stopPort>8091</stopPort>
                 </configuration>
             </plugin>
         </plugins>

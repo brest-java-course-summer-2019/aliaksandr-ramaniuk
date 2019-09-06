@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     /**
-     * Redirect to main page: departments.
+     * redirect the default page to the home page: departments.
      *
      * @return redirect path
      */
     @GetMapping(value = "/")
     public String defaultPageRedirect() {
-        return "redirect:/departments";
+        return "redirect:departments";
     }
 }

@@ -13,6 +13,8 @@ public class DepartmentValidator implements Validator {
     public static final int DEPARTMENT_NAME_MAX_SIZE = 40;
     public static final String DEPARTMENT_NAME = "departmentName";
     public static final String DEPARTMENT_NAME_IS_EMPTY = "departmentName.empty";
+    public static final String DEPARTMENT_NAME_MAX_SIZE_40 = "departmentName.maxSize40";
+
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -27,7 +29,7 @@ public class DepartmentValidator implements Validator {
 
         if (StringUtils.hasLength(department.getDepartmentName())
                 && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
-            errors.rejectValue(DEPARTMENT_NAME, "departmentName.maxSize40");
+            errors.rejectValue(DEPARTMENT_NAME, DEPARTMENT_NAME_MAX_SIZE_40);
         }
     }
 }

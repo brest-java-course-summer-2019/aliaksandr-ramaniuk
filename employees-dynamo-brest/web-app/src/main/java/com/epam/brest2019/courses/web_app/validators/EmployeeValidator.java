@@ -12,6 +12,8 @@ public class EmployeeValidator implements Validator {
 
     public static final int EMPLOYEE_LOGIN_MAX_SIZE = 40;
     public static final int EMPLOYEE_LAST_NAME_MAX_SIZE = 40;
+    public static final String EMPLOYEE_LOGIN_MAX_SIZE_40 = "login.maxSize40";
+    public static final String EMPLOYEE_LAST_NAME_MAX_SIZE_40 = "lastName.maxSize40";
     public static final String EMPLOYEE_LOGIN = "login";
     public static final String EMPLOYEE_LAST_NAME = "lastName";
     public static final String EMPLOYEE_LOGIN_IS_EMPTY = "login.empty";
@@ -33,14 +35,14 @@ public class EmployeeValidator implements Validator {
 
         if (StringUtils.hasLength(employee.getLogin())
                 && employee.getLogin().length() > EMPLOYEE_LOGIN_MAX_SIZE) {
-            errors.rejectValue(EMPLOYEE_LOGIN, "login.maxSize40");
+            errors.rejectValue(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_MAX_SIZE_40);
         }
 
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_IS_EMPTY);
 
         if (StringUtils.hasLength(employee.getLastName())
                 && employee.getLastName().length() > EMPLOYEE_LAST_NAME_MAX_SIZE) {
-            errors.rejectValue(EMPLOYEE_LAST_NAME, "lastName.maxSize40");
+            errors.rejectValue(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_MAX_SIZE_40);
         }
 
     }

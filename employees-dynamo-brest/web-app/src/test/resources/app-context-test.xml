@@ -30,8 +30,13 @@
     <!--        <constructor-arg name="dataSource" ref="dataSource"/>-->
     <!--    </bean>-->
 
-    <bean id="departmentService" class="com.epam.brest2019.courses.web_app.com.epam.brest2019.courses.web_app.consumers.DepartmentRestConsumer">
+    <bean id="departmentService" class="com.epam.brest2019.courses.web_app.consumers.DepartmentRestConsumer">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
+    <bean id="employeeService" class="com.epam.brest2019.courses.web_app.consumers.EmployeeRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employees}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 

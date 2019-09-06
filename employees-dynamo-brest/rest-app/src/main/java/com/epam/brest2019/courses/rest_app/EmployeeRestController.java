@@ -7,11 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -41,7 +40,7 @@ public class EmployeeRestController {
 
     @GetMapping(value = "/employees/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Employee findById(@PathVariable ("id") Integer employeeId) {
+    public Employee findById(@PathVariable("id") Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
         return employeeService.findById(employeeId);
     }
@@ -52,13 +51,15 @@ public class EmployeeRestController {
         LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
         return employeeService.findByDepartmentId(departmentId);
     }
-
+/*
     @PostMapping()
     public ResponseEntity<Employee> add(@RequestBody Employee employee) {
         LOGGER.debug("Add new employee: ({})", employee);
         Employee result = employeeService.add(employee);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
+
+ */
 
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
@@ -79,6 +80,8 @@ public class EmployeeRestController {
         LOGGER.debug("Get the number of employees in all departments");
         return employeeService.totalCountOfEmployees();
     }
+
+
 /*
     @GetMapping(value = "/employees/lastName")
     @ResponseStatus(value = HttpStatus.OK)
