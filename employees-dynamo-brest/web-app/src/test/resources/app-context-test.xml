@@ -24,25 +24,34 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <bean id="departmentService" class="com.epam.brest2019.courses.web_app.consumers.DepartmentRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <!-- <bean id="departmentService" class="com.epam.brest2019.courses.web_app.consumers.DepartmentRestConsumer">
+         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>
+         <constructor-arg index="1" ref="restTemplate"/>
+     </bean>
+
+     <bean id="employeeService" class="com.epam.brest2019.courses.web_app.consumers.EmployeeRestConsumer">
+         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employees}"/>
+         <constructor-arg index="1" ref="restTemplate"/>
+     </bean>
+     -->
+
+    <bean id="departmentService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest2019.courses.service.DepartmentService"/>
     </bean>
 
-    <bean id="employeeService" class="com.epam.brest2019.courses.web_app.consumers.EmployeeRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employees}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="employeeService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.brest2019.courses.service.EmployeeService"/>
     </bean>
 
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
+     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+         <property name="messageConverters">
+             <list>
+                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+             </list>
+         </property>
+     </bean>
 
-    <!-- Thymeleaf Template Resolver -->
+     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
@@ -73,5 +82,7 @@
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basename="/WEB-INF/messages">
     </bean>
+
+
 
 </beans>

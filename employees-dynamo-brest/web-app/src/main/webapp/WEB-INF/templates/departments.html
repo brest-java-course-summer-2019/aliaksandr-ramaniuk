@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
 
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -34,8 +36,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav1">
             <ul class="navbar-nav mr-4">
-                <li class="nav-item active"><a class="nav-link" href="departments.html">Departments</a></li>
-                <li class="nav-item"><a class="nav-link" href="employees.html">Employees</a></li>
+                <a class="nav-item nav-link active"
+                   href="departments.html"
+                   th:href="@{/departments}">Departments</a>
+                <a class="nav-item nav-link active"
+                   href="employees.html"
+                   th:href="@{/employees}">Employees</a>
             </ul>
         </div>
     </nav>
@@ -228,6 +234,23 @@
 <p></p>
 
 <hr>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Please confirm delete departmeтt: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
+    })
+</script>
 
 <footer>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">

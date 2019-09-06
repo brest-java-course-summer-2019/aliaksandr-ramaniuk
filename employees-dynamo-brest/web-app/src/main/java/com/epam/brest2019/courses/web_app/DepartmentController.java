@@ -59,15 +59,13 @@ public class DepartmentController {
      *
      * @return view name
      */
-    @GetMapping(value = "/department/{id}")
+    @GetMapping(value = "/department/{departmentId}")
     public final String findById(@PathVariable Integer departmentId, Model model) {
-
         LOGGER.debug("Go to edit department page({},{})", departmentId, model);
         Department department = departmentService.findById(departmentId);
         model.addAttribute("department", department);
         return "department";
     }
-
 
     /**
      * Go to add department page.
@@ -109,7 +107,7 @@ public class DepartmentController {
      *
      * @return view name
      */
-    @PostMapping(value = "/department/{id}")
+    @PostMapping(value = "/department/{departmentId}")
     public String updateDepartment(@Valid Department department,
                                    BindingResult result) {
         LOGGER.debug("updateDepartment({}, {})", department, result);
@@ -128,9 +126,9 @@ public class DepartmentController {
      * Redirect to main page: departments.
      * @return view name.
      */
-    @GetMapping(value = "/department/{id}/delete")
+    @GetMapping(value = "/department/{departmentId}/delete")
     public final String delete(@PathVariable Integer departmentId, Model model) {
-        LOGGER.debug("Delete department with specified id: ({}),({})", departmentId, model);
+        LOGGER.debug("Delete department with specified id (departmentId): ({}),({})", departmentId, model);
         departmentService.delete(departmentId);
         return "redirect:/departments";
     }
