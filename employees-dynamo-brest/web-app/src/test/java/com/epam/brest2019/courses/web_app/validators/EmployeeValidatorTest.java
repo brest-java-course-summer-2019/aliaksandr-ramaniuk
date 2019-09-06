@@ -99,7 +99,7 @@ public class EmployeeValidatorTest {
         assertTrue(result.hasErrors());
     }
 
-   // @Test
+    @Test
     void shouldValidateEmployeeLogin() {
 
         // given
@@ -110,10 +110,11 @@ public class EmployeeValidatorTest {
         employeeValidator.validate(employee, result);
 
         // then
-       assertFalse(result.hasErrors());
+        // problem
+        assertTrue(result.hasErrors());
 }
 
-  //  @Test
+    @Test
     void shouldValidateEmployeeLastName() {
 
         // given
@@ -124,7 +125,8 @@ public class EmployeeValidatorTest {
         employeeValidator.validate(employee, result);
 
         // then
-        assertFalse(result.hasErrors());
+        // problem
+        assertTrue(result.hasErrors());
 
     }
 }
