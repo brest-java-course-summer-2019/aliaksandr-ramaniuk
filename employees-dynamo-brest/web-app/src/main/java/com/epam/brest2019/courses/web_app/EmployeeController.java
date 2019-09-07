@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -39,7 +40,7 @@ public class EmployeeController {
     EmployeeValidator employeeValidator;
 
     /**
-     * Goto employees list page.
+     * Go to employees list page.
      *
      * @param model model
      * @return view name
@@ -52,16 +53,16 @@ public class EmployeeController {
     }
 
     /**
-     * Goto employee edit page.
+     * Go to employee edit page.
      *
      * @return view name
      */
-    @GetMapping(value = "/employee_Edit/{employeeId}")
+    @GetMapping(value = "/employee-Edit/{employeeId}")
     public final String findById(@PathVariable Integer employeeId, Model model) {
         LOGGER.debug("Go to edit employee page({},{})", employeeId, model);
         Employee employee = employeeService.findById(employeeId);
-        model.addAttribute("employee_Edit", employee);
-        return "employees";
+        model.addAttribute("employee-Edit", employee);
+        return "employee-Edit";
     }
 
     /**
@@ -69,13 +70,13 @@ public class EmployeeController {
      *
      * @return view name
      */
-    @GetMapping(value = "employee_Add")
+    @GetMapping(value = "/employee-Add")
     public final String goToAddEmployeePage(Model model) {
         LOGGER.debug("Go to employee add page ({})", model);
         Employee employee = new Employee();
         model.addAttribute("isNew", true);
-        model.addAttribute("employee_Add", employee);
-        return "employee_Add";
+        model.addAttribute("employee-Add", employee);
+        return "employee-Add";
     }
 
     /**
@@ -85,14 +86,13 @@ public class EmployeeController {
      * @param result binding result.
      * @return view name
      */
-    @PostMapping(value = "/employee_Add")
-    public String addEmployee(@Valid Employee employee,
+    @PostMapping(value = "/employee-Add")
+    public String addEmployee(@Valid @ModelAttribute("employee-Add") Employee employee,
                                 BindingResult result) {
-
         LOGGER.debug("Add employee({}, {})", employee, result);
         employeeValidator.validate(employee, result);
         if (result.hasErrors()) {
-            return "employee_Add";
+            return "employee-Add";
         } else {
             this.employeeService.add(employee);
             return "redirect:/employees";
@@ -104,13 +104,13 @@ public class EmployeeController {
      *
      * @return view name
      */
-    @PostMapping(value = "/employee_Edit/{employeeId}")
-    public String updateEmployee(@Valid Employee employee,
+    @PostMapping(value = "/employee-Edit/{employeeId}")
+    public String updateEmployee(@Valid @ModelAttribute("employee-Edit") Employee employee,
                                    BindingResult result) {
         LOGGER.debug("Update employee ({}, {})", employee, result);
         employeeValidator.validate(employee, result);
         if (result.hasErrors()) {
-            return "employee_Edit";
+            return "employee-Edit";
         } else {
             this.employeeService.update(employee);
             return "redirect:/employees";

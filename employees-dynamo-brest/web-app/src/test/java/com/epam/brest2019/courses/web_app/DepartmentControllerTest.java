@@ -136,7 +136,7 @@ public class DepartmentControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param(DEPARTMENT_NAME, DEPARTMENT_NAME)
                 .param(DEPARTMENT_ACCESS_RIGHTS, DEPARTMENT_ACCESS_RIGHTS)
-                .sessionAttr(DEPARTMENTS, new Department())
+                .sessionAttr(DEPARTMENT, new Department())
         )
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/departments"))
@@ -169,7 +169,7 @@ public class DepartmentControllerTest {
     }
 
     /**
-     * Delete department with specified id (departmentId).
+     * Update department with specified id (departmentId).
      */
     @Test
     public void updateDepartment() throws Exception {
@@ -204,10 +204,12 @@ public class DepartmentControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/departments/{departmentId}/delete", DEPARTMENT_ID_1)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/departments"))
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/departments"))
         ;
 
-   //     Mockito.verify(departmentService, Mockito.times(1)).delete(Mockito.anyInt());
+        Mockito.verify(departmentService, Mockito.times(1)).delete(Mockito.anyInt());
 
     }
 
