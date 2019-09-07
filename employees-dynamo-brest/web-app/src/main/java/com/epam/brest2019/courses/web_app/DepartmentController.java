@@ -85,14 +85,14 @@ public class DepartmentController {
      * Persist new department into persistence storage.
      *
      * @param department new department with filled data.
-     * @param result     binding result.
+     * @param result binding result.
      * @return view name
      */
     @PostMapping(value = "/department")
     public String addDepartment(@Valid Department department,
                                 BindingResult result) {
 
-        LOGGER.debug("addDepartment({}, {})", department, result);
+        LOGGER.debug("Add department({}, {})", department, result);
         departmentValidator.validate(department, result);
         if (result.hasErrors()) {
             return "department";
@@ -110,7 +110,7 @@ public class DepartmentController {
     @PostMapping(value = "/department/{departmentId}")
     public String updateDepartment(@Valid Department department,
                                    BindingResult result) {
-        LOGGER.debug("updateDepartment({}, {})", department, result);
+        LOGGER.debug("Update department({}, {})", department, result);
         departmentValidator.validate(department, result);
         if (result.hasErrors()) {
             return "department";
