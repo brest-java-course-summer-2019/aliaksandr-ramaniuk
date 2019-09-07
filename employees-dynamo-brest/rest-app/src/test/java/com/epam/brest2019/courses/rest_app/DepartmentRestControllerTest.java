@@ -97,7 +97,7 @@ public class DepartmentRestControllerTest {
         Mockito.when(departmentService.findById(departmentId)).thenReturn(createDepartmentForTest(departmentId));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/departments/{id}", departmentId)
+                .get("/departments/{departmentId}", departmentId)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -175,7 +175,7 @@ public class DepartmentRestControllerTest {
         doNothing().when(departmentService).delete(createDepartmentForTest(departmentId).getDepartmentId());
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/departments/{id}", departmentId))
+                .delete("/departments/{departmentId}", departmentId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
         ;
 

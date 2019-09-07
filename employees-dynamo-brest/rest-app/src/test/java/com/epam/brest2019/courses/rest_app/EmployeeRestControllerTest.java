@@ -106,7 +106,7 @@ public class EmployeeRestControllerTest {
         Mockito.when(employeeService.findById(employeeId)).thenReturn(createEmployeeForTest(employeeId));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/employees/{id}", employeeId)
+                .get("/employees/{employeeId}", employeeId)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -130,7 +130,7 @@ public class EmployeeRestControllerTest {
         Mockito.when(employeeService.findByDepartmentId(departmentId)).thenReturn(Arrays.asList(createEmployeeForTest(1)));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/employees/departmentId", departmentId)
+                .get("/employees/{departmentId}", departmentId)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -148,7 +148,7 @@ public class EmployeeRestControllerTest {
         Mockito.verifyNoMoreInteractions(employeeService);
     }
 
-   // @Test
+    @Test
     public void add() throws Exception {
         int employeeId = 1;
 
@@ -194,7 +194,7 @@ public class EmployeeRestControllerTest {
         doNothing().when(employeeService).delete(createEmployeeForTest(employeeId).getDepartmentId());
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/employees/{id}", employeeId))
+                .delete("/employees/{employeeId}", employeeId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
         ;
 

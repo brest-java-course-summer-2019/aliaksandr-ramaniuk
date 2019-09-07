@@ -39,9 +39,9 @@ public class DepartmentRestController {
         return departmentService.findAll();
     }
 
-    @GetMapping(value = "/departments/{id}")
+    @GetMapping(value = "/departments/{departmentId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Department findById(@PathVariable ("id") Integer departmentId) {
+    public Department findById(@PathVariable ("departmentId") Integer departmentId) {
         LOGGER.debug("Find department with specified id: ({})", departmentId);
         return departmentService.findById(departmentId);
     }
@@ -60,9 +60,9 @@ public class DepartmentRestController {
         departmentService.update(department);
     }
 
-    @DeleteMapping(value = "/departments/{id}")
+    @DeleteMapping(value = "/departments/{departmentId}")
     public void delete(@PathVariable("id") Integer departmentId) {
-        LOGGER.debug("Delete department with specified id: ({})", departmentId);
+        LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
         departmentService.delete(departmentId);
     }
 
