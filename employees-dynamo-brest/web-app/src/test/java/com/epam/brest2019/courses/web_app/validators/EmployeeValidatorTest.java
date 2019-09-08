@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EmployeeValidatorTest {
+
+    private static final String EMPLOYEE = "employee";
+
     Employee employee;
 
     EmployeeValidator employeeValidator = new EmployeeValidator();
@@ -20,7 +23,7 @@ public class EmployeeValidatorTest {
     @BeforeEach
     void setup() {
         employee = Mockito.mock(Employee.class);
-        result = new BeanPropertyBindingResult(employee, "employee");
+        result = new BeanPropertyBindingResult(employee, EMPLOYEE);
     }
 
     @Test

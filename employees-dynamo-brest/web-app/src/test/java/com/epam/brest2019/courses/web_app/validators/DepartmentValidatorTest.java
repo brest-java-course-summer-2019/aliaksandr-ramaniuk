@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DepartmentValidatorTest {
 
+    private static final String DEPARTMENT = "department";
+
     Department department;
 
     DepartmentValidator departmentValidator = new DepartmentValidator();
@@ -22,7 +24,7 @@ class DepartmentValidatorTest {
     @BeforeEach
     void setup() {
         department = Mockito.mock(Department.class);
-        result = new BeanPropertyBindingResult(department, "department");
+        result = new BeanPropertyBindingResult(department, DEPARTMENT);
     }
 
     @Test
