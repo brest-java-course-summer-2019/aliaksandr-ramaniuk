@@ -128,4 +128,10 @@ public class EmployeeController {
         employeeService.delete(employeeId);
         return "redirect:/employees";
     }
+
+    //totalCountOfEmployees
+
+    //filterEmployee
+
+    //filterEmployeeByDate
 }

@@ -55,7 +55,7 @@ public class EmployeeRestController {
      * @param employeeId employee id.
      * @return employees list with employeeId.
      */
-    @GetMapping(value = "/employee/{employeeId}")
+    @GetMapping(value = "/employee-Edit/{employeeId}")
     @ResponseStatus(value = HttpStatus.OK)
     public Employee findById(@PathVariable Integer employeeId) {
         LOGGER.debug("Find employee with specified id (employeeId): ({})", employeeId);

@@ -111,7 +111,7 @@ public class EmployeeRestControllerTest {
         Mockito.when(employeeService.findById(EMPLOYEE_ID_1)).thenReturn(createEmployeeForTest(EMPLOYEE_ID_1));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/employee/{employeeId}", EMPLOYEE_ID_1)
+                .get("/employee-Edit/{employeeId}", EMPLOYEE_ID_1)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
