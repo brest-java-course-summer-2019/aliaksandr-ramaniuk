@@ -9,8 +9,14 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+/**
+ * Department Consumer.
+ */
 public class DepartmentRestConsumer implements DepartmentService {
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentRestConsumer.class);
 
     private String url;

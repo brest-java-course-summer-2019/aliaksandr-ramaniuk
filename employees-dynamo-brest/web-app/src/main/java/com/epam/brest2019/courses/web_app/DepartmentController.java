@@ -35,7 +35,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     /**
-     * Validator.
+     * Department Validator.
      */
     @Autowired
     DepartmentValidator departmentValidator;

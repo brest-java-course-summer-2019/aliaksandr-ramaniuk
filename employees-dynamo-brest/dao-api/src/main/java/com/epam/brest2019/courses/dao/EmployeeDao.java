@@ -23,7 +23,7 @@ public interface EmployeeDao {
      * Get all employees with specified department id.
      *
      * @param departmentId department id.
-     * @return departmentId.
+     * @return employees list with departmentId.
      */
     List<Employee> findByDepartmentId(Integer departmentId);
 
@@ -31,7 +31,7 @@ public interface EmployeeDao {
      * Get employee with specified id.
      *
      * @param employeeId employee id.
-     * @return employeeId.
+     * @return employees list with employeeId.
      */
     Optional<Employee> findById(Integer employeeId);
 
@@ -67,7 +67,7 @@ public interface EmployeeDao {
     /**
      * Get filter employees by last name.
      * @param lastName last name.
-     * @return employees.
+     * @return employees list with filter by last name.
      */
     List<Employee> filterEmployee(String lastName);
 
@@ -75,7 +75,7 @@ public interface EmployeeDao {
      * Get filter employees by date.
      * @param localDates local date first value.
      * @param localDates local date second value.
-     * @return employees.
+     * @return employees list with filter by date.
      */
     List<Employee> filterEmployeeByDate(LocalDate...  localDates);
 

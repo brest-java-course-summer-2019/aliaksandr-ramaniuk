@@ -10,8 +10,14 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Employee Consumer.
+ */
 public class EmployeeRestConsumer implements EmployeeService {
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestConsumer.class);
 
     private String url;

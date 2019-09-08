@@ -21,7 +21,7 @@ public interface DepartmentDao {
      * Find Department by departmentId.
      *
      * @param departmentId department id.
-     * @return department list of all department.
+     * @return department list with departmentId.
      */
     Optional<Department> findById(Integer departmentId);
 
@@ -51,7 +51,7 @@ public interface DepartmentDao {
     /**
      * Find all departments with the count of employees in each department.
      *
-     * @return findAllCountEmployeesInDepartment list of all departments with the count of employees in each department.
+     * @return list of all departments with the count of employees in each department.
      */
     List<Department> findAllCountEmployeesInDepartment();
 

@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-//import java.util.Collection;
-//import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -29,31 +27,60 @@ import java.util.List;
 @RestController
 public class EmployeeRestController {
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestController.class);
 
+    /**
+     * Employee Service.
+     */
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Get all employees.
+     *
+     * @return employees list of all departments.
+     */
     @GetMapping(value = "/employees")
     public List<Employee> findAll() {
         LOGGER.debug("Find all employees");
         return employeeService.findAll();
     }
 
-    @GetMapping(value = "/employees/{employeeId}")
+    /**
+     * Get employee with specified id.
+     *
+     * @param employeeId employee id.
+     * @return employees list with employeeId.
+     */
+    @GetMapping(value = "/employee/{employeeId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Employee findById(@PathVariable("id") Integer employeeId) {
-        LOGGER.debug("Find employee with specified id: ({})", employeeId);
+    public Employee findById(@PathVariable Integer employeeId) {
+        LOGGER.debug("Find employee with specified id (employeeId): ({})", employeeId);
         return employeeService.findById(employeeId);
     }
 
+    /**
+     * Get all employees with specified department id.
+     *
+     * @param departmentId department id.
+     * @return employees list with specified department id.
+     */
     @GetMapping(value = "/employees/{departmentId}")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Employee> findByDepartmentId(@PathVariable ("departmentId") Integer departmentId) {
-        LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
+        LOGGER.debug("Find all employees with specified department id (departmentId): ({})", departmentId);
         return employeeService.findByDepartmentId(departmentId);
     }
 
+    /**
+     * Add new employee.
+     *
+     * @param employee employee.
+     * @return employee.
+     */
     @PostMapping()
     public ResponseEntity<Employee> add(@RequestBody Employee employee) {
         LOGGER.debug("Add new employee: ({})", employee);
@@ -61,8 +88,11 @@ public class EmployeeRestController {
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-
-
+    /**
+     * Update employee.
+     *
+     * @param employee employee.
+     */
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Employee employee) {
@@ -70,33 +100,56 @@ public class EmployeeRestController {
         employeeService.update(employee);
     }
 
+    /**
+     * Delete employee with specified id.
+     *
+     * @param employeeId employee id.
+     */
     @DeleteMapping(value = "/employees/{employeeId}")
     public void delete(@PathVariable("employeeId") Integer employeeId) {
         LOGGER.debug("Delete employee with specified id (employeeId): ({})", employeeId);
         employeeService.delete(employeeId);
     }
 
-    @GetMapping
+    /**
+     * Get the number of employees in all departments.
+     *
+     * @return total count employees in all departments.
+     */
+   /* @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     public int totalCountOfEmployees() {
         LOGGER.debug("Get the number of employees in all departments");
         return employeeService.totalCountOfEmployees();
     }
+        */
 
 
+    /**
+     * Get filter employees by last name.
+     * @param lastName last name.
+     * @return employees list with filter by last name.
+     */
 /*
-    @GetMapping(value = "/employees/lastName")
+    @GetMapping(value = "/employees/{lastName}")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Employee> filterEmployee(@PathVariable String lastName) {
         LOGGER.debug("Get filter employees by last name: ({})", lastName);
         return employeeService.filterEmployee(lastName);
     }
-
-    @GetMapping(value = "/employees/localDates")
+*/
+    /**
+     * Get filter employees by date.
+     * @param localDates1 local date first value.
+     * @param localDates2 local date second value.
+     * @return employees list with filter by date.
+     */
+ /*   @GetMapping(value = "/employees/{localDates1}/{localDates2}")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Employee> filterEmployeeByDate(@PathVariable LocalDate... localDates) {
-        LOGGER.debug("Get filter employees by date: ({})", localDates, localDates);
-        return employeeService.filterEmployeeByDate(localDates);
+    public List<Employee> filterEmployeeByDate(@PathVariable ("localDates1") LocalDate localDates1,
+                                               @PathVariable ("localDates2") LocalDate localDates2) {
+        LOGGER.debug("Get filter employees by date: ({}, {})", localDates1, localDates2);
+        return employeeService.filterEmployeeByDate(localDates1, localDates1);
     }
 */
 }

@@ -28,13 +28,13 @@ public class EmployeeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     /**
-     * Department Service.
+     * Employee Service.
      */
     @Autowired
     private EmployeeService employeeService;
 
     /**
-     * Validator.
+     * Employee Validator.
      */
     @Autowired
     EmployeeValidator employeeValidator;
