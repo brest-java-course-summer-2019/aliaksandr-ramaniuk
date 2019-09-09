@@ -37,7 +37,7 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public Department findById(Integer departmentId) {
-        LOGGER.debug("Find department with specified id: ({})", departmentId);
+        LOGGER.debug("Find department with specified id (departmentId): ({})", departmentId);
         ResponseEntity<Department> responseEntity = restTemplate.getForEntity(url + "/" + departmentId, Department.class);
         return responseEntity.getBody();
     }
@@ -58,7 +58,7 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public void delete(Integer departmentId) {
-        LOGGER.debug("Delete department with specified id: ({})", departmentId);
+        LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
         restTemplate.delete(url + "/" + departmentId);
     }
 

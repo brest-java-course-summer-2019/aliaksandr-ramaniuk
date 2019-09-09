@@ -521,6 +521,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
     </reporting>
 
 </project>
