@@ -69,6 +69,12 @@ public class Employee {
     private LocalDate localDate;
 
     /**
+     * Number of employees in all departments.
+     */
+    private Integer totalCountEmployeesInAllDepartments;
+
+
+    /**
      * Set department id.
      *
      * @param departmentId department id.
@@ -132,6 +138,15 @@ public class Employee {
     }
 
     /**
+     * Set the number of employees in all departments.
+     *
+     * @param totalCountEmployeesInAllDepartments total count employees in all departments.
+     */
+    public void setTotalCountEmployeesInAllDepartments(Integer totalCountEmployeesInAllDepartments) {
+        this.totalCountEmployeesInAllDepartments = totalCountEmployeesInAllDepartments;
+    }
+
+    /**
      * Get department id.
      *
      * @return departmentId department by id).
@@ -192,6 +207,15 @@ public class Employee {
      */
     public LocalDate getLocalDate() {
         return localDate;
+    }
+
+    /**
+     * Get the number of employees in all departments.
+     *
+     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
+     */
+    public Integer getTotalCountEmployeesInAllDepartments() {
+        return totalCountEmployeesInAllDepartments;
     }
 
     @Override

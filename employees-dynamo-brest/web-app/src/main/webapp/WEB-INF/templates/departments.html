@@ -26,9 +26,9 @@
 <header>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
         <a href="/" class="navbar-brand"><img src="../../resources/static/img/Dynamo_Brest_logo.png"
-                                     th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
-                                     height="50" width="50"
-                                     alt="Динамо Брест"></a>
+                                              th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
+                                              height="50" width="50"
+                                              alt="Динамо Брест"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -74,27 +74,36 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>Department name</th>
+                            <th class="text-center">Access rights</th>
                             <th class="text-center">Number of Employees</th>
                             <th></th>
+
                         </tr>
                         </thead>
 
                         <tbody>
                         <tr class="table-active">
                         <tr th:each="department : ${departments}">
-<!--                            <td>Администратор</td>-->
+                            <!--                            <td>Администратор</td>-->
                             <td th:text="${department.departmentName}"></td>
-<!--                            <td class="text-center">12</td>-->
-                            <td th:text="${department.countEmployeesInDepartment}"></td>
+                            <!--                            <td class="text-center">12</td>-->
+                            <td class="text-center" th:text="${department.departmentAccessRights}"></td>
+                            <td class="text-center" th:text="${department.countEmployeesInDepartment}"></td>
                             <td class="text-right">
                                 <a href="department.html"
+                                   th:href="@{|/department/${department.departmentId}|}"
                                    class="btn btn-dark btn-sm"
                                    title="Edit department"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fas fa-user-edit"></i> <span
                                         class="d-none d-md-inline">&nbsp;&nbsp;Edit&nbsp;&nbsp;</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
+                                <!--                                <span data-toggle="modal" data-target="#deleteDialog">-->
+                                <span data-toggle="modal"
+                                      data-target="#deleteDialog"
+                                      th:attr="data-id=${department.departmentId},
+                                      data-name=${department.departmentName}">
+<!--                                    -->
                                 <a href="#"
                                    class="btn btn-dark btn-sm"
                                    title="delete department"
@@ -127,9 +136,9 @@
                                 </span>
                             </td>
                         </tr>
-<!--                        <tr class="table-active">-->
+                        <!--                        <tr class="table-active">-->
                         <tr th:remove="all">
-                            <td>Тренерс  кий    штаб</td>
+                            <td>Тренерс кий штаб</td>
                             <td class="text-center">7</td>
                             <td class="text-right">
                                 <a href="department.html"
@@ -152,7 +161,7 @@
                         </tr>
 
                         <tr th:remove="all">
-                            <td>Иг  р  ок</td>
+                            <td>Иг р ок</td>
                             <td class="text-center">28</td>
                             <td class="text-right">
                                 <a href="department.html"
@@ -175,7 +184,7 @@
                         </tr>
 
                         <tr th:remove="all">
-<!--                        <tr class="table-active">-->
+                            <!--                        <tr class="table-active">-->
                             <td>Бухгалтер</td>
                             <td class="text-center">2</td>
                             <td class="text-right">
@@ -224,7 +233,9 @@
                         <tfoot class="thead-dark">
                         <tr>
                             <th>Итого:</th>
+                            <th></th>
                             <th class="text-center">48</th>
+                            <!--                            <th class="text-center" th:text="${employee.totalCountEmployeesInAllDepartments}"></th>-->
                             <th></th>
                         </tr>
                         </tfoot>
@@ -239,6 +250,35 @@
 
 <hr>
 
+
+<footer>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
+</footer>
+
+
+<!-- Confirm delete Modal -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="../../resources/static/js/jquery.min.js"
         th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"
@@ -251,15 +291,12 @@
     })
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete departmeтt: "' + target.data('name') + '"')
+        $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
+
+
+
 </script>
-
-<footer>
-    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
-        <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
-</footer>
-
 </body>
 </html>

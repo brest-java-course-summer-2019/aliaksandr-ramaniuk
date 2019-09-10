@@ -70,7 +70,7 @@ public class DepartmentRestController {
      * @return department.
      */
     @PostMapping()
-    public ResponseEntity<Department> add(@RequestBody Department department) {
+    public ResponseEntity<Department> add(@RequestBody Department department)  {
         LOGGER.debug("Add new department: ({})", department);
         Department result = departmentService.add(department);
         return new ResponseEntity<>(result, HttpStatus.CREATED);

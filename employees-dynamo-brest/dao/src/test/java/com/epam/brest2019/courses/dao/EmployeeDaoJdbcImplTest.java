@@ -27,6 +27,13 @@ public class EmployeeDaoJdbcImplTest {
     private static final String LAST_NAME = "lastName";
     private static final String FIRST_NAME = "firstName";
     private static final String PATRONIC_NAME = "patronicName";
+    public static final Integer EMPLOYEE_ID_1 = 1;
+    public static final Integer EMPLOYEE_ID_2 = 2;
+    public static final Integer EMPLOYEE_ID_6 = 6;
+    public static final Integer DEPARTMENT_ID_1 = 1;
+    public static final Integer DEPARTMENT_ID_2 = 2;
+    public static final Integer DEPARTMENT_ID_3 = 3;
+
 
     @Autowired
     EmployeeDao employeeDao;
@@ -41,7 +48,7 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void findByDepartmentId() {
-        List<Employee> employees = employeeDao.findByDepartmentId(6);
+        List<Employee> employees = employeeDao.findByDepartmentId(EMPLOYEE_ID_6);
         assertNotNull(employeeDao);
         assertTrue(employees.size() > 0);
         assertEquals(employees.size(), 3);
@@ -49,12 +56,11 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void findById() {
-        int departmentId = 1;
         LocalDate testLocalDate = LocalDate.of(2019, 01, 01);
 
-        Employee testEmployee = employeeDao.findById(departmentId).get();
+        Employee testEmployee = employeeDao.findById(DEPARTMENT_ID_1).get();
         assertNotNull(employeeDao);
-        assertTrue(testEmployee.getDepartmentId().equals(departmentId));
+        assertTrue(testEmployee.getDepartmentId().equals(DEPARTMENT_ID_1));
         assertEquals(testEmployee.getLogin(), "romanukalex");
         assertEquals(testEmployee.getLastName(), "РОМАНЮК");
         assertEquals(testEmployee.getFirstName(), "АЛЕКСАНДР");
@@ -64,13 +70,12 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void add() {
-        int departmentId = 3;
 
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
         List<Employee> employees = employeeDao.findAll();
         int sizeBeforeAdd = employees.size();
-        Employee employee = new Employee(departmentId, LOGIN_ADD, LAST_NAME, FIRST_NAME, PATRONIC_NAME, localDate);
+        Employee employee = new Employee(DEPARTMENT_ID_3, LOGIN_ADD, LAST_NAME, FIRST_NAME, PATRONIC_NAME, localDate);
         Employee newEmployee = employeeDao.add(employee);
 
         List<Employee> employeesAfterAdd = employeeDao.findAll();
@@ -87,18 +92,16 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void update() {
-        int employeeId = 2;
-        int departmentId = 2;
 
         LocalDate newLocalDate = LocalDate.of(2019, 07, 17);
 
-        Employee employee = employeeDao.findById(employeeId).get();
+        Employee employee = employeeDao.findById(EMPLOYEE_ID_2).get();
 
         employee.setLogin(LOGIN_UPDATE);
         employee.setFirstName(FIRST_NAME);
         employee.setLastName(LAST_NAME);
         employee.setPatronicName(PATRONIC_NAME);
-        employee.setDepartmentId(departmentId);
+        employee.setDepartmentId(DEPARTMENT_ID_2);
         employee.setLocalDate(newLocalDate);
 
         employeeDao.update(employee);
@@ -115,11 +118,10 @@ public class EmployeeDaoJdbcImplTest {
 
     @Test
     public void delete() {
-        int departmentId = 1;
 
         LocalDate localDate = LocalDate.of(2019, 07, 07);
 
-        Employee employee = new Employee(departmentId, LOGIN_DELETE, LAST_NAME, FIRST_NAME, PATRONIC_NAME, localDate);
+        Employee employee = new Employee(DEPARTMENT_ID_1, LOGIN_DELETE, LAST_NAME, FIRST_NAME, PATRONIC_NAME, localDate);
         employeeDao.add(employee);
         List<Employee> employees = employeeDao.findAll();
         int sizeBefore = employees.size();

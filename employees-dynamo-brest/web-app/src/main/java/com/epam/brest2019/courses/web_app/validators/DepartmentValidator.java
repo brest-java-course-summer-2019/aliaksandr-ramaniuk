@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 @Component
 public class DepartmentValidator implements Validator {
 
-    public static final int DEPARTMENT_NAME_MAX_SIZE = 40;
+    public static final Integer DEPARTMENT_NAME_MAX_SIZE = 40;
     public static final String DEPARTMENT_NAME = "departmentName";
     public static final String DEPARTMENT_NAME_IS_EMPTY = "departmentName.empty";
     public static final String DEPARTMENT_NAME_MAX_SIZE_40 = "departmentName.maxSize40";

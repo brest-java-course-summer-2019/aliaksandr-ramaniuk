@@ -127,7 +127,7 @@ public class DepartmentController {
      * @return view name.
      */
     @GetMapping(value = "/departments/{departmentId}/delete")
-    public final String delete(@PathVariable Integer departmentId, Model model) {
+    public final String updateDepartment(@PathVariable Integer departmentId, Model model) {
         LOGGER.debug("Delete department with specified id (departmentId): ({}),({})", departmentId, model);
         departmentService.delete(departmentId);
         return "redirect:/departments";

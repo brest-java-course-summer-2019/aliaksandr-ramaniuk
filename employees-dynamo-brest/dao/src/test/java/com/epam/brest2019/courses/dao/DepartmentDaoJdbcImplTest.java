@@ -24,6 +24,7 @@ public class DepartmentDaoJdbcImplTest {
     private static final String NEW_DEPARTMENT = "NEW DEPARTMENT";
     private static final String UPDATE_DEPARTMENT = "UPDATE DEPARTMENT";
     private static final String ACCESS_RIGHTS = "read";
+    public static final Integer DEPARTMENT_ID_2 = 2;
 
     @Autowired
     DepartmentDao departmentDao;
@@ -37,9 +38,9 @@ public class DepartmentDaoJdbcImplTest {
 
     @Test
     public void findById() {
-        Department testFindDepartmentById = departmentDao.findById(2).get();
+        Department testFindDepartmentById = departmentDao.findById(DEPARTMENT_ID_2).get();
         assertNotNull(testFindDepartmentById);
-        assertTrue(testFindDepartmentById.getDepartmentId().equals(2));
+        assertTrue(testFindDepartmentById.getDepartmentId().equals(DEPARTMENT_ID_2));
         assertEquals(testFindDepartmentById.getDepartmentName(), DEPARTMENT);
     }
 

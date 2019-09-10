@@ -15,6 +15,7 @@ public class EmployeeTest {
     private static final String EMPLOYEE_FIRST_NAME = "first name";
     private static final String EMPLOYEE_LAST_NAME = "last name";
     private static final String EMPLOYEE_PATRONIC_NAME = "patronic name";
+    private static final Integer TOTAL_COUNT_EMPLOYEES_IN_ALL_DEPARTMENTS = 10;
 
     Employee employee = new Employee();
 
@@ -61,6 +62,12 @@ public class EmployeeTest {
 
         employee.setLocalDate(localDate);
         assertEquals(employee.getLocalDate(), localDateTest);
+    }
+
+    @Test
+    public void getTotalCountEmployeesInAllDepartments(){
+        employee.setTotalCountEmployeesInAllDepartments(TOTAL_COUNT_EMPLOYEES_IN_ALL_DEPARTMENTS);
+        assertTrue(employee.getTotalCountEmployeesInAllDepartments().equals(TOTAL_COUNT_EMPLOYEES_IN_ALL_DEPARTMENTS));
     }
 
     /**
