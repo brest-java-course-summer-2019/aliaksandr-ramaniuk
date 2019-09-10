@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-ru">
+<html lang="en-ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
 
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -52,6 +50,7 @@
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="department.html"
+                   th:href="@{/department}"
                    class="btn btn-dark"
                    data-toggle="tooltip"
                    data-placement="left"
@@ -82,8 +81,11 @@
 
                         <tbody>
                         <tr class="table-active">
-                            <td>Администратор</td>
-                            <td class="text-center">1</td>
+                        <tr th:each="department : ${departments}">
+<!--                            <td>Администратор</td>-->
+                            <td th:text="${department.departmentName}"></td>
+<!--                            <td class="text-center">12</td>-->
+                            <td th:text="${department.countEmployeesInDepartment}"></td>
                             <td class="text-right">
                                 <a href="department.html"
                                    class="btn btn-dark btn-sm"
@@ -103,7 +105,7 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>Руководство</td>
                             <td class="text-center">4</td>
                             <td class="text-right">
@@ -125,8 +127,9 @@
                                 </span>
                             </td>
                         </tr>
-                        <tr class="table-active">
-                            <td>Тренерский штаб</td>
+<!--                        <tr class="table-active">-->
+                        <tr th:remove="all">
+                            <td>Тренерс  кий    штаб</td>
                             <td class="text-center">7</td>
                             <td class="text-right">
                                 <a href="department.html"
@@ -148,8 +151,8 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>Игрок</td>
+                        <tr th:remove="all">
+                            <td>Иг  р  ок</td>
                             <td class="text-center">28</td>
                             <td class="text-right">
                                 <a href="department.html"
@@ -171,7 +174,8 @@
                             </td>
                         </tr>
 
-                        <tr class="table-active">
+                        <tr th:remove="all">
+<!--                        <tr class="table-active">-->
                             <td>Бухгалтер</td>
                             <td class="text-center">2</td>
                             <td class="text-right">
@@ -194,7 +198,7 @@
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr th:remove="all">
                             <td>Обслуживающий персонал</td>
                             <td class="text-center">6</td>
                             <td class="text-right">

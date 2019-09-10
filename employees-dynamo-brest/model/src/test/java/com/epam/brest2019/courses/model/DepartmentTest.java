@@ -10,6 +10,7 @@ public class DepartmentTest {
     private static final Integer DEPARTMENT_ID = 8;
     private static final String DEPARTMENT_NAME = "department name";
     private static final String DEPARTMENT_ACCESS_RIGHTS = "department access rights";
+    private static final Integer COUNT_EMPLOYEES_IN_DEPARTMENT = 10;
 
     Department department = new Department();
 
@@ -31,6 +32,12 @@ public class DepartmentTest {
         assertEquals(department.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS);
     }
 
+    @Test
+    public void getCountEmployeesInDepartment() {
+        department.setCountEmployeesInDepartment(10);
+        assertTrue(department.getCountEmployeesInDepartment().equals(10));
+    }
+
     /**
      * Constructor Department Test
      */
@@ -46,8 +53,11 @@ public class DepartmentTest {
         department.setDepartmentId(DEPARTMENT_ID);
         department.setDepartmentName(DEPARTMENT_NAME);
         department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS);
+        department.setCountEmployeesInDepartment(COUNT_EMPLOYEES_IN_DEPARTMENT);
         String expectedResponseDepartment = "Department {departmentId = " + DEPARTMENT_ID + ", departmentName = "
-                + DEPARTMENT_NAME + ", departmentAccessRights = " + DEPARTMENT_ACCESS_RIGHTS + "}";
+                + DEPARTMENT_NAME + ", departmentAccessRights = " + DEPARTMENT_ACCESS_RIGHTS
+                + ", countEmployeesInDepartment = " + COUNT_EMPLOYEES_IN_DEPARTMENT + "}";
+
         assertEquals(expectedResponseDepartment, department.toString());
     }
 }
