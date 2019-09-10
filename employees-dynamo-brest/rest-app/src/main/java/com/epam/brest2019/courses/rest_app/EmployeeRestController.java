@@ -1,16 +1,16 @@
 package com.epam.brest2019.courses.rest_app;
 
 
-//import com.epam.brest2019.courses.model.Employee;
-//import com.epam.brest2019.courses.service.EmployeeService;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
+import com.epam.brest2019.courses.model.Employee;
+import com.epam.brest2019.courses.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.DeleteMapping;
-//import org.springframework.web.bind.annotation.GetMapping;
-//
+import org.springframework.web.bind.annotation.GetMapping;
+
 //import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +18,7 @@ package com.epam.brest2019.courses.rest_app;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-//import java.util.List;
+import java.util.List;
 
 /**
  * Employee Rest controller.
@@ -27,27 +27,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmployeeRestController {
 
-//    /**
-//     * Logger.
-//     */
-//    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestController.class);
-//
-//    /**
-//     * Employee Service.
-//     */
-//    @Autowired
-//    private EmployeeService employeeService;
-//
-//    /**
-//     * Get all employees.
-//     *
-//     * @return employees list of all departments.
-//     */
-//    @GetMapping(value = "/employees")
-//    public List<Employee> findAll() {
-//        LOGGER.debug("Find all employees");
-//        return employeeService.findAll();
-//    }
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRestController.class);
+
+    /**
+     * Employee Service.
+     */
+    @Autowired
+    private EmployeeService employeeService;
+
+    /**
+     * Get all employees.
+     *
+     * @return employees list of all departments.
+     */
+    @GetMapping(value = "/employees")
+    public List<Employee> findAll() {
+        LOGGER.debug("Find all employees");
+        return employeeService.findAll();
+    }
 //
 //    /**
 //     * Get employee with specified id.
