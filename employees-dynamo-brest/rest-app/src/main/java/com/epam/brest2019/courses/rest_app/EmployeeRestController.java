@@ -81,7 +81,7 @@ public class EmployeeRestController {
      * @param employee employee.
      * @return employee.
      */
-    @PostMapping()
+    @PostMapping(value = "/employee-Add")
     public ResponseEntity<Employee> add(@RequestBody Employee employee) {
         LOGGER.debug("Add new employee: ({})", employee);
         Employee result = employeeService.add(employee);
@@ -93,7 +93,7 @@ public class EmployeeRestController {
      *
      * @param employee employee.
      */
-    @PutMapping()
+    @PutMapping(value = "/employee-Edit/{employeeId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Employee employee) {
         LOGGER.debug("Update employee: ({})", employee);

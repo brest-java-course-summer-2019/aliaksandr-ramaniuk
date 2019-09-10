@@ -80,12 +80,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -97,7 +91,7 @@
                 <configuration>
                     <webAppSourceDirectory>src/main/webapp/WEB-INF/templates</webAppSourceDirectory>
                     <httpConnector>
-                        <port>8095</port>
+                        <port>8092</port>
                     </httpConnector>
                 </configuration>
             </plugin>
