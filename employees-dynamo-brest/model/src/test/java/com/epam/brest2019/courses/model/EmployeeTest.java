@@ -3,6 +3,7 @@ package com.epam.brest2019.courses.model;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -63,6 +64,19 @@ public class EmployeeTest {
         employee.setLocalDate(localDate);
         assertEquals(employee.getLocalDate(), localDateTest);
     }
+
+//    @Test
+//    public void getLocalDateString() {
+//        LocalDate localDate = LocalDate.of(2019, 01, 01);
+//        LocalDate localDateTest = LocalDate.of(2019, 01, 01);
+//
+//        LocalDate date = LocalDate.from(localDateTest);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String localDateTestString = date.format(formatter);
+//
+//        employee.setLocalDate(localDate);
+//        assertEquals(employee.getLocalDateString(), localDateTestString);
+//    }
 
     @Test
     public void getTotalCountEmployeesInAllDepartments(){

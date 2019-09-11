@@ -122,12 +122,26 @@ public class EmployeeController {
      *
      * @return view name
      */
-    @GetMapping(value = "/employees/{employeeId}/delete")
+    @GetMapping(value = "/employee/{employeeId}/delete")
     public final String delete(@PathVariable Integer employeeId, Model model) {
         LOGGER.debug("Delete employee with specified id:({},{})", employeeId, model);
         employeeService.delete(employeeId);
         return "redirect:/employees";
     }
+
+
+    /**
+     * Get the number of employees in all departments.
+     *
+     * @return total count employees in all departments.
+     */
+    @GetMapping(value = "/totalCountOfEmployees}")
+    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
+        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
+        employeeService.totalCountOfEmployees();
+        return "employees";
+    }
+
 
     //totalCountOfEmployees
 

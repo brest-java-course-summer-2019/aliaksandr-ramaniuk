@@ -77,7 +77,6 @@
                             <th class="text-center">Access rights</th>
                             <th class="text-center">Number of Employees</th>
                             <th></th>
-
                         </tr>
                         </thead>
 
@@ -103,10 +102,8 @@
                                       data-target="#deleteDialog"
                                       th:attr="data-id=${department.departmentId},
                                       data-name=${department.departmentName}">
-<!--                                    -->
-                                <a href="#"
-                                   class="btn btn-dark btn-sm"
-                                   title="delete department"
+                                <a href="#" class="btn btn-dark btn-sm"
+                                   title="Delete department"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fas fa-user-minus"></i>
@@ -148,7 +145,8 @@
                                    data-placement="top">
                                     <i class="fas fa-user-edit"></i> <span
                                         class="d-none d-md-inline">&nbsp;&nbsp;Edit&nbsp;&nbsp;</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
+                                <span data-toggle="modal"
+                                      data-target="#deleteDialog">
                                 <a href="#"
                                    class="btn btn-dark btn-sm"
                                    title="delete department"
@@ -269,7 +267,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Please confirm delete
+                Please confirm delete department
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -279,6 +277,8 @@
     </div>
 </div>
 
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="../../resources/static/js/jquery.min.js"
         th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"
@@ -294,9 +294,6 @@
         $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
-
-
-
 </script>
 </body>
 </html>

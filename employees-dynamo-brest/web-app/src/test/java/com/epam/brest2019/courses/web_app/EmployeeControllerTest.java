@@ -133,7 +133,7 @@ public class EmployeeControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Employees Add</title>")))
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Add employee</title>")))
         ;
     }
 
@@ -225,7 +225,7 @@ public class EmployeeControllerTest {
         Mockito.doNothing().doThrow(new IllegalStateException()).when(employeeService).delete(Mockito.anyInt());
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/employees/{employeeId}/delete", EMPLOYEE_ID_1)
+                MockMvcRequestBuilders.get("/employee/{employeeId}/delete", EMPLOYEE_ID_1)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/employees"))

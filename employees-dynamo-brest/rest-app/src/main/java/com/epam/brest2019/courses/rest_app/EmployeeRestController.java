@@ -6,16 +6,16 @@ import com.epam.brest2019.courses.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -48,20 +48,20 @@ public class EmployeeRestController {
         LOGGER.debug("Find all employees");
         return employeeService.findAll();
     }
-//
-//    /**
-//     * Get employee with specified id.
-//     *
-//     * @param employeeId employee id.
-//     * @return employees list with employeeId.
-//     */
-//    @GetMapping(value = "/employee-Edit/{employeeId}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public Employee findById(@PathVariable Integer employeeId) {
-//        LOGGER.debug("Find employee with specified id (employeeId): ({})", employeeId);
-//        return employeeService.findById(employeeId);
-//    }
-//
+
+    /**
+     * Get employee with specified id.
+     *
+     * @param employeeId employee id.
+     * @return employees list with employeeId.
+     */
+    @GetMapping(value = "/employee-Edit/{employeeId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Employee findById(@PathVariable Integer employeeId) {
+        LOGGER.debug("Find employee with specified id (employeeId): ({})", employeeId);
+        return employeeService.findById(employeeId);
+    }
+
 //    /**
 //     * Get all employees with specified department id.
 //     *
@@ -94,37 +94,37 @@ public class EmployeeRestController {
 //     *
 //     * @param employee employee.
 //     */
+//    //    @PutMapping(value = "/employee-Edit/{employeeId}")
 //    @PutMapping()
-////    @PutMapping(value = "/employee-Edit/{employeeId}")
 //    @ResponseStatus(value = HttpStatus.ACCEPTED)
 //    public void update(@RequestBody Employee employee) {
 //        LOGGER.debug("Update employee: ({})", employee);
 //        employeeService.update(employee);
 //    }
-//
-//    /**
-//     * Delete employee with specified id.
-//     *
-//     * @param employeeId employee id.
-//     */
-//    @DeleteMapping(value = "/employees/{employeeId}")
-//    public void delete(@PathVariable("employeeId") Integer employeeId) {
-//        LOGGER.debug("Delete employee with specified id (employeeId): ({})", employeeId);
-//        employeeService.delete(employeeId);
-//    }
+
+    /**
+     * Delete employee with specified id.
+     *
+     * @param employeeId employee id.
+     */
+    @DeleteMapping(value = "/employees/{employeeId}")
+    public void delete(@PathVariable("employeeId") Integer employeeId) {
+        LOGGER.debug("Delete employee with specified id (employeeId): ({})", employeeId);
+        employeeService.delete(employeeId);
+    }
 
     /**
      * Get the number of employees in all departments.
      *
      * @return total count employees in all departments.
      */
-   /* @GetMapping
+    @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     public int totalCountOfEmployees() {
         LOGGER.debug("Get the number of employees in all departments");
         return employeeService.totalCountOfEmployees();
     }
-        */
+
 
 
     /**

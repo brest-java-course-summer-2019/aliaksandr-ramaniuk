@@ -202,7 +202,7 @@ public class DepartmentControllerTest {
         Mockito.doNothing().doThrow(new IllegalStateException()).when(departmentService).delete(Mockito.anyInt());
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/departments/{departmentId}/delete", DEPARTMENT_ID_1)
+                MockMvcRequestBuilders.get("/department/{departmentId}/delete", DEPARTMENT_ID_1)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/departments"))

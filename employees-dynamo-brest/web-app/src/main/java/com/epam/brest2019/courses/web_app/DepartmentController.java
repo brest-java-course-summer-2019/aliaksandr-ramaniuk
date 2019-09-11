@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -89,7 +90,7 @@ public class DepartmentController {
      * @return view name
      */
     @PostMapping(value = "/department")
-    public String addDepartment(@Valid Department department,
+    public String addDepartment(@Valid @ModelAttribute("department") Department department,
                                 BindingResult result) {
 
         LOGGER.debug("Add department({}, {})", department, result);
@@ -126,9 +127,9 @@ public class DepartmentController {
      * Redirect to main page: departments.
      * @return view name.
      */
-    @GetMapping(value = "/departments/{departmentId}/delete")
-    public final String updateDepartment(@PathVariable Integer departmentId, Model model) {
-        LOGGER.debug("Delete department with specified id (departmentId): ({}),({})", departmentId, model);
+    @GetMapping(value = "/department/{departmentId}/delete")
+    public final String deleteDepartment(@PathVariable Integer departmentId, Model model) {
+        LOGGER.debug("Delete department with specified id (departmentId): ({}, {})", departmentId, model);
         departmentService.delete(departmentId);
         return "redirect:/departments";
     }

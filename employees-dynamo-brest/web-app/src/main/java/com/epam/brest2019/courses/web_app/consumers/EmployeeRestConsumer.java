@@ -74,7 +74,7 @@ public class EmployeeRestConsumer implements EmployeeService {
     @Override
     public int totalCountOfEmployees(){
         LOGGER.debug("Get the number of employees in all departments");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/", Integer.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity("/", Integer.class);
         return (int) responseEntity.getBody();
     }
 

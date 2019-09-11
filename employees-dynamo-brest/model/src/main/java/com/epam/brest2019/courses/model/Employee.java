@@ -209,6 +209,19 @@ public class Employee {
         return localDate;
     }
 
+//    /**
+//     * Get date-string of registration employee.
+//     *
+//     * @return localDateString date-string of registration employee.
+//     */
+//    public String getLocalDateString() {
+//        LocalDate date = LocalDate.from(localDate);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String localDateString = date.format(formatter);
+//        return localDateString;
+//    }
+
+
     /**
      * Get the number of employees in all departments.
      *
