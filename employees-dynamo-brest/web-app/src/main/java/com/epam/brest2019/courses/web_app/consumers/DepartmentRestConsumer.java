@@ -30,10 +30,9 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public List<Department> findAll() {
-//        LOGGER.debug("Find all departments");
-//        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/", List.class);
-//        return (List<Department>) responseEntity.getBody();
-        return null;
+        LOGGER.debug("Find all departments");
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/", List.class);
+        return (List<Department>) responseEntity.getBody();
     }
 
     @Override
@@ -60,7 +59,7 @@ public class DepartmentRestConsumer implements DepartmentService {
     @Override
     public void delete(Integer departmentId) {
         LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
-        restTemplate.delete(url + "/department/" + departmentId);
+        restTemplate.delete(url + "/" + departmentId);
 //
     }
 

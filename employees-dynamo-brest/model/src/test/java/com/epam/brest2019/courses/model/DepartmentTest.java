@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class DepartmentTest {
 
     private static final Integer DEPARTMENT_ID = 8;
-    private static final String DEPARTMENT_NAME = "department name";
+    private static final String DEPARTMENT_NAME = "DEPARTMENT NAME";
     private static final String DEPARTMENT_ACCESS_RIGHTS = "department access rights";
     private static final Integer COUNT_EMPLOYEES_IN_DEPARTMENT = 10;
 

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
@@ -59,7 +58,7 @@ public class DepartmentRestController {
      */
     @GetMapping(value = "/departments/{departmentId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Department findById(@PathVariable("departmentId") Integer departmentId) {
+    public Department findById(@PathVariable Integer departmentId) {
         LOGGER.debug("Find department with specified id: ({})", departmentId);
         return departmentService.findById(departmentId);
     }
@@ -71,12 +70,11 @@ public class DepartmentRestController {
      * @return department.
      */
     @PostMapping()
-//    public ResponseEntity<Department> add(@Valid @RequestBody Department department)  {
-    public void add(@Valid @RequestBody Department department)  {
-        LOGGER.debug("Add new department: ({})", department);
-//        Department result = departmentService.add(department);
-//        return new ResponseEntity<Department>(result, HttpStatus.CREATED);
-
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Department> add(@RequestBody Department department) {
+           LOGGER.debug("Add new department: ({})", department);
+        Department result = departmentService.add(department);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     /**
@@ -85,7 +83,7 @@ public class DepartmentRestController {
      * @param department department.
      * @return department.
      */
-    @PutMapping()
+    @PutMapping(value = "/departments")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Department department) {
         LOGGER.debug("Update department: ({})", department);
@@ -98,7 +96,7 @@ public class DepartmentRestController {
      * @param departmentId department id.
      */
     @DeleteMapping(value = "/departments/{departmentId}")
-    public void delete(@PathVariable("departmentId") Integer departmentId) {
+    public void delete(@PathVariable("departmentId") int departmentId) {
         LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
         departmentService.delete(departmentId);
     }

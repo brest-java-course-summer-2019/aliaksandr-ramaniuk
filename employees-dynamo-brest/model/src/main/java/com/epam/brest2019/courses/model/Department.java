@@ -25,6 +25,7 @@ public class Department {
     /**
      * Department id.
      */
+
     private Integer departmentId;
 
     /**

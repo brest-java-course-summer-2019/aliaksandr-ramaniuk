@@ -39,6 +39,11 @@ public class Employee {
     private Integer departmentId;
 
     /**
+     * Department name.
+     */
+    private String departmentName;
+
+    /**
      * Employee Id.
      */
     private Integer employeeId;
@@ -81,6 +86,15 @@ public class Employee {
      */
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    /**
+     * Set department name.
+     *
+     * @param departmentName department name.
+     */
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     /**
@@ -156,6 +170,15 @@ public class Employee {
     }
 
     /**
+     * Get department name.
+     *
+     * @return departmentName department name.
+     */
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    /**
      * Get employee id.
      *
      * @return employeeId employee by id.
@@ -205,9 +228,24 @@ public class Employee {
      *
      * @return localDate date of registration employee.
      */
+
     public LocalDate getLocalDate() {
         return localDate;
     }
+
+//    /**
+//     * Get date-string of registration employee.
+//     *
+//     * @return localDateString date-string of registration employee.
+//     */
+//    public String getLocalDateString() {
+//       if (localDate != null)
+//       {
+//           String localDateString = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//           return localDateString;
+//       }
+//       else return "no date";
+//    }
 
 //    /**
 //     * Get date-string of registration employee.

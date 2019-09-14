@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceMockTest {
 
-    private static final String DEPARTMENT_NAME = "department name";
-    private static final String ADD_DEPARTMENT_NAME = "addDepartment name";
+    private static final String DEPARTMENT_NAME = "DEPARTMENT NAME";
+    private static final String ADD_DEPARTMENT_NAME = "ADD DEPARTMENT NAME";
     private static final String DEPARTMENT_ACCESS_RIGHTS = "department access rights";
 
     @Mock

@@ -10,9 +10,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--    &lt;!&ndash; Use spring servlet for all requests, including static resources &ndash;&gt;-->
-<!--    <mvc:default-servlet-handler/>-->
-
     <!-- Use @MVC annotations -->
     <mvc:annotation-driven/>
 
@@ -32,26 +29,4 @@
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
-
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="dataSource"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="departmentDao" class="com.epam.brest2019.courses.dao.DepartmentDaoJdbcImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="departmentService" class="com.epam.brest2019.courses.service.DepartmentServiceImpl">-->
-<!--        <constructor-arg ref="departmentDao"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="employeeDao" class="com.epam.brest2019.courses.dao.EmployeeDaoJdbcImpl">-->
-<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
-<!--    </bean>-->
-
-<!--    <bean id="employeeService" class="com.epam.brest2019.courses.service.EmployeeServiceImpl">-->
-<!--        <constructor-arg ref="employeeDao"/>-->
-<!--    </bean>-->
-
-
 </beans>

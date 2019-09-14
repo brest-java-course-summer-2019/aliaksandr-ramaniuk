@@ -203,7 +203,7 @@ public class EmployeeRestControllerTest {
 //        Mockito.verifyNoMoreInteractions(employeeService);
 //    }
 //
-//   // @Test
+//    @Test
 //    public void totalCountOfEmployees() throws Exception {
 //        int totalCountOfEmployees = 2;
 //
@@ -216,9 +216,9 @@ public class EmployeeRestControllerTest {
 //                .andExpect(MockMvcResultMatchers.status().isOk())
 //                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
 //        ;
-//
+
 //    }
-//
+
     private Employee createEmployeeForTest(int employeeId) {
         Employee employee = new Employee();
 

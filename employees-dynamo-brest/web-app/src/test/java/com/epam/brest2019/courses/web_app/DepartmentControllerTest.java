@@ -136,7 +136,7 @@ public class DepartmentControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param(DEPARTMENT_NAME, DEPARTMENT_NAME)
                 .param(DEPARTMENT_ACCESS_RIGHTS, DEPARTMENT_ACCESS_RIGHTS)
-                .sessionAttr(DEPARTMENT, new Department())
+              //  .sessionAttr(DEPARTMENT, new Department())
         )
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/departments"))
@@ -165,7 +165,6 @@ public class DepartmentControllerTest {
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, isEmptyOrNullString())))
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ACCESS_RIGHTS, isEmptyOrNullString())))
         ;
-
     }
 
     /**

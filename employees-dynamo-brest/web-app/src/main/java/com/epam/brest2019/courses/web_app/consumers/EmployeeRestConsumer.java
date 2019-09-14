@@ -32,22 +32,23 @@ public class EmployeeRestConsumer implements EmployeeService {
     @Override
     public List<Employee> findAll() {
         LOGGER.debug("Find all employees");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/", List.class);
-        return (List<Employee>) responseEntity.getBody();
+        ResponseEntity responseEntity1 = restTemplate.getForEntity(url + "/", List.class);
+        return (List<Employee>) responseEntity1.getBody();
     }
 
     @Override
     public List<Employee> findByDepartmentId(Integer departmentId) {
         LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
-        ResponseEntity<Employee> responseEntity = restTemplate.getForEntity(url + "/" + departmentId, Employee.class);
-        return (List<Employee>) responseEntity.getBody();
+        ResponseEntity<Employee> responseEntity2 = restTemplate.getForEntity(url + "/" + departmentId, Employee.class);
+        return (List<Employee>) responseEntity2.getBody();
     }
+
 
     @Override
     public Employee findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
-        ResponseEntity<Employee> responseEntity = restTemplate.getForEntity(url + "/" + employeeId, Employee.class);
-        return responseEntity.getBody();
+        ResponseEntity<Employee> responseEntity1 = restTemplate.getForEntity(url + "/" + employeeId, Employee.class);
+        return responseEntity1.getBody();
     }
 
 
@@ -74,21 +75,21 @@ public class EmployeeRestConsumer implements EmployeeService {
     @Override
     public int totalCountOfEmployees(){
         LOGGER.debug("Get the number of employees in all departments");
-        ResponseEntity responseEntity = restTemplate.getForEntity("/", Integer.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/", Integer.class);
         return (int) responseEntity.getBody();
     }
 
     @Override
     public List<Employee> filterEmployee(String lastName){
         LOGGER.debug("Get filter employees by last name: ({})", lastName);
-        ResponseEntity<Employee> responseEntity = restTemplate.getForEntity(url + "/" + lastName, Employee.class);
-        return (List<Employee>) responseEntity.getBody();
+        ResponseEntity<Employee> responseEntity2 = restTemplate.getForEntity(url + "/" + lastName, Employee.class);
+        return (List<Employee>) responseEntity2.getBody();
     }
 
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
         LOGGER.debug("Get filter employees by date: ({})", localDates, localDates);
-        ResponseEntity<Employee> responseEntity = restTemplate.getForEntity(url + "/" + localDates, Employee.class);
-        return (List<Employee>) responseEntity.getBody();
+        ResponseEntity<Employee> responseEntity3 = restTemplate.getForEntity(url + "/" + localDates, Employee.class);
+        return (List<Employee>) responseEntity3.getBody();
     }
 }

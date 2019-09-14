@@ -83,6 +83,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void update(Department department) {
+        department.setDepartmentName(department.getDepartmentName().toUpperCase());
         Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException(FAILED_TO_UPDATE));
@@ -90,9 +91,9 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void delete(Integer departmentId) {
-        MapSqlParameterSource deletePasameter = new MapSqlParameterSource();
-        deletePasameter.addValue(DEPARTMENT_ID, departmentId);
-        Optional.of(namedParameterJdbcTemplate.update(deleteSql, deletePasameter))
+        MapSqlParameterSource deleteParameter = new MapSqlParameterSource();
+        deleteParameter.addValue(DEPARTMENT_ID, departmentId);
+        Optional.of(namedParameterJdbcTemplate.update(deleteSql, deleteParameter))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException(FAILED_TO_DELETE));
     }

@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+//import org.springframework.validation.FieldError;
+//import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -56,7 +59,7 @@ public class DepartmentController {
     }
 
     /**
-     * Goto edit department page.
+     * Go to edit department page.
      *
      * @return view name
      */
@@ -86,20 +89,29 @@ public class DepartmentController {
      * Persist new department into persistence storage.
      *
      * @param department new department with filled data.
-     * @param result binding result.
+     * @param result     binding result.
      * @return view name
      */
     @PostMapping(value = "/department")
-    public String addDepartment(@Valid @ModelAttribute("department") Department department,
+    public String addDepartment(@Valid Department department,
                                 BindingResult result) {
 
         LOGGER.debug("Add department({}, {})", department, result);
         departmentValidator.validate(department, result);
+
         if (result.hasErrors()) {
             return "department";
         } else {
-            this.departmentService.add(department);
-            return "redirect:/departments";
+            try{
+                this.departmentService.add(department);
+                return "redirect:/departments";
+            }
+            catch (Exception error){
+                FieldError ssoError = new FieldError("department", "departmentName","This name is used");
+                result.addError(ssoError);
+                return "department";
+            }
+
         }
     }
 
@@ -123,8 +135,9 @@ public class DepartmentController {
 
     /**
      * Delete department.
-     *
+     * <p>
      * Redirect to main page: departments.
+     *
      * @return view name.
      */
     @GetMapping(value = "/department/{departmentId}/delete")

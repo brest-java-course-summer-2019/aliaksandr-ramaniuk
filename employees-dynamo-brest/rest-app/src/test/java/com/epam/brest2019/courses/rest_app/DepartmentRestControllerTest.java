@@ -115,7 +115,7 @@ public class DepartmentRestControllerTest {
                 .content(asJsonString(new Department(DEPARTMENT_NAME, DEPARTMENT_ACCESS_RIGHTS)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andReturn().getResponse()
         ;
 
