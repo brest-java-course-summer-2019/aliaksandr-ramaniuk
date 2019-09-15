@@ -102,12 +102,11 @@ public class DepartmentController {
         if (result.hasErrors()) {
             return "department";
         } else {
-            try{
+            try {
                 this.departmentService.add(department);
                 return "redirect:/departments";
-            }
-            catch (Exception error){
-                FieldError ssoError = new FieldError("department", "departmentName","This name is used");
+            } catch (Exception error) {
+                FieldError ssoError = new FieldError("department", "departmentName", "This name is used");
                 result.addError(ssoError);
                 return "department";
             }
@@ -127,12 +126,11 @@ public class DepartmentController {
         if (result.hasErrors()) {
             return "department";
         } else {
-            try{
+            try {
                 this.departmentService.update(department);
                 return "redirect:/departments";
-            }
-            catch (Exception error){
-                FieldError ssoError = new FieldError("department", "departmentName","This name is used");
+            } catch (Exception error) {
+                FieldError ssoError = new FieldError("department", "departmentName", "This name is used");
                 result.addError(ssoError);
                 return "department";
             }
@@ -141,7 +139,7 @@ public class DepartmentController {
 
     /**
      * Delete department.
-     *
+     * <p>
      * Redirect to main page: departments.
      *
      * @return view name.

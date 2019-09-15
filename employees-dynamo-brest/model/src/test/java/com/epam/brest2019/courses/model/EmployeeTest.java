@@ -3,14 +3,17 @@ package com.epam.brest2019.courses.model;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class EmployeeTest {
 
-    private static final Integer EMPLOYEE_ID = 10;
+
     private static final Integer DEPARTMENT_ID = 8;
+    private static final String DEPARTMENT_NAME = "DEPARTMEN NAME";
+    private static final Integer EMPLOYEE_ID = 10;
     private static final String EMPLOYEE_LOGIN = "login";
     private static final String EMPLOYEE_FIRST_NAME = "first name";
     private static final String EMPLOYEE_LAST_NAME = "last name";
@@ -30,6 +33,13 @@ public class EmployeeTest {
         employee.setDepartmentId(DEPARTMENT_ID);
         assertTrue(employee.getDepartmentId().equals(DEPARTMENT_ID));
     }
+
+    @Test
+    public void getDepartmentName() {
+        employee.setDepartmentName(DEPARTMENT_NAME);
+        assertTrue(employee.getDepartmentName().equals(DEPARTMENT_NAME));
+    }
+
 
     @Test
     public void getLogin() {
@@ -62,6 +72,7 @@ public class EmployeeTest {
 
         employee.setLocalDate(localDate);
         assertEquals(employee.getLocalDate(), localDateTest);
+        assertEquals(employee.getLocalDateString(), localDateTest.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
     @Test

@@ -31,8 +31,5 @@ public class DepartmentValidator implements Validator {
                 && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
             errors.rejectValue(DEPARTMENT_NAME, DEPARTMENT_NAME_MAX_SIZE_40);
         }
-
-
-
     }
 }

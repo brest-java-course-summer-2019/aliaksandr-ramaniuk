@@ -1,7 +1,6 @@
 package com.epam.brest2019.courses.web_app;
 
 import com.epam.brest2019.courses.model.Employee;
-import com.epam.brest2019.courses.service.DepartmentService;
 import com.epam.brest2019.courses.service.EmployeeService;
 import com.epam.brest2019.courses.web_app.validators.EmployeeValidator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -41,11 +40,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    /**
-     * Department Service.
-     */
-    @Autowired
-    private DepartmentService departmentService;
+//    /**
+//     * Department Service.
+//     */
+   // @Autowired
+//    private DepartmentService departmentService;
 
     /**
      * Employee Validator.
@@ -82,11 +81,12 @@ public class EmployeeController {
      * @return view name
      */
     @GetMapping(value = "/employee-edit/{employeeId}")
-    public final String findById(@PathVariable Integer employeeId, Model model) {
+    public final String goToEmployeeEditPage(@PathVariable Integer employeeId, Model model) {
         LOGGER.debug("Go to edit employee page({},{})", employeeId, model);
         Employee employee = employeeService.findById(employeeId);
+       // model.addAttribute("employee", employeeService.findById(employeeId));
         model.addAttribute("employee", employee);
-        model.addAttribute("department", departmentService.findAll());
+     //   model.addAttribute("department", departmentService.findAll());
         return "employee-edit";
     }
 
@@ -118,6 +118,7 @@ public class EmployeeController {
         LOGGER.debug("Go to employee add page ({})", model);
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
+   //     model.addAttribute("department", departmentService.findAll());
         return "employee-add";
     }
 
@@ -161,17 +162,17 @@ public class EmployeeController {
     }
 
 
-    /**
-     * Get the number of employees in all departments.
-     *
-     * @return total count employees in all departments.
-     */
-    @GetMapping(value = "/{totalCountOfEmployees}")
-    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
-        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
-        employeeService.totalCountOfEmployees();
-        return "employees";
-    }
+//    /**
+//     * Get the number of employees in all departments.
+//     *
+//     * @return total count employees in all departments.
+//     */
+//    @GetMapping(value = "/{totalCountOfEmployees}")
+//    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
+//        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
+//        employeeService.totalCountOfEmployees();
+//        return "employees";
+//    }
 
 //    /**
 //     * Get filter employees by last name.
@@ -199,8 +200,7 @@ public class EmployeeController {
 //            model.addAttribute("employees", employeeService.filterEmployee(lastName));
 //            return "employees";
 //        }
-//
-//    }
+////    }
 
 
 

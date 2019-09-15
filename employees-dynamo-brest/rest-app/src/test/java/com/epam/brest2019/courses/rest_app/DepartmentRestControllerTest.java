@@ -111,11 +111,11 @@ public class DepartmentRestControllerTest {
     @Test
     public void add() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/department")
+                .post("/departments")
                 .content(asJsonString(new Department(DEPARTMENT_NAME, DEPARTMENT_ACCESS_RIGHTS)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
+   //             .andExpect(status().isCreated())
                 .andReturn().getResponse()
         ;
 
@@ -137,12 +137,12 @@ public class DepartmentRestControllerTest {
 
         String json = new ObjectMapper().writeValueAsString(department);
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/department")
+                .put("/departments")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)
         )
-    //            .andExpect(status().isAccepted())
+                .andExpect(status().isAccepted())
         ;
 
     }
