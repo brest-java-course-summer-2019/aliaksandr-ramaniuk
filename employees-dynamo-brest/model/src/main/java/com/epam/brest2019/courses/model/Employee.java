@@ -1,6 +1,9 @@
 package com.epam.brest2019.courses.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Employee model
@@ -71,6 +74,7 @@ public class Employee {
     /**
      * Employee date of registration.
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate localDate;
 
     /**
@@ -233,19 +237,19 @@ public class Employee {
         return localDate;
     }
 
-//    /**
-//     * Get date-string of registration employee.
-//     *
-//     * @return localDateString date-string of registration employee.
-//     */
-//    public String getLocalDateString() {
-//       if (localDate != null)
-//       {
-//           String localDateString = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//           return localDateString;
-//       }
-//       else return "no date";
-//    }
+    /**
+     * Get date-string of registration employee.
+     *
+     * @return localDateString date-string of registration employee.
+     */
+    public String getLocalDateString() {
+       if (localDate != null)
+       {
+           String localDateString = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+           return localDateString;
+       }
+       else return "no date";
+    }
 
 //    /**
 //     * Get date-string of registration employee.
@@ -258,7 +262,6 @@ public class Employee {
 //        String localDateString = date.format(formatter);
 //        return localDateString;
 //    }
-
 
     /**
      * Get the number of employees in all departments.

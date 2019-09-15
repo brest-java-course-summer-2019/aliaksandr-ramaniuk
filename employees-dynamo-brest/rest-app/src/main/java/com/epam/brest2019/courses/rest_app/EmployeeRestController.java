@@ -123,6 +123,7 @@ public class EmployeeRestController {
 //        LOGGER.debug("Get the number of employees in all departments");
 //        return employeeService.totalCountOfEmployees();
 //    }
+
 //
 //    /**
 //     * Get filter employees by last name.
@@ -132,10 +133,11 @@ public class EmployeeRestController {
 //
 //    @GetMapping(value = "/employees/{lastName}")
 //    @ResponseStatus(value = HttpStatus.OK)
-//    public List<Employee> filterEmployee(@PathVariable ("lastName") String lastName) {
+//    public List<Employee> filterEmployee(@PathVariable String lastName) {
 //        LOGGER.debug("Get filter employees by last name: ({})", lastName);
 //        return employeeService.filterEmployee(lastName);
 //    }
+
 
 //    /**
 //     * Get filter employees by date.

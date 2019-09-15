@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+
+    <title>Edit employee</title>
+</head>
+
+<body>
+
+<header>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <a href="https://dynamo-brest.by" class="navbar-brand"><img
+                src="../../resources/static/img/Dynamo_Brest_logo.png"
+                th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
+                height="50" width="50"
+                alt="Динамо Брест"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav1">
+            <ul class="navbar-nav mr-4">
+                <a class="nav-item nav-link active"
+                   href="departments.html"
+                   th:href="@{/departments}">Departments</a>
+                <a class="nav-item nav-link active"
+                   href="employees.html"
+                   th:href="@{/employees}">Employees</a>
+            </ul>
+        </div>
+    </nav>
+
+    <nav id="main-header"
+         class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-danger">
+        <span class="navbar-brand text-uppercase mr-auto"><p class="font-weight-bold"><h3>Edit employee</h3></p></span>
+        <ul class="navbar-nav float-right">
+            <li class="nav-item">
+                <a href="employees.html"
+                   th:href="@{/employees}"
+                   class="btn btn-dark"
+                   data-toggle="tooltip"
+                   data-placement="left"
+                   title="Return">
+                    <i class="fas fa-undo"></i> <span
+                        class="d-none d-sm-inline">&nbsp;&nbsp;Return</span></a>
+                &nbsp;&nbsp;
+            </li>
+            <li class="nav-item">
+                <a href="employees.html"
+                   th:href="@{/employees}"
+                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
+                   class="btn btn-dark"
+                   data-toggle="tooltip"
+                   data-placement="left"
+                   title="Save Employee">
+                    <i class="fas fa-save"></i></i> <span
+                        class="d-none d-sm-inline">&nbsp;Save Employee</span></a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<section id="employee-edit">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card border-dark mb-3">
+                    <div class="card-body">
+                        <form id="employeeForm"
+                              th:object="${employee}"
+                              action="employees.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <strong>Warning!</strong>
+                                <strong>Please correct errors:</strong>
+                            </div>
+
+                            <input id="field_employeeId"
+                                   type="hidden"
+                                   th:field="*{employeeId}"/>
+
+                            <div class="form-group">
+                                <label class="form-control-label font-weight-bolder"
+                                       for="field_login">Login</label>
+                                <input readonly class="form-control-plaintext"
+                                       id="field_login"
+                                       type="text"
+                                       value=""
+                                       th:field="*{login}">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label font-weight-bolder"
+                                       for="field_FirstName">First Name</label>
+                                <input class="form-control "
+                                       th:class="${#fields.hasErrors('firstName')} ? 'form-control is-invalid' : 'form-control'"
+                                       id="field_FirstName"
+                                       type="text"
+                                       placeholder="Enter First Name"
+                                       th:field="*{firstName}"/>
+                                <div th:if="${#fields.hasErrors('firstName')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{firstName}">[errors]
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label font-weight-bolder"
+                                       for="field_LastName">Last Name</label>
+                                <input class="form-control"
+                                       th:class="${#fields.hasErrors('lastName')} ? 'form-control is-invalid' : 'form-control'"
+                                       id="field_LastName"
+                                       type="text"
+                                       placeholder="Enter Last Name"
+                                       th:field="*{lastName}"/>
+                                <div th:if="${#fields.hasErrors('lastName')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{lastName}">[errors]
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label font-weight-bolder"
+                                       for="field_PatromicName">Patronic Name</label>
+                                <input class="form-control"
+                                       th:class="${#fields.hasErrors('patronicName')} ? 'form-control is-invalid' : 'form-control'"
+                                       id="field_PatromicName"
+                                       type="text"
+                                       placeholder="Enter Patronic Name"
+                                       th:field="*{patronicName}"/>
+                                <div th:if="${#fields.hasErrors('patronicName')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{patronicName}">[errors]
+                                </div>
+                            </div>
+
+<!--                            <div class="form-group">-->
+<!--                                <label class="form-control-label font-weight-bolder"-->
+<!--                                       for="departmentId">Department</label>-->
+<!--                                <select class="form-control"-->
+<!--                                        id="departmentId"-->
+<!--                                        th:field="*{departmentId}">-->
+<!--                                    <option value="">Select Department</option>-->
+<!--                                    <option th:each="department: ${departments}"-->
+<!--                                            th:value="${department.departmentId}"-->
+<!--                                            th:text="${department.departmentName}"-->
+<!--                                            th:selected="${department.departmentId} == ${employee.departmentId}-->
+<!--                                         >-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+                                                        <div class="form-group">
+                                                            <label class="form-control-label font-weight-bolder"
+                                                                   for="field_DepartmentName">Department Name</label>
+                                                            <input class="form-control"
+
+                                                                   id="field_DepartmentName"
+                                                                   type="text"
+                                                                   placeholder="Enter Department Name"
+                                                                   th:field="*{departmentId}"/>
+                                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<footer>
+    <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
+        <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
+</footer>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    </script>
+
+</body>
+</html>
+

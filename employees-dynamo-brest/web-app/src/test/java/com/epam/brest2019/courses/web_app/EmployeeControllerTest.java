@@ -37,8 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = {"classpath:app-context-test.xml"})
 public class EmployeeControllerTest {
 
-    private static final String EMPLOYEE_EDIT = "employee-Edit";
-    private static final String EMPLOYEE_ADD = "employee-Add";
+    private static final String EMPLOYEE_EDIT = "employee-edit";
+    private static final String EMPLOYEE_ADD = "employee-add";
     private static final String EMPLOYEES = "employees";
     private static final String EMPLOYEE = "employee";
     private static final String EMPLOYEE_ID = "employeeId";
@@ -97,7 +97,6 @@ public class EmployeeControllerTest {
                          )
                  )))
          ;
-
     }
 
     /**
@@ -109,10 +108,10 @@ public class EmployeeControllerTest {
         Mockito.when(employeeService.findById(EMPLOYEE_ID_1)).thenReturn(createEmployeeForTest(EMPLOYEE_ID_1));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/employee/{employeeId}", EMPLOYEE_ID_1))
+                .get("/employee-edit/{employeeId}", EMPLOYEE_ID_1))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE))
+                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE_EDIT))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_1))))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN + EMPLOYEE_ID_1))))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME + EMPLOYEE_ID_1))))
@@ -146,7 +145,7 @@ public class EmployeeControllerTest {
     public void addEmployee() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/employee-Add")
+                .post("/employee-add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN)
                 .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
@@ -172,13 +171,13 @@ public class EmployeeControllerTest {
     @Test
     public void updateEmptyEmployee() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/employee/{employeeId}", EMPLOYEE_ID_1)
+                .post("/employee-edit/{employeeId}", EMPLOYEE_ID_1)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param(EMPLOYEE_ID, EMPLOYEE_ID_1.toString())
                 .sessionAttr(EMPLOYEE, new Employee())
         )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE))
+                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE_EDIT))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_1))))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, isEmptyOrNullString())))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, isEmptyOrNullString())))
@@ -197,7 +196,7 @@ public class EmployeeControllerTest {
                 .when(employeeService).update(createEmployeeForTest(EMPLOYEE_ID_1));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/employee/{employeeId}", EMPLOYEE_ID_1)
+                .post("/employee-edit/{employeeId}", EMPLOYEE_ID_1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN + EMPLOYEE_ID_2)
                 .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME + EMPLOYEE_ID_2)

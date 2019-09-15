@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
     employee_id INT NOT NULL AUTO_INCREMENT,
     login VARCHAR(40) NOT NULL UNIQUE,
-    first_name VARCHAR(40) NULL,
+    first_name VARCHAR(40) NOT NULL,
     last_name  VARCHAR(40) NOT NULL,
     patronic_name  VARCHAR(40) NULL,
     local_date  DATE NOT NULL,

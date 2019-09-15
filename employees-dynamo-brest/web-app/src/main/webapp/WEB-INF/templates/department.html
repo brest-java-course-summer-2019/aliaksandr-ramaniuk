@@ -62,7 +62,8 @@
                 &nbsp;&nbsp;
             </li>
 
-            <li class="nav-item"><a href="departments.html"
+            <li class="nav-item">
+                <a href="departments.html"
                    th:href="@{/departments}"
                    th:onclick="@{document.forms['departmentForm'].submit(); return false;}"
                    class="btn btn-dark btn"
@@ -125,7 +126,6 @@
                                     <option value="read" >read</option>
                                     <option value="write">write</option>
                                     <option value="admin">admin</option>
-                                    th:field="*{departmentAccessRights}"
                                 </select>
                             </div>
                         </form>

@@ -109,6 +109,9 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public void update(Employee employee) {
+        employee.setLastName(employee.getLastName().toUpperCase());
+        employee.setFirstName(employee.getFirstName().toUpperCase());
+        employee.setPatronicName(employee.getPatronicName().toUpperCase());
         Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(employee)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException(FAILED_TO_UPDATE));
