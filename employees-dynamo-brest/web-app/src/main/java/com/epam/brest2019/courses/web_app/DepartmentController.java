@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-
+import java.util.List;
 
 /**
  * Department controller.
@@ -51,10 +51,24 @@ public class DepartmentController {
      * @param model model
      * @return view name
      */
-    @GetMapping(value = "/departments")
+    @GetMapping(value = "/departments", produces = "application/json")
     public final String departments(Model model) {
         LOGGER.debug("Find all departments: ({})", model);
-        model.addAttribute("departments", departmentService.findAllCountEmployeesInDepartment());
+        //     Department department = new Department();
+        List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
+//                Integer counter = departments.stream()
+//                .filter(department -> department.getCountEmployeesInDepartment() != null)
+//                .mapToInt(Department::getCountEmployeesInDepartment).sum();
+//         Integer counter = 0;
+//        for (int i = 0; i < departments.size(); i++) {
+//            counter += departments.get(i).getCountEmployeesInDepartment();
+//        }
+//        departments.forEach((dept)->{
+//           counter += dept.getCountEmployeesInDepartment();
+//
+//        });
+        model.addAttribute("departments", departments);
+        model.addAttribute("totalCountOfEmployees", 586);
         return "departments";
     }
 
@@ -147,7 +161,14 @@ public class DepartmentController {
     @GetMapping(value = "/department/{departmentId}/delete")
     public final String deleteDepartment(@PathVariable Integer departmentId, Model model) {
         LOGGER.debug("Delete department with specified id (departmentId): ({}, {})", departmentId, model);
-        departmentService.delete(departmentId);
-        return "redirect:/departments";
+//        departmentService.delete(departmentId);
+//        return "redirect:/departments";
+        try {
+            departmentService.delete(departmentId);
+            return "redirect:/departments";
+        } catch (Exception error) {
+            model.addAttribute("deleteException", departmentId);
+            return "redirect:/departments";
+        }
     }
 }

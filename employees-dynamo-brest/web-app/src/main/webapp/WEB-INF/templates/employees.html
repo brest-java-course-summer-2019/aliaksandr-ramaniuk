@@ -92,24 +92,27 @@
     <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-dark">
         <form class="form-inline"
               action="employees.html"
+              th:action="@{/filter}"
+
               id="employeeFormLastName"
-              th:object="${employee}"
-              th:action="@{${#httpServletRequest.servletPath}}"
               th:method="@{post}">
+<!--              th:action="@{${#httpServletRequest.servletPath}}"-->
+
             <div class="form-group">
-                <label for="inlineFormInputName">Filter by Last Name&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <input id="inlineFormInputName"
+                <label for="lastName">Filter by Last Name&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input
+                        id="lastName"
+                       name="lastName"
                        type="text"
                        value=""
                        class="form-control"
                        placeholder="Enter Last Name">
-<!--                       th:field="*{employee.lastName}">-->
             </div>
 
             </div>
             <div class="col-auto my-1">
                 <a href="employees.html"
-                   th:href="@{/employees}"
+                   th:href="@{/filter}"
                    th:onclick="@{document.forms['employeeFormLastName'].submit(); return false;}"
                    class="btn btn-dark"
                    data-toggle="tooltip"
@@ -157,7 +160,7 @@
                             <td class="text-center" th:text="${employee.patronicName}"></td>
                             <td class="text-center"
 
-                                th:text="${employee.localDateString}"></td>
+                                th:text="${employee.localDate}"></td>
                             <!--                              th:text="${employee.localDate}">-->
                             </td>
                             <!--                            <td>01.02.2018</td>-->
@@ -255,6 +258,7 @@
         $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
     })
+
 
 
 

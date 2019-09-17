@@ -77,6 +77,16 @@ public class Employee {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate localDate;
 
+    public void setLocalDate1(String localDate1) {
+        LocalDate1 = localDate1;
+    }
+
+    public String getLocalDate1() {
+        return LocalDate1;
+    }
+
+    private String LocalDate1;
+
     /**
      * Number of employees in all departments.
      */

@@ -131,12 +131,12 @@ public class EmployeeRestController {
 //     * @return employees list with filter by last name.
 //     */
 //
-//    @GetMapping(value = "/employees/{lastName}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public List<Employee> filterEmployee(@PathVariable String lastName) {
-//        LOGGER.debug("Get filter employees by last name: ({})", lastName);
-//        return employeeService.filterEmployee(lastName);
-//    }
+    @GetMapping(value = "/employees/{lastName}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
+        LOGGER.debug("Get filter employees by last name: ({})", lastName);
+        return employeeService.filterEmployee(lastName);
+    }
 
 
 //    /**

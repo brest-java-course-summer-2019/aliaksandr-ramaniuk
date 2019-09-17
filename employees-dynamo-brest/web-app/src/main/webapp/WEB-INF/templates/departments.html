@@ -25,10 +25,11 @@
 <body>
 <header>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
-        <a href="https://dynamo-brest.by/" class="navbar-brand"><img src="../../resources/static/img/Dynamo_Brest_logo.png"
-                                              th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
-                                              height="50" width="50"
-                                              alt="Динамо Брест"></a>
+        <a href="https://dynamo-brest.by/" class="navbar-brand"><img
+                src="../../resources/static/img/Dynamo_Brest_logo.png"
+                th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
+                height="50" width="50"
+                alt="Динамо Брест"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -114,9 +115,8 @@
                         </tbody>
                         <tfoot class="thead-dark">
                         <tr>
-                            <th>Итого:</th>
-                            <th></th>
-<!--                                                        <th class="text-center">48!!</th>-->
+                            <th>Итого: </th>
+                            <th th:text="${totalCountOfEmployees}"></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -178,6 +178,7 @@
         $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
+
 
 
 </script>

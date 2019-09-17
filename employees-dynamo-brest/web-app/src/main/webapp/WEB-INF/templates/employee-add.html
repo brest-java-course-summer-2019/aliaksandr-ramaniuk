@@ -166,23 +166,35 @@
                                        id="field_DataAdd"
                                        placeholder="yyyy-MM-dd"
                                        type="date"
-                                       th:field="*{localDate}"/>
+                                       th:field="*{localDate1}"/>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-control-label font-weight-bolder"
-                                       for="field_Department">Department</label>
-                                <select class="form-control"
-                                        id="field_Department"
-                                        th:field="*{departmentId}">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                <label class="form-control-label font-weight-bolder">Department</label>
+                                <select class="form-control" id="departmentId" name="departmentName" th:field="*{departmentId}">
+                                    <option value="">Select Department</option>
+                                    <option th:each="department : ${departments}"
+                                            th:value="${department.departmentId}"
+                                            th:text="${department.departmentName}"
+                                            th:selected="${department.departmentId} == ${employee.departmentId}">
+                                    </option>
                                 </select>
                             </div>
+
+<!--                            <div class="form-group">-->
+<!--                                <label class="form-control-label font-weight-bolder"-->
+<!--                                       for="field_Department">Department</label>-->
+<!--                                <select class="form-control"-->
+<!--                                        id="field_Department"-->
+<!--                                        th:field="*{departmentId}">-->
+<!--                                    <option value="1">1</option>-->
+<!--                                    <option value="2">2</option>-->
+<!--                                    <option value="3">3</option>-->
+<!--                                    <option value="4">4</option>-->
+<!--                                    <option value="5">5</option>-->
+<!--                                    <option value="6">6</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
                         </form>
                     </div>
                 </div>

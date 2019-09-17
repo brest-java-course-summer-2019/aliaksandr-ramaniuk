@@ -1,6 +1,7 @@
 package com.epam.brest2019.courses.web_app;
 
 import com.epam.brest2019.courses.model.Employee;
+import com.epam.brest2019.courses.service.DepartmentService;
 import com.epam.brest2019.courses.service.EmployeeService;
 import com.epam.brest2019.courses.web_app.validators.EmployeeValidator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 /**
  * Employee controller.
@@ -40,11 +42,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-//    /**
-//     * Department Service.
-//     */
-   // @Autowired
-//    private DepartmentService departmentService;
+    /**
+     * Department Service.
+     */
+    @Autowired
+    private DepartmentService departmentService;
 
     /**
      * Employee Validator.
@@ -81,12 +83,11 @@ public class EmployeeController {
      * @return view name
      */
     @GetMapping(value = "/employee-edit/{employeeId}")
-    public final String goToEmployeeEditPage(@PathVariable Integer employeeId, Model model) {
+    public final String findById(@PathVariable Integer employeeId, Model model) {
         LOGGER.debug("Go to edit employee page({},{})", employeeId, model);
-        Employee employee = employeeService.findById(employeeId);
-       // model.addAttribute("employee", employeeService.findById(employeeId));
-        model.addAttribute("employee", employee);
-     //   model.addAttribute("department", departmentService.findAll());
+        //  Employee employee = employeeService.findById(employeeId);
+        model.addAttribute("employee", employeeService.findById(employeeId));
+        model.addAttribute("departments", departmentService.findAll());
         return "employee-edit";
     }
 
@@ -97,10 +98,12 @@ public class EmployeeController {
      */
     @PostMapping(value = "/employee-edit/{employeeId}")
     public String updateEmployee(@Valid Employee employee,
-                                 BindingResult result) {
+                                 BindingResult result, Model model) {
         LOGGER.debug("Update employee ({}, {})", employee, result);
         employeeValidator.validate(employee, result);
         if (result.hasErrors()) {
+            model.addAttribute("employee", employee);
+            model.addAttribute("departments", departmentService.findAll());
             return "employee-edit";
         } else {
             this.employeeService.update(employee);
@@ -118,7 +121,7 @@ public class EmployeeController {
         LOGGER.debug("Go to employee add page ({})", model);
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
-   //     model.addAttribute("department", departmentService.findAll());
+        model.addAttribute("departments", departmentService.findAll());
         return "employee-add";
     }
 
@@ -126,16 +129,20 @@ public class EmployeeController {
      * Persist new employee into persistence storage.
      *
      * @param employee new employee with filled data.
-     * @param result binding result.
+     * @param result   binding result.
      * @return view name
      */
     @PostMapping(value = "/employee-add")
     public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
-                                BindingResult result) {
+                              BindingResult result, Model model) {
         LOGGER.debug("Add employee({}, {})", employee, result);
         employeeValidator.validate(employee, result);
 
+   //     employee.setLocalDate(LocalDate.parse(employee.getLocalDate1()));
+
         if (result.hasErrors()) {
+            model.addAttribute("employee", employee);
+            model.addAttribute("departments", departmentService.findAll());
             return "employee-add";
         } else {
             try {
@@ -162,17 +169,17 @@ public class EmployeeController {
     }
 
 
-//    /**
-//     * Get the number of employees in all departments.
-//     *
-//     * @return total count employees in all departments.
-//     */
-//    @GetMapping(value = "/{totalCountOfEmployees}")
-//    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
-//        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
-//        employeeService.totalCountOfEmployees();
-//        return "employees";
-//    }
+    /**
+     * Get the number of employees in all departments.
+     *
+     * @return total count employees in all departments.
+     */
+    @GetMapping(value = "/{totalCountOfEmployees}")
+    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
+        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
+        employeeService.totalCountOfEmployees();
+        return "employees";
+    }
 
 //    /**
 //     * Get filter employees by last name.
@@ -180,29 +187,40 @@ public class EmployeeController {
 //     * @return employees list with filter by last name.
 //     */
 //****************************************************************
-//    @PostMapping(value = "/filter-employee/{lastName}")
+//    @GetMapping(value = "/filter-employee/{lastName}")
 //    public String filterEmployee(@PathVariable String lastName, Model model) {
 //        LOGGER.debug("Get filter employees by last name: ({})", lastName);
-//        model.addAttribute("employees", employeeService.filterEmployee(lastName));
+//        model.addAttribute("lastName", employeeService.filterEmployee(lastName));
 //        return "employees";
 //    }
 //******************************************************************
-//    @PostMapping(value = "/filter-employee/{lastName}")
-//    public String filterEmployee(@Valid @ModelAttribute("employee") Employee employee,
-//                                 BindingResult result, Model model) {
-//        String lastName = employee.getLastName();
-//        LOGGER.debug("Get filter employees by last name: ({})", result);
-//        employeeValidator.validate(employee, result);
-//        model.addAttribute("lastName", lastName);
-//        if (result.hasErrors()) {
-//            return "employees";
-//        } else {
-//            model.addAttribute("employees", employeeService.filterEmployee(lastName));
-//            return "employees";
-//        }
-////    }
+    @PostMapping(value = "/filter")
+    public String filterEmployee(@Valid @ModelAttribute("lastName") Employee employee,
+                                 BindingResult result, Model model) {
+          LOGGER.debug("Get filter employees by last name: ({})", result);
+        employeeValidator.validate(employee, result);
+
+        if (result.hasErrors()) {
+            return "employees";
+        } else {
+            model.addAttribute("lastName", employeeService.filterEmployee(employee.getLastName()));
+            return "employees";
+        }
+
+    }
+
+        //filterEmployeeByDate
+//
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//    public Brand getBrand(@PathVariable Integer id) {
+//        return brandService.getOne(id);
+//    }
+//
+//    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+//    public List<Brand> getBrand(@PathVariable String name) {
+//        return brandService.getSome(name);
+//    }
 
 
-
-    //filterEmployeeByDate
+    
 }
