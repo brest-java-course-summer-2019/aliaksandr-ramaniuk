@@ -136,15 +136,6 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void totalCountOfEmployees() {
-        int totalCountOfEmployees = employeeService.totalCountOfEmployees();
-        int countEmployeeInDataScript = 11;
-
-        assertNotNull(totalCountOfEmployees);
-        //     assertEquals(totalCountOfEmployees, countEmployeeInDataScript);
-    }
-
-    @Test
     public void filterEmployee() {
         int CountOfEmployee2 = 2;
         List<Employee> employees2 = employeeService.filterEmployee("РО");

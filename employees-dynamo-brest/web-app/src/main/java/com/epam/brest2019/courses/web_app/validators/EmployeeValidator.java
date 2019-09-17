@@ -41,19 +41,23 @@ public class EmployeeValidator implements Validator {
     public void validate(Object target, Errors errors) {
         employee = (Employee) target;
 
-//        ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_IS_EMPTY);
-//
-//        if (StringUtils.hasLength(employee.getLogin())
-//                && employee.getLogin().length() > EMPLOYEE_LOGIN_MAX_SIZE) {
-//            errors.rejectValue(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_MAX_SIZE_40);
-//        }
+        ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_IS_EMPTY);
+ ////////////////////////////////
+        if(employee.getLogin() == null){
+            errors.rejectValue(EMPLOYEE_LOGIN, "is null!!");
+        }
+////////////////////////////////////////////////////////////
+        if (StringUtils.hasLength(employee.getLogin())
+                && employee.getLogin().length() > EMPLOYEE_LOGIN_MAX_SIZE) {
+            errors.rejectValue(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_MAX_SIZE_40);
+        }
 
-//        ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_IS_EMPTY);
-//
-//        if (StringUtils.hasLength(employee.getLogin())
-//                && employee.getLogin().length() > EMPLOYEE_FIRST_NAME_MAX_SIZE) {
-//            errors.rejectValue(EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_MAX_SIZE_40);
-//        }
+        ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_IS_EMPTY);
+
+        if (StringUtils.hasLength(employee.getLogin())
+                && employee.getLogin().length() > EMPLOYEE_FIRST_NAME_MAX_SIZE) {
+            errors.rejectValue(EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_MAX_SIZE_40);
+        }
 
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_IS_EMPTY);
 
@@ -62,10 +66,10 @@ public class EmployeeValidator implements Validator {
             errors.rejectValue(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_MAX_SIZE_40);
         }
 
-//        if (StringUtils.hasLength(employee.getPatronicName())
-//                && employee.getPatronicName().length() > EMPLOYEE_PATRONIC_NAME_MAX_SIZE) {
-//            errors.rejectValue(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_MAX_SIZE_40);
-//        }
+        if (StringUtils.hasLength(employee.getPatronicName())
+                && employee.getPatronicName().length() > EMPLOYEE_PATRONIC_NAME_MAX_SIZE) {
+            errors.rejectValue(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_MAX_SIZE_40);
+        }
 
     }
 }

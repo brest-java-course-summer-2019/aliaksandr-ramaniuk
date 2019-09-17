@@ -64,20 +64,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public int totalCountOfEmployees(){
-        LOGGER.debug("Get the number of employees in all departments");
-        return employeeDao.totalCountOfEmployees();
-    }
-
-    @Override
     public List<Employee> filterEmployee(String lastName){
         LOGGER.debug("Get filter employees by last name: ({})", lastName);
         return  employeeDao.filterEmployee(lastName);
     }
 
     @Override
-    public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
-        LOGGER.debug("Get filter employees by date: ({})", localDates, localDates);
-        return  employeeDao.filterEmployeeByDate(localDates);
+    public List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2) {
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
+        return  employeeDao.filterEmployeeByDate(localDate1, localDate2);
     }
 }

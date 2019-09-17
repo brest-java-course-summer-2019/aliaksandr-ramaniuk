@@ -4,6 +4,8 @@ import com.epam.brest2019.courses.model.Department;
 import com.epam.brest2019.courses.service.DepartmentService;
 
 import com.epam.brest2019.courses.web_app.validators.DepartmentValidator;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.HttpServerErrorException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -56,19 +59,30 @@ public class DepartmentController {
         LOGGER.debug("Find all departments: ({})", model);
         //     Department department = new Department();
         List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
-//                Integer counter = departments.stream()
-//                .filter(department -> department.getCountEmployeesInDepartment() != null)
-//                .mapToInt(Department::getCountEmployeesInDepartment).sum();
-//         Integer counter = 0;
-//        for (int i = 0; i < departments.size(); i++) {
-//            counter += departments.get(i).getCountEmployeesInDepartment();
-//        }
+
+//         departments.stream()
+//        .filter(department -> department.getCountEmployeesInDepartment() != null)
+//                 .mapToInt(Department::getCountEmployeesInDepartment).sum();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<Department> departmentList = mapper.convertValue(
+                departments,
+                new TypeReference<List<Department>>(){}
+        );
+
+        int counter = 0;
+        for (int i = 0; i < departmentList.size(); i++) {
+
+            Department test = (Department) departmentList.get(i);
+            counter += test.getCountEmployeesInDepartment();
+        }
 //        departments.forEach((dept)->{
 //           counter += dept.getCountEmployeesInDepartment();
 //
 //        });
         model.addAttribute("departments", departments);
-        model.addAttribute("totalCountOfEmployees", 586);
+        model.addAttribute("totalCountOfEmployees", counter);
         return "departments";
     }
 
@@ -119,7 +133,7 @@ public class DepartmentController {
             try {
                 this.departmentService.add(department);
                 return "redirect:/departments";
-            } catch (Exception error) {
+            } catch (HttpServerErrorException e) {
                 FieldError ssoError = new FieldError("department", "departmentName", "This name is used");
                 result.addError(ssoError);
                 return "department";
@@ -161,8 +175,6 @@ public class DepartmentController {
     @GetMapping(value = "/department/{departmentId}/delete")
     public final String deleteDepartment(@PathVariable Integer departmentId, Model model) {
         LOGGER.debug("Delete department with specified id (departmentId): ({}, {})", departmentId, model);
-//        departmentService.delete(departmentId);
-//        return "redirect:/departments";
         try {
             departmentService.delete(departmentId);
             return "redirect:/departments";

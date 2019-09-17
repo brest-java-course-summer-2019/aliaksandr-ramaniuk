@@ -65,19 +65,28 @@
     <hr>
 
     <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-dark">
-        <form class="form-inline">
+        <form class="form-inline"
+              id="FormFiterDate"
+              action="/filter-date"
+              th:method="@{get}">
             <div class="form-group">
-                <label for="inlineData1">Filter by Data&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label for="localDateString1">Filter by Data&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <input type="date"
                        class="form-control"
-                       id="inlineData1">
-                <label for="inlineData2">&nbsp; - &nbsp;</label>
+                       id="localDateString1"
+                       text="localDateString1"
+                       th:text="${localDateString1}">
+                <label for="localDateString2">&nbsp; - &nbsp;</label>
                 <input type="date"
                        class="form-control"
-                       id="inlineData2">
+                       id="localDateString2"
+                     text="localDateString2"
+                       th:text="${localDateString2}">
             </div>
             <div class="col-auto my-1">
-                <a href="#"
+                <a href="employees.html"
+                   th:href="@{/employees/${localDate1}/${localDate2}}"
+                   th:onclick="@{document.forms['FormFiterDate'].submit(); return false;}"
                    class="btn btn-dark"
                    data-toggle="tooltip"
                    data-placement="left"
@@ -91,9 +100,7 @@
 
     <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-dark">
         <form class="form-inline"
-              action="employees.html"
-              th:action="@{/filter}"
-
+              action="/filter"
               id="employeeFormLastName"
               th:method="@{post}">
 <!--              th:action="@{${#httpServletRequest.servletPath}}"-->
@@ -112,7 +119,7 @@
             </div>
             <div class="col-auto my-1">
                 <a href="employees.html"
-                   th:href="@{/filter}"
+                   th:href="@{/employees}"
                    th:onclick="@{document.forms['employeeFormLastName'].submit(); return false;}"
                    class="btn btn-dark"
                    data-toggle="tooltip"
@@ -158,12 +165,7 @@
                             <td class="text-center" th:text="${employee.lastName}"></td>
                             <td class="text-center" th:text="${employee.firstName}"></td>
                             <td class="text-center" th:text="${employee.patronicName}"></td>
-                            <td class="text-center"
-
-                                th:text="${employee.localDate}"></td>
-                            <!--                              th:text="${employee.localDate}">-->
-                            </td>
-                            <!--                            <td>01.02.2018</td>-->
+                            <td class="text-center" th:text="${employee.localDate}"></td>
                             <td class="text-center" th:text="${employee.departmentName}"></td>
                             <td class="text-right">
                                 <a href="employee-edit.html"
@@ -258,17 +260,6 @@
         $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
     })
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>

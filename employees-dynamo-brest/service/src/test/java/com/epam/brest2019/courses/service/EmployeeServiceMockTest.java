@@ -123,19 +123,6 @@ public class EmployeeServiceMockTest {
         Mockito.verify(employeeDao).delete(employeeId);
     }
 
-    @Test
-    public void totalCountOfEmployees() {
-        int totalCountOfEmployees = 5;
-
-        Mockito.when(employeeDao.totalCountOfEmployees()).thenReturn(totalCountOfEmployees);
-        int employeesCount = employeeService.totalCountOfEmployees();
-
-        assertNotNull(employeesCount);
-        assertTrue(employeesCount > 0);
-        assertEquals(5, employeesCount);
-
-        Mockito.verify(employeeDao).totalCountOfEmployees();
-    }
 
     @Test
     public void filterEmployee() {

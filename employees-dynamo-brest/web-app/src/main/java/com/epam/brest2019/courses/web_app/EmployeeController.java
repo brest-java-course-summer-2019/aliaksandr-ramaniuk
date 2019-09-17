@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.HttpServerErrorException;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Employee controller.
@@ -137,8 +140,11 @@ public class EmployeeController {
                               BindingResult result, Model model) {
         LOGGER.debug("Add employee({}, {})", employee, result);
         employeeValidator.validate(employee, result);
-
-   //     employee.setLocalDate(LocalDate.parse(employee.getLocalDate1()));
+        try {
+            employee.setLocalDate(LocalDate.parse(employee.getLocalDate3()));
+        } catch (DateTimeParseException e) {
+            employee.setLocalDate(LocalDate.now());
+        }
 
         if (result.hasErrors()) {
             model.addAttribute("employee", employee);
@@ -148,9 +154,10 @@ public class EmployeeController {
             try {
                 this.employeeService.add(employee);
                 return "redirect:/employees";
-            } catch (Exception error) {
+            } catch (HttpServerErrorException e) {
                 FieldError ssoError = new FieldError("employee", "login", "This login is used");
                 result.addError(ssoError);
+                model.addAttribute("departments", departmentService.findAll());
                 return "employee-add";
             }
         }
@@ -169,19 +176,7 @@ public class EmployeeController {
     }
 
 
-    /**
-     * Get the number of employees in all departments.
-     *
-     * @return total count employees in all departments.
-     */
-    @GetMapping(value = "/{totalCountOfEmployees}")
-    public final String totalCountOfEmployees(@PathVariable Integer totalCountOfEmployees) {
-        LOGGER.debug("Get the number of employees in all departments:({})", totalCountOfEmployees);
-        employeeService.totalCountOfEmployees();
-        return "employees";
-    }
-
-//    /**
+    //    /**
 //     * Get filter employees by last name.
 //     * @param lastName last name.
 //     * @return employees list with filter by last name.
@@ -195,32 +190,39 @@ public class EmployeeController {
 //    }
 //******************************************************************
     @PostMapping(value = "/filter")
-    public String filterEmployee(@Valid @ModelAttribute("lastName") Employee employee,
+    public String filterEmployee(@ModelAttribute("lastName") String lastName,
                                  BindingResult result, Model model) {
-          LOGGER.debug("Get filter employees by last name: ({})", result);
-        employeeValidator.validate(employee, result);
+        LOGGER.debug("Get filter employees by last name: ({})", result);
+
+//        List<Employee> list = employeeService.filterEmployee(lastName);
 
         if (result.hasErrors()) {
             return "employees";
         } else {
-            model.addAttribute("lastName", employeeService.filterEmployee(employee.getLastName()));
+            model.addAttribute("employees", employeeService.findAll());
             return "employees";
         }
-
     }
 
-        //filterEmployeeByDate
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    public Brand getBrand(@PathVariable Integer id) {
-//        return brandService.getOne(id);
-//    }
-//
-//    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-//    public List<Brand> getBrand(@PathVariable String name) {
-//        return brandService.getSome(name);
-//    }
+    /**
+     * Get filter employees by date.
+     *
+     * @param localDate1 local date first value.
+     * @param localDate2 local date second value.
+     * @return employees list with filter by date.
+     */
+    @GetMapping(value = "/employees/{localDate1}/{localDate2}")
+    public String filterEmployee(@PathVariable LocalDate localDate1,
+                                 @PathVariable LocalDate localDate2,
+                                 Model model) {
 
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
 
-    
+        Employee employee = new Employee();
+        employee.setLocalDate(LocalDate.parse(employee.getLocalDateString1()));
+        employee.setLocalDate(LocalDate.parse(employee.getLocalDateString2()));
+        model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate1, localDate2));
+        return "employees";
+    }
+
 }

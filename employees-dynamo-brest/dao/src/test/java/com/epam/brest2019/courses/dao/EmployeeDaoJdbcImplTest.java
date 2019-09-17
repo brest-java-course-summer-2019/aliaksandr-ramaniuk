@@ -117,14 +117,6 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void totalCountOfEmployees() {
-        int totalCountOfEmployees = employeeDao.totalCountOfEmployees();
-
-        assertNotNull(totalCountOfEmployees);
-        //       assertEquals(totalCountOfEmployees, 11);
-    }
-
-    @Test
     public void filterEmployee() {
         int CountOfEmployees = 2;
         List<Employee> employees = employeeDao.filterEmployee("РО");

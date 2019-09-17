@@ -13,7 +13,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +44,6 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Value("${employee.delete}")
     private String deleteSql;
 
-    @Value("${employee.totalCountOfEmployees}")
-    private String totalCountOfEmployeesSql;
-
     @Value("${employee.filterEmployee}")
     private String filterEmployeeSql;
 
@@ -61,6 +57,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private static final String FIRST_NAME = "firstName";
     private static final String PATRONIC_NAME = "patronicName";
     private static final String LOCAL_DATE = "localDate";
+    private static final String LOCAL_DATE1 = "localDate1";
+    private static final String LOCAL_DATE2 = "localDate2";
     private static final String FAILED_TO_UPDATE = "Failed to update employee in Database!";
     private static final String FAILED_TO_DELETE = "Failed to delete employee from Database!";
 
@@ -127,35 +125,30 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     }
 
     @Override
-    public int totalCountOfEmployees() {
-        return namedParameterJdbcTemplate.queryForObject(totalCountOfEmployeesSql, (HashMap) null, Integer.class);
-    }
-
-    @Override
     public List<Employee> filterEmployee(String lastName) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName.toUpperCase() + "%");
-        List<Employee> resultsFilter = namedParameterJdbcTemplate.query(filterEmployeeSql, namedParameters,
+        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "'%" + lastName.toUpperCase() + "%'");
+        List<Employee> resultsFilterEmployee = namedParameterJdbcTemplate.query(filterEmployeeSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 
-        return resultsFilter;
+        return resultsFilterEmployee;
     }
 
     @Override
-    public List<Employee> filterEmployeeByDate(LocalDate... localDates) {
+    public List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2) {
 
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-
-        int i = 1;
-        for (LocalDate localDate : localDates) {
-            String LOCAL_DATE_FILTER = LOCAL_DATE + i;
-            parameters.addValue(LOCAL_DATE_FILTER, localDate);
-            i++;
-        }
-
-        List<Employee> resultsFilter = namedParameterJdbcTemplate.query(filterEmployeeByDateSql, parameters,
+//        MapSqlParameterSource parameters = new MapSqlParameterSource();
+//
+//        int i = 1;
+//        for (LocalDate localDate : LocalDate) {
+//            String LOCAL_DATE_FILTER = LOCAL_DATE + i;
+//            parameters.addValue(LOCAL_DATE_FILTER, localDate);
+//            i++;
+//        }
+        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue(LOCAL_DATE1, localDate1).addValue(LOCAL_DATE2, localDate2);
+        List<Employee> resultsFilterDate = namedParameterJdbcTemplate.query(filterEmployeeByDateSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 
-        return resultsFilter;
+        return resultsFilterDate;
     }
 
     private boolean successfullyUpdated(int numRowsUpdated) {

@@ -77,21 +77,34 @@ public class Employee {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate localDate;
 
-    public void setLocalDate1(String localDate1) {
-        LocalDate1 = localDate1;
+    private String localDateString1;
+    private String localDateString2;
+
+    private String localDate3;
+
+    public void setLocalDateString1(String localDateString1) {
+        this.localDateString1 = localDateString1;
     }
 
-    public String getLocalDate1() {
-        return LocalDate1;
+    public void setLocalDateString2(String localDateString2) {
+        this.localDateString2 = localDateString2;
     }
 
-    private String LocalDate1;
+    public void setLocalDate3(String localDate3) {
+        this.localDate3 = localDate3;
+    }
 
-    /**
-     * Number of employees in all departments.
-     */
-    private Integer totalCountEmployeesInAllDepartments;
+    public String getLocalDateString1() {
+        return localDateString1;
+    }
 
+    public String getLocalDateString2() {
+        return localDateString2;
+    }
+
+    public String getLocalDate3() {
+        return localDate3;
+    }
 
     /**
      * Set department id.
@@ -163,15 +176,6 @@ public class Employee {
      */
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
-    }
-
-    /**
-     * Set the number of employees in all departments.
-     *
-     * @param totalCountEmployeesInAllDepartments total count employees in all departments.
-     */
-    public void setTotalCountEmployeesInAllDepartments(Integer totalCountEmployeesInAllDepartments) {
-        this.totalCountEmployeesInAllDepartments = totalCountEmployeesInAllDepartments;
     }
 
     /**
@@ -273,14 +277,6 @@ public class Employee {
 //        return localDateString;
 //    }
 
-    /**
-     * Get the number of employees in all departments.
-     *
-     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
-     */
-    public Integer getTotalCountEmployeesInAllDepartments() {
-        return totalCountEmployeesInAllDepartments;
-    }
 
     @Override
     public String toString() {

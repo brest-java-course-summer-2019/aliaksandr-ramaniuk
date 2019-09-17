@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -112,45 +114,34 @@ public class EmployeeRestController {
         employeeService.delete(employeeId);
     }
 
-//    /**
-//     * Get the number of employees in all departments.
-//     *
-//     * @return total count employees in all departments.
-//     */
-//    @GetMapping(value = "/employees/{totalCountOfEmployees}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public Integer totalCountOfEmployees() {
-//        LOGGER.debug("Get the number of employees in all departments");
-//        return employeeService.totalCountOfEmployees();
-//    }
 
-//
 //    /**
 //     * Get filter employees by last name.
 //     * @param lastName last name.
 //     * @return employees list with filter by last name.
 //     */
 //
-    @GetMapping(value = "/employees/{lastName}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
-        LOGGER.debug("Get filter employees by last name: ({})", lastName);
-        return employeeService.filterEmployee(lastName);
+//    @GetMapping(value = "/employees/{lastName}")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
+//        LOGGER.debug("Get filter employees by last name: ({})", lastName);
+//        return employeeService.filterEmployee(lastName);
+//    }
+
+
+    /**
+     * Get filter employees by date.
+     *
+     * @param localDate1 local date first value.
+     * @param localDate2 local date second value.
+     * @return employees list with filter by date.
+     */
+    @GetMapping(value = "/employees/{localDate1}/{localDate2}")
+    public List<Employee> filterEmployee(@PathVariable LocalDate localDate1,
+                                         @PathVariable LocalDate localDate2) {
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
+        return employeeService.filterEmployeeByDate(localDate1, localDate2);
     }
 
-
-//    /**
-//     * Get filter employees by date.
-//     * @param localDates1 local date first value.
-//     * @param localDates2 local date second value.
-//     * @return employees list with filter by date.
-//     */
-//   @GetMapping(value = "/employees/{localDates1}/{localDates2}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public List<Employee> filterEmployeeByDate(@PathVariable ("localDates1") LocalDate localDates1,
-//                                               @PathVariable ("localDates2") LocalDate localDates2) {
-//        LOGGER.debug("Get filter employees by date: ({}, {})", localDates1, localDates2);
-//        return employeeService.filterEmployeeByDate(localDates1, localDates1);
-//    }
 
 }

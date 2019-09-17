@@ -63,13 +63,6 @@ public interface EmployeeService {
     void delete(Integer employeeId);
 
     /**
-     * Get the number of employees in all departments.
-     *
-     * @return totalCountEmployeesInAllDepartments total count employees in all departments.
-     */
-    int totalCountOfEmployees();
-
-    /**
      * Get filter employee by last name.
      * @param lastName last name.
      * @return employees.
@@ -78,9 +71,9 @@ public interface EmployeeService {
 
     /**
      * Get filter employees by date.
-     * @param localDates local date first value.
-     * @param localDates local date second value.
+     * @param localDate1 local date first value.
+     * @param localDate2 local date second value.
      * @return employees.
      */
-    List<Employee> filterEmployeeByDate(LocalDate... localDates);
+    List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2);
 }
