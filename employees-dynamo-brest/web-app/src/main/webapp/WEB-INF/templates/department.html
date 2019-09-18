@@ -23,10 +23,11 @@
 <body>
 <header>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
-        <a href="https://dynamo-brest.by/" class="navbar-brand"><img src="../../resources/static/img/Dynamo_Brest_logo.png"
-                                              th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
-                                              height="50" width="50"
-                                              alt="Динамо Брест"></a>
+        <a href="https://dynamo-brest.by/" class="navbar-brand"><img
+                src="../../resources/static/img/Dynamo_Brest_logo.png"
+                th:src="@{/resources/static/img/Dynamo_Brest_logo.png}"
+                height="50" width="50"
+                alt="Динамо Брест"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav1">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,11 +45,8 @@
 
     <nav id="main-header"
          class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-danger">
-<!--        <span class="navbar-brand text-uppercase mr-auto"><p-->
-<!--                class="font-weight-bold"><h3>Add/Edit Department</h3></p></span>-->
         <span class="navbar-brand text-uppercase mr-auto"
               th:text="${isNew} ? 'Add department' : 'Edit Department'"></span>
-<!--        -->
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="departments.html"
@@ -59,7 +57,6 @@
                    title="Return">
                     <i class="fas fa-undo"></i> <span
                         class="d-none d-sm-inline">&nbsp;&nbsp;Return</span></a>
-                &nbsp;&nbsp;
             </li>
 
             <li class="nav-item">
@@ -79,14 +76,12 @@
 
 <hr>
 
-
 <section id="department">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="card border-dark mb-3">
                     <div class="card-body">
-<!--                        <form>-->
                         <form id="departmentForm"
                               th:object="${department}"
                               action="departments.html"
@@ -97,11 +92,9 @@
                                 <strong>Warning!</strong>
                                 <strong>Please correct errors:</strong>
                             </div>
-<!---->
                             <input id="field_departmentId"
                                    type="hidden"
                                    th:field="*{departmentId}"/>
-<!---->
                             <div class="form-group">
                                 <label class="form-control-label font-weight-bolder"
                                        for="field_departmentName">Department name</label>
@@ -114,7 +107,8 @@
                                        th:field="*{departmentName}"/>
                                 <div th:if="${#fields.hasErrors('departmentName')}"
                                      class="invalid-feedback"
-                                     th:errors="*{departmentName}">[errors]</div>
+                                     th:errors="*{departmentName}">[errors]
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -123,7 +117,7 @@
                                 <select class="form-control"
                                         id="field_departmentAccessRights"
                                         th:field="*{departmentAccessRights}">
-                                    <option value="read" >read</option>
+                                    <option value="read">read</option>
                                     <option value="write">write</option>
                                     <option value="admin">admin</option>
                                 </select>
@@ -148,10 +142,12 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+
 </body>
 </html>

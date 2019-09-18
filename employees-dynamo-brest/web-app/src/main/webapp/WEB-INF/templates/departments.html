@@ -98,24 +98,14 @@
                                    data-placement="top">
                                     <i class="fas fa-user-edit"></i> <span
                                         class="d-none d-md-inline">&nbsp;&nbsp;Edit&nbsp;&nbsp;</span></a>
-                                <!--                                <span data-toggle="modal" data-target="#deleteDialog">-->
-<!--                                <span         -->
-<!--                                        data-toggle="modal"-->
-<!--                                      data-target="#deleteDialog"-->
-<!--                                      th:attr="data-id=${department.departmentId}, data-name=${department.departmentName}">-->
-
-                                    <a href="#"
-                                       data-toggle="modal"
-                                       data-target="#deleteDialog"
-                                       th:attr="data-id=${department.departmentId}, data-name=${department.departmentName}"
-
-
-                                       th:class="${department.countEmployeesInDepartment > 0} ? 'invisible' : 'btn btn-dark btn-sm'"
-                                       title="Delete department">
-
-                                    <i class="fas fa-user-minus"></i>
-                                    <span class="d-none d-md-inline">&nbsp;&nbsp;Delete</span></a>
-<!--                                </span>-->
+                                <a href="#"
+                                   data-toggle="modal"
+                                   data-target="#deleteDialog"
+                                   th:attr="data-id=${department.departmentId}, data-name=${department.departmentName}"
+                                   th:class="${department.countEmployeesInDepartment > 0} ? 'invisible' : 'btn btn-dark btn-sm'"
+                                   title=" Delete department">
+                                <i class="fas fa-user-minus"></i>
+                                <span class="d-none d-md-inline">&nbsp;&nbsp;Delete</span></a>
                             </td>
                         </tr>
 
@@ -124,8 +114,8 @@
                         <tr>
                             <th>Итого:</th>
                             <th></th>
-                             <th class="text-center" th:text="${totalCountOfEmployees}"></th>
-                               <th></th>
+                            <th class="text-center" th:text="${totalCountOfEmployees}"></th>
+                            <th></th>
                         </tr>
                         </tfoot>
                     </table>
@@ -139,12 +129,10 @@
 
 <hr>
 
-
 <footer>
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
         <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
 </footer>
-
 
 <!-- Confirm delete Modal -->
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
@@ -161,8 +149,8 @@
                 Please confirm delete department
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
-                <a id="deleteUrl" href="#" class="btn btn-danger" >Delete</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -176,6 +164,7 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -185,8 +174,10 @@
         $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
-</script>
 
+
+
+</script>
 
 </body>
 </html>

@@ -175,7 +175,7 @@
                                 <span data-toggle="modal"
                                       data-target="#deleteDialog"
                                       th:attr="data-id=${employee.employeeId},
-                                      data-name=${employee.lastName}">
+                                      data-name1=${employee.login}">
                                 <a href="#"
                                    class="btn btn-dark btn-sm"
                                    title="delete employee"
@@ -198,7 +198,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            </tr>
+                        </tr>
                         </tfoot>
                     </table>
 
@@ -215,7 +215,6 @@
     <nav class="pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light  p-0">
         <p>&copy; Brest Java Course Summer 2019 <i class="far fa-futbol"></i></p>
 </footer>
-
 
 <!-- Confirm delete Modal -->
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
@@ -245,16 +244,18 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"')
+        $(this).find('.modal-body').text('Please confirm delete employee with login: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
     })
 
 </script>
+
 </body>
 </html>

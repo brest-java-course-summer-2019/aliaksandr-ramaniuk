@@ -58,7 +58,7 @@
                    title="Return">
                     <i class="fas fa-undo"></i> <span
                         class="d-none d-sm-inline">&nbsp;&nbsp;Return</span></a>
-                &nbsp;&nbsp;
+
             </li>
             <li class="nav-item">
                 <a href="employees.html"
@@ -153,8 +153,8 @@
 
                             <div class="form-group">
                                 <label class="form-control-label font-weight-bolder">Department</label>
-                                <select class="form-control" id="departmentId" name="departmentName" th:field="*{departmentId}">
-                                    <option value="">Select Department</option>
+                                <select class="form-control" id="departmentId" name="departmentName"
+                                        th:field="*{departmentId}">
                                     <option th:each="department : ${departments}"
                                             th:value="${department.departmentId}"
                                             th:text="${department.departmentName}"
@@ -182,7 +182,8 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
-    </script>
+
+</script>
 
 </body>
 </html>
