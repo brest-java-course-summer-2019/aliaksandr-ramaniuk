@@ -33,18 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAll2() {
-        LOGGER.debug("Find all employees");
-        return employeeDao.findAll2();
-    }
-
-    @Override
-    public List<Employee> findByDepartmentId(Integer departmentId) {
-        LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
-        return employeeDao.findByDepartmentId(departmentId);
-    }
-
-    @Override
     public Employee findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
         return employeeDao.findById(employeeId)

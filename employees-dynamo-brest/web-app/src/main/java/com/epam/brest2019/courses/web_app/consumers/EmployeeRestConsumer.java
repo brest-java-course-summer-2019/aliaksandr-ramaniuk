@@ -37,27 +37,11 @@ public class EmployeeRestConsumer implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAll2() {
-        LOGGER.debug("Find all employees");
-        ResponseEntity responseEntity10 = restTemplate.getForEntity(url + "2/", List.class);
-        return (List<Employee>) responseEntity10.getBody();
-    }
-
-    @Override
-    public List<Employee> findByDepartmentId(Integer departmentId) {
-        LOGGER.debug("Find all employees with specified department id: ({})", departmentId);
-        ResponseEntity<Employee> responseEntity2 = restTemplate.getForEntity(url + "/" + departmentId, Employee.class);
-        return (List<Employee>) responseEntity2.getBody();
-    }
-
-
-    @Override
     public Employee findById(Integer employeeId) {
         LOGGER.debug("Find employee with specified id: ({})", employeeId);
         ResponseEntity<Employee> responseEntity1 = restTemplate.getForEntity(url + "/" + employeeId, Employee.class);
         return responseEntity1.getBody();
     }
-
 
     @Override
     public Employee add(Employee employee) {

@@ -52,13 +52,6 @@ public class EmployeeRestController {
         return employeeService.findAll();
     }
 
-    @GetMapping(value = "/employees2")
-    public List<Employee> findAll2() {
-        LOGGER.debug("Find all employees");
-        return employeeService.findAll2();
-    }
-
-
     /**
      * Get employee with specified id.
      *
@@ -70,18 +63,6 @@ public class EmployeeRestController {
     public Employee findById(@PathVariable Integer employeeId) {
         LOGGER.debug("Find employee with specified id (employeeId): ({})", employeeId);
         return employeeService.findById(employeeId);
-    }
-
-    /**
-     * Get all employees with specified department id.
-     *
-     * @param departmentId department id.
-     * @return employees list with specified department id.
-     */
-    @GetMapping(value = "/employees/{departmentId}")
-    public List<Employee> findByDepartmentId(@PathVariable Integer departmentId) {
-        LOGGER.debug("Find all employees with specified department id (departmentId): ({})", departmentId);
-        return employeeService.findByDepartmentId(departmentId);
     }
 
     /**
@@ -120,7 +101,6 @@ public class EmployeeRestController {
         employeeService.delete(employeeId);
     }
 
-
     /**
      * Get filter employees by last name.
      *
@@ -135,7 +115,6 @@ public class EmployeeRestController {
         return employeeService.filterEmployee(lastName);
     }
 
-
     /**
      * Get filter employees by date.
      *
@@ -144,8 +123,8 @@ public class EmployeeRestController {
      * @return employees list with filter by date.
      */
     @GetMapping(value = "/employees/{localDate1}/{localDate2}")
-    public List<Employee> filterEmployeeByDate(@PathVariable (value = "localDate1") String localDate1,
-                                               @PathVariable (value = "localDate2") String localDate2) {
+    public List<Employee> filterEmployeeByDate(@PathVariable(value = "localDate1") String localDate1,
+                                               @PathVariable(value = "localDate2") String localDate2) {
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
 
         LocalDate localDate11 = LocalDate.parse(localDate1);

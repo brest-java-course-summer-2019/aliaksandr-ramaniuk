@@ -11,30 +11,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Employee {
 
-    /**
-     * Constructor with parameters.
-     *
-     * @param departmentId department id.
-     * @param login        login.
-     * @param firstName    First Name.
-     * @param patronicName Patronic Name.
-     * @param localDate    Date.
-     */
-    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, LocalDate localDate) {
-        this.departmentId = departmentId;
-        this.login = login;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronicName = patronicName;
-        this.localDate = localDate;
-    }
-
-    /**
-     * Constructor without parameters.
-     */
-
-    public Employee() {
-    }
 
     /**
      * Department Id.
@@ -101,6 +77,32 @@ public class Employee {
 
     private String localDate11;
     private String localDate22;
+
+    /**
+     * Constructor with parameters.
+     *
+     * @param departmentId department id.
+     * @param login        login.
+     * @param firstName    First Name.
+     * @param patronicName Patronic Name.
+     * @param localDate    Date.
+     */
+    public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, LocalDate localDate) {
+        this.departmentId = departmentId;
+        this.login = login;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronicName = patronicName;
+        this.localDate = localDate;
+    }
+
+    /**
+     * Constructor without parameters.
+     */
+
+    public Employee() {
+    }
+
 
     public LocalDate getLocalDate1() {
         return localDate1;
@@ -284,18 +286,6 @@ public class Employee {
        }
        else return "no date";
     }
-
-//    /**
-//     * Get date-string of registration employee.
-//     *
-//     * @return localDateString date-string of registration employee.
-//     */
-//    public String getLocalDateString() {
-//        LocalDate date = LocalDate.from(localDate);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        String localDateString = date.format(formatter);
-//        return localDateString;
-//    }
 
 
     @Override

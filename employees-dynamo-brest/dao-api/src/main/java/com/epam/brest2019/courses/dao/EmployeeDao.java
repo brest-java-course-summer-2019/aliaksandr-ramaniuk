@@ -18,15 +18,6 @@ public interface EmployeeDao {
      * @return employees list of all departments.
      */
     List<Employee> findAll();
-    List<Employee> findAll2();
-
-    /**
-     * Get all employees with specified department id.
-     *
-     * @param departmentId department id.
-     * @return employees list with departmentId.
-     */
-    List<Employee> findByDepartmentId(Integer departmentId);
 
     /**
      * Get employee with specified id.

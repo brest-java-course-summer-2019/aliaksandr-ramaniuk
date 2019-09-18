@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.util.NestedServletException;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -77,7 +79,6 @@ public class EmployeeController {
         model.addAttribute("employees", employeeService.findAll());
         return "employees";
     }
-
 
     /**
      * Go to employee edit page.
@@ -179,12 +180,18 @@ public class EmployeeController {
                                  BindingResult result, Model model) {
         LOGGER.debug("Get filter employees by last name: ({})", result);
 
-        if (result.hasErrors() || lastName == null || lastName == "") {
-            return "employees";
-        } else {
-            model.addAttribute("employees", employeeService.filterEmployee(lastName));
+        try {
+            if (result.hasErrors() || lastName == null || lastName == "") {
+                return "employees";
+            } else {
+                model.addAttribute("employees", employeeService.filterEmployee(lastName));
+                return "employees";
+            }
+        }
+        catch (HttpClientErrorException e){
             return "employees";
         }
+
     }
 
     /**
@@ -195,8 +202,8 @@ public class EmployeeController {
      * @return employees list with filter by date.
      */
     @PostMapping(value = "/filter-date")
-    public String filterEmployeeByDate (@PathVariable (value = "localDate1") String localDate1,
-                                       @PathVariable (value = "localDate2") String localDate2,
+    public String filterEmployeeByDate (@ModelAttribute (value = "localDate1") String localDate1,
+                                       @ModelAttribute (value = "localDate2") String localDate2,
                                        Model model) {
 
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
@@ -206,5 +213,7 @@ public class EmployeeController {
 
           model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate11, localDate22));
         return "employees";
+
+
     }
 }

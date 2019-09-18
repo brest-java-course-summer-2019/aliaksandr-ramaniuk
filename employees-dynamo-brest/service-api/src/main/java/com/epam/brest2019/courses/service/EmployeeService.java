@@ -18,16 +18,6 @@ public interface EmployeeService {
      * @return employees List of all employees.
      */
     List<Employee> findAll();
-    List<Employee> findAll2();
-
-
-    /**
-     * Find all employees with specified department id (departmentId).
-     *
-     * @param departmentId department id.
-     * @return departmentId list of employees by department id.
-     */
-    List<Employee> findByDepartmentId(Integer departmentId);
 
 
     /**
@@ -56,6 +46,7 @@ public interface EmployeeService {
      */
     void update(Employee employee);
 
+
     /**
      * Delete employee with specified id (employeeId).
      *
@@ -63,12 +54,14 @@ public interface EmployeeService {
      */
     void delete(Integer employeeId);
 
+
     /**
      * Get filter employee by last name.
      * @param lastName last name.
      * @return employees.
      */
     List<Employee> filterEmployee(String lastName);
+
 
     /**
      * Get filter employees by date.

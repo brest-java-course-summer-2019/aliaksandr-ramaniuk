@@ -44,9 +44,9 @@ public class EmployeeValidator implements Validator {
     public void validate(Object target, Errors errors) {
         employee = (Employee) target;
 
+        //Employee login
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_IS_EMPTY);
 
-        //Employee login
         if(employee.getLogin() == null){
             errors.rejectValue(EMPLOYEE_LOGIN, IS_NULL);
         }
@@ -55,7 +55,12 @@ public class EmployeeValidator implements Validator {
             errors.rejectValue(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_MAX_SIZE_40);
         }
 
+        //Employee fist name
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_IS_EMPTY);
+
+        if(employee.getFirstName() == null){
+            errors.rejectValue(EMPLOYEE_FIRST_NAME, IS_NULL);
+        }
 
         if (StringUtils.hasLength(employee.getLogin())
                 && employee.getLogin().length() > EMPLOYEE_FIRST_NAME_MAX_SIZE) {

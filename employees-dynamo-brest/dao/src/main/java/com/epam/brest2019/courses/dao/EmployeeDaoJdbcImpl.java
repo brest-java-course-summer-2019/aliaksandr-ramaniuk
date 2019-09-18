@@ -77,21 +77,6 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> findAll2() {
-        List<Employee> employees =
-                namedParameterJdbcTemplate.query(findAllSql2, BeanPropertyRowMapper.newInstance(Employee.class));
-        return employees;
-    }
-
-    @Override
-    public List<Employee> findByDepartmentId(Integer departmentId) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
-        List<Employee> results = namedParameterJdbcTemplate.query(findByDepartmentIdSql, namedParameters,
-                BeanPropertyRowMapper.newInstance(Employee.class));
-        return results;
-    }
-
-    @Override
     public Optional<Employee> findById(Integer employeeId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(EMPLOYEE_ID, employeeId);
         List<Employee> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
@@ -146,14 +131,6 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2) {
 
-//        MapSqlParameterSource parameters = new MapSqlParameterSource();
-//
-//        int i = 1;
-//        for (LocalDate localDate : LocalDate) {
-//            String LOCAL_DATE_FILTER = LOCAL_DATE + i;
-//            parameters.addValue(LOCAL_DATE_FILTER, localDate);
-//            i++;
-//        }
         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue(LOCAL_DATE1, localDate1).addValue(LOCAL_DATE2, localDate2);
         List<Employee> resultsFilterDate = namedParameterJdbcTemplate.query(filterEmployeeByDateSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
