@@ -123,13 +123,14 @@ public class EmployeeRestController {
 
     /**
      * Get filter employees by last name.
+     *
      * @param lastName last name.
      * @return employees list with filter by last name.
      */
 
     @GetMapping(value = "/employees2/{lastName}")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
+    public List<Employee> filterEmployee(@PathVariable(value = "lastName") String lastName) {
         LOGGER.debug("Get filter employees by last name: ({})", lastName);
         return employeeService.filterEmployee(lastName);
     }
@@ -143,11 +144,14 @@ public class EmployeeRestController {
      * @return employees list with filter by date.
      */
     @GetMapping(value = "/employees/{localDate1}/{localDate2}")
-    public List<Employee> filterEmployee(@PathVariable LocalDate localDate1,
-                                         @PathVariable LocalDate localDate2) {
+    public List<Employee> filterEmployeeByDate(@PathVariable (value = "localDate1") String localDate1,
+                                               @PathVariable (value = "localDate2") String localDate2) {
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
-        return employeeService.filterEmployeeByDate(localDate1, localDate2);
-    }
 
+        LocalDate localDate11 = LocalDate.parse(localDate1);
+        LocalDate localDate22 = LocalDate.parse(localDate2);
+
+        return employeeService.filterEmployeeByDate(localDate11, localDate22);
+    }
 
 }

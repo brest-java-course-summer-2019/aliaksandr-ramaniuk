@@ -89,7 +89,7 @@ public class EmployeeRestConsumer implements EmployeeService {
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2) {
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
-        ResponseEntity<Employee> responseEntity3 = restTemplate.getForEntity(url + "/" + localDate1 + "/" + localDate2, Employee.class);
+        ResponseEntity responseEntity3 = restTemplate.getForEntity(url + "/" + localDate1 + "/" + localDate2, List.class);
         return (List<Employee>) responseEntity3.getBody();
     }
 }

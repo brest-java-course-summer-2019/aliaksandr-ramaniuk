@@ -66,31 +66,31 @@
 
     <nav class="py-1 mb-3 navbar navbar-expand-sm navbar-light text-dark">
         <form class="form-inline"
-              id="FormFiterDate"
+              id="FormFilterDate"
               action="/filter-date"
-              th:method="@{get}">
+              th:method="@{post}">
             <div class="form-group">
-                <label for="localDateString1">Filter by Data&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <input type="date"
+                <label for="localDate1">Filter by Data&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input id="localDate1"
+                       name="localDate1"
+                       type="date"
                        class="form-control"
-                       id="localDateString1"
-                       text="localDateString1"
-                       th:text="${localDateString1}">
-                <label for="localDateString2">&nbsp; - &nbsp;</label>
-                <input type="date"
+                       value="">
+                <label for="localDate2">&nbsp; - &nbsp;</label>
+                <input id="localDate2"
+                       name="localDate2"
+                       type="date"
                        class="form-control"
-                       id="localDateString2"
-                     text="localDateString2"
-                       th:text="${localDateString2}">
+                       value="">
             </div>
             <div class="col-auto my-1">
                 <a href="employees.html"
-                   th:href="@{/employees/${localDate1}/${localDate2}}"
-                   th:onclick="@{document.forms['FormFiterDate'].submit(); return false;}"
+                   th:href="@{/employees}"
+                   th:onclick="@{document.forms['FormFilterDate'].submit(); return false;}"
                    class="btn btn-dark"
                    data-toggle="tooltip"
                    data-placement="left"
-                   title="Filter by Second Name">
+                   title="Filter Date">
                     <i class="far fa-calendar-alt"></i><span
                         class="d-none d-sm-inline">&nbsp;&nbsp;&nbsp;&nbsp;Filter Data</span></a>
             </div>
@@ -103,12 +103,9 @@
               action="/filter"
               id="employeeFormLastName"
               th:method="@{post}">
-<!--              th:action="@{${#httpServletRequest.servletPath}}"-->
-
             <div class="form-group">
                 <label for="lastName">Filter by Last Name&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <input
-                        id="lastName"
+                <input id="lastName"
                        name="lastName"
                        type="text"
                        value=""
@@ -260,6 +257,7 @@
         $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"')
         document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
     })
+
 </script>
 </body>
 </html>

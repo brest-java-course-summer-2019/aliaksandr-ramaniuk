@@ -174,15 +174,12 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-
     @PostMapping(value = "/filter")
     public String filterEmployee(@ModelAttribute("lastName") String lastName,
                                  BindingResult result, Model model) {
         LOGGER.debug("Get filter employees by last name: ({})", result);
 
-//        List<Employee> list = employeeService.filterEmployee(lastName);
-
-        if (result.hasErrors()) {
+        if (result.hasErrors() || lastName == null || lastName == "") {
             return "employees";
         } else {
             model.addAttribute("employees", employeeService.filterEmployee(lastName));
@@ -197,18 +194,17 @@ public class EmployeeController {
      * @param localDate2 local date second value.
      * @return employees list with filter by date.
      */
-    @GetMapping(value = "/employees/{localDate1}/{localDate2}")
-    public String filterEmployee(@PathVariable String localDate1,
-                                 @PathVariable String localDate2,
-                                 Model model) {
+    @PostMapping(value = "/filter-date")
+    public String filterEmployeeByDate (@PathVariable (value = "localDate1") String localDate1,
+                                       @PathVariable (value = "localDate2") String localDate2,
+                                       Model model) {
 
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
 
-        Employee employee = new Employee();
-        employee.setLocalDate(LocalDate.parse(employee.getLocalDateString1()));
-        employee.setLocalDate(LocalDate.parse(employee.getLocalDateString2()));
-   //     model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate1, localDate2));
+          LocalDate localDate11 = LocalDate.parse(localDate1);
+          LocalDate localDate22 = LocalDate.parse(localDate2);
+
+          model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate11, localDate22));
         return "employees";
     }
-
 }

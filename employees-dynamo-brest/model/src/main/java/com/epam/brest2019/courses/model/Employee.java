@@ -76,34 +76,54 @@ public class Employee {
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate localDate;
-
-    private String localDateString1;
-    private String localDateString2;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    private LocalDate localDate1;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    private LocalDate localDate2;
 
     private String localDate3;
 
-    public void setLocalDateString1(String localDateString1) {
-        this.localDateString1 = localDateString1;
+    public String getLocalDate11() {
+        return localDate11;
     }
 
-    public void setLocalDateString2(String localDateString2) {
-        this.localDateString2 = localDateString2;
+    public void setLocalDate11(String localDate11) {
+        this.localDate11 = localDate11;
     }
 
-    public void setLocalDate3(String localDate3) {
-        this.localDate3 = localDate3;
+    public String getLocalDate22() {
+        return localDate22;
     }
 
-    public String getLocalDateString1() {
-        return localDateString1;
+    public void setLocalDate22(String localDate22) {
+        this.localDate22 = localDate22;
     }
 
-    public String getLocalDateString2() {
-        return localDateString2;
+    private String localDate11;
+    private String localDate22;
+
+    public LocalDate getLocalDate1() {
+        return localDate1;
+    }
+
+    public void setLocalDate1(LocalDate localDate1) {
+        this.localDate1 = localDate1;
+    }
+
+    public LocalDate getLocalDate2() {
+        return localDate2;
+    }
+
+    public void setLocalDate2(LocalDate localDate2) {
+        this.localDate2 = localDate2;
     }
 
     public String getLocalDate3() {
         return localDate3;
+    }
+
+    public void setLocalDate3(String localDate3) {
+        this.localDate3 = localDate3;
     }
 
     /**

@@ -328,10 +328,8 @@
                             <contextPath>/</contextPath>
                         </webApp>
                         <httpConnector>
-                            <port>8080</port>
+                            <port>8083</port>
                         </httpConnector>
-                        <!--<stopKey>stop</stopKey>-->
-                        <!--<stopPort>8081</stopPort>-->
                     </configuration>
                 </plugin>
             </plugins>

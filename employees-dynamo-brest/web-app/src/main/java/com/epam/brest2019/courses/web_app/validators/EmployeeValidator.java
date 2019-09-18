@@ -10,6 +10,9 @@ import org.springframework.validation.Validator;
 @Component
 public class EmployeeValidator implements Validator {
 
+
+    public static final String IS_NULL = " is null!";
+
     public static final int EMPLOYEE_LOGIN_MAX_SIZE = 40;
     public static final String EMPLOYEE_LOGIN_MAX_SIZE_40 = "login.maxSize40";
     public static final String EMPLOYEE_LOGIN = "login";
@@ -42,11 +45,11 @@ public class EmployeeValidator implements Validator {
         employee = (Employee) target;
 
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_IS_EMPTY);
- ////////////////////////////////
+
+        //Employee login
         if(employee.getLogin() == null){
-            errors.rejectValue(EMPLOYEE_LOGIN, "is null!!");
+            errors.rejectValue(EMPLOYEE_LOGIN, IS_NULL);
         }
-////////////////////////////////////////////////////////////
         if (StringUtils.hasLength(employee.getLogin())
                 && employee.getLogin().length() > EMPLOYEE_LOGIN_MAX_SIZE) {
             errors.rejectValue(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_MAX_SIZE_40);
@@ -59,11 +62,21 @@ public class EmployeeValidator implements Validator {
             errors.rejectValue(EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_MAX_SIZE_40);
         }
 
+        //Employee last name
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_IS_EMPTY);
+
+        if(employee.getLastName() == null){
+            errors.rejectValue(EMPLOYEE_LAST_NAME, IS_NULL);
+        }
 
         if (StringUtils.hasLength(employee.getLastName())
                 && employee.getLastName().length() > EMPLOYEE_LAST_NAME_MAX_SIZE) {
             errors.rejectValue(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME_MAX_SIZE_40);
+        }
+
+        //Employee patronic name
+        if(employee.getPatronicName() == null){
+            errors.rejectValue(EMPLOYEE_PATRONIC_NAME, IS_NULL);
         }
 
         if (StringUtils.hasLength(employee.getPatronicName())
