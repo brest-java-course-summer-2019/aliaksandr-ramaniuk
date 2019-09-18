@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -53,6 +52,13 @@ public class EmployeeRestController {
         return employeeService.findAll();
     }
 
+    @GetMapping(value = "/employees2")
+    public List<Employee> findAll2() {
+        LOGGER.debug("Find all employees");
+        return employeeService.findAll2();
+    }
+
+
     /**
      * Get employee with specified id.
      *
@@ -66,17 +72,17 @@ public class EmployeeRestController {
         return employeeService.findById(employeeId);
     }
 
-//    /**
-//     * Get all employees with specified department id.
-//     *
-//     * @param departmentId department id.
-//     * @return employees list with specified department id.
-//     */
-//    @GetMapping(value = "/employees/{departmentId}")
-//    public List<Employee> findByDepartmentId(@PathVariable Integer departmentId) {
-//        LOGGER.debug("Find all employees with specified department id (departmentId): ({})", departmentId);
-//        return employeeService.findByDepartmentId(departmentId);
-//    }
+    /**
+     * Get all employees with specified department id.
+     *
+     * @param departmentId department id.
+     * @return employees list with specified department id.
+     */
+    @GetMapping(value = "/employees/{departmentId}")
+    public List<Employee> findByDepartmentId(@PathVariable Integer departmentId) {
+        LOGGER.debug("Find all employees with specified department id (departmentId): ({})", departmentId);
+        return employeeService.findByDepartmentId(departmentId);
+    }
 
     /**
      * Add new employee.
@@ -115,18 +121,18 @@ public class EmployeeRestController {
     }
 
 
-//    /**
-//     * Get filter employees by last name.
-//     * @param lastName last name.
-//     * @return employees list with filter by last name.
-//     */
-//
-//    @GetMapping(value = "/employees/{lastName}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
-//        LOGGER.debug("Get filter employees by last name: ({})", lastName);
-//        return employeeService.filterEmployee(lastName);
-//    }
+    /**
+     * Get filter employees by last name.
+     * @param lastName last name.
+     * @return employees list with filter by last name.
+     */
+
+    @GetMapping(value = "/employees2/{lastName}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Employee> filterEmployee(@PathVariable(value = "lastName")  String lastName) {
+        LOGGER.debug("Get filter employees by last name: ({})", lastName);
+        return employeeService.filterEmployee(lastName);
+    }
 
 
     /**

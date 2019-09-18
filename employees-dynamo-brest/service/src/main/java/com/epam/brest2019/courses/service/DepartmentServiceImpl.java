@@ -33,6 +33,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDao.findAll();
     }
 
+
     @Override
     public Department findById(Integer departmentId) {
         LOGGER.debug("Find department with specified id: ({})", departmentId);

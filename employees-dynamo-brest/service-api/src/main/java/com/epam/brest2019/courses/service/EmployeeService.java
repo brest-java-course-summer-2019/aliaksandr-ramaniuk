@@ -18,6 +18,7 @@ public interface EmployeeService {
      * @return employees List of all employees.
      */
     List<Employee> findAll();
+    List<Employee> findAll2();
 
 
     /**

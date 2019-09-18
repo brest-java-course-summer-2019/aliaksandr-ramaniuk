@@ -29,6 +29,9 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Value("${employee.findAll}")
     private String findAllSql;
 
+    @Value("${employee.findAll2}")
+    private String findAllSql2;
+
     @Value("${employee.findByDepartmentId}")
     private String findByDepartmentIdSql;
 
@@ -70,6 +73,13 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     public List<Employee> findAll() {
         List<Employee> employees =
                 namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(Employee.class));
+        return employees;
+    }
+
+    @Override
+    public List<Employee> findAll2() {
+        List<Employee> employees =
+                namedParameterJdbcTemplate.query(findAllSql2, BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;
     }
 
@@ -126,7 +136,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> filterEmployee(String lastName) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "'%" + lastName.toUpperCase() + "%'");
+        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName.toUpperCase() + "%");
         List<Employee> resultsFilterEmployee = namedParameterJdbcTemplate.query(filterEmployeeSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 

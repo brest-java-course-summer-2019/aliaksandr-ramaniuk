@@ -26,7 +26,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 /**
  * Employee controller.
@@ -176,19 +175,6 @@ public class EmployeeController {
     }
 
 
-    //    /**
-//     * Get filter employees by last name.
-//     * @param lastName last name.
-//     * @return employees list with filter by last name.
-//     */
-//****************************************************************
-//    @GetMapping(value = "/filter-employee/{lastName}")
-//    public String filterEmployee(@PathVariable String lastName, Model model) {
-//        LOGGER.debug("Get filter employees by last name: ({})", lastName);
-//        model.addAttribute("lastName", employeeService.filterEmployee(lastName));
-//        return "employees";
-//    }
-//******************************************************************
     @PostMapping(value = "/filter")
     public String filterEmployee(@ModelAttribute("lastName") String lastName,
                                  BindingResult result, Model model) {
@@ -199,7 +185,7 @@ public class EmployeeController {
         if (result.hasErrors()) {
             return "employees";
         } else {
-            model.addAttribute("employees", employeeService.findAll());
+            model.addAttribute("employees", employeeService.filterEmployee(lastName));
             return "employees";
         }
     }
@@ -212,8 +198,8 @@ public class EmployeeController {
      * @return employees list with filter by date.
      */
     @GetMapping(value = "/employees/{localDate1}/{localDate2}")
-    public String filterEmployee(@PathVariable LocalDate localDate1,
-                                 @PathVariable LocalDate localDate2,
+    public String filterEmployee(@PathVariable String localDate1,
+                                 @PathVariable String localDate2,
                                  Model model) {
 
         LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
@@ -221,7 +207,7 @@ public class EmployeeController {
         Employee employee = new Employee();
         employee.setLocalDate(LocalDate.parse(employee.getLocalDateString1()));
         employee.setLocalDate(LocalDate.parse(employee.getLocalDateString2()));
-        model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate1, localDate2));
+   //     model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate1, localDate2));
         return "employees";
     }
 
