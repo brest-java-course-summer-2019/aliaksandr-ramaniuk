@@ -19,7 +19,7 @@ public class EmployeeValidator implements Validator {
     public static final String EMPLOYEE_LOGIN_IS_EMPTY = "login.empty";
 
     public static final int EMPLOYEE_FIRST_NAME_MAX_SIZE = 40;
-    public static final String EMPLOYEE_FIRST_NAME_MAX_SIZE_40 = "lastName.maxSize40";
+    public static final String EMPLOYEE_FIRST_NAME_MAX_SIZE_40 = "firstName.maxSize40";
     public static final String EMPLOYEE_FIRST_NAME = "firstName";
     public static final String EMPLOYEE_FIRST_NAME_IS_EMPTY = "firstName.empty";
 
@@ -44,6 +44,12 @@ public class EmployeeValidator implements Validator {
     public void validate(Object target, Errors errors) {
         employee = (Employee) target;
 
+//        checkField(EMPLOYEE_LOGIN, employee.getLogin(), errors);
+//        checkField(EMPLOYEE_LAST_NAME, employee.getLastName(), errors);
+//        checkField(EMPLOYEE_FIRST_NAME, employee.getFirstName(), errors);
+//        checkField(EMPLOYEE_PATRONIC_NAME, employee.getPatronicName(), errors);
+
+
         //Employee login
         ValidationUtils.rejectIfEmpty(errors, EMPLOYEE_LOGIN, EMPLOYEE_LOGIN_IS_EMPTY);
 
@@ -63,7 +69,7 @@ public class EmployeeValidator implements Validator {
         }
 
         if (StringUtils.hasLength(employee.getLogin())
-                && employee.getLogin().length() > EMPLOYEE_FIRST_NAME_MAX_SIZE) {
+                && employee.getFirstName().length() > EMPLOYEE_FIRST_NAME_MAX_SIZE) {
             errors.rejectValue(EMPLOYEE_FIRST_NAME, EMPLOYEE_FIRST_NAME_MAX_SIZE_40);
         }
 
@@ -90,4 +96,21 @@ public class EmployeeValidator implements Validator {
         }
 
     }
+
+//    private void checkField(String fieldName, String fieldValue, Errors errors){
+//
+//        fieldValue = fieldValue.trim();
+//
+//        ValidationUtils.rejectIfEmpty(errors, fieldName, fieldName + ".empty");
+//
+//        if(fieldValue == null){
+//            errors.rejectValue(fieldName, IS_NULL);
+//        }
+//        if (StringUtils.hasLength(fieldValue)
+//                && fieldValue.length() > EMPLOYEE_MAX_SIZE) {
+//            errors.rejectValue(fieldName, fieldName + ".maxSize40");
+////        }
+//
+//    }
+
 }

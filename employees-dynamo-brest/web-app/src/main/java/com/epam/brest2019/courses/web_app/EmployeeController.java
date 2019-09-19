@@ -76,6 +76,8 @@ public class EmployeeController {
     public final String employees(Model model) {
         LOGGER.debug("Find all employees: ({})", model);
         model.addAttribute("employees", employeeService.findAll());
+//        model.addAttribute("localDateStart", "01.02.2019");
+//        model.addAttribute("localDateEnd", "01.10.2019");
         return "employees";
     }
 
@@ -138,14 +140,28 @@ public class EmployeeController {
     public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
                               BindingResult result, Model model) {
         LOGGER.debug("Add employee({}, {})", employee, result);
+
+        employee.setLogin(employee.getLogin().trim());
+        employee.setLastName(employee.getLastName().trim());
+        employee.setFirstName(employee.getFirstName().trim());
+
         employeeValidator.validate(employee, result);
 
         try {
-            employee.setLocalDate(LocalDate.parse(employee.getLocalDateView()));
+            LocalDate dateValue = LocalDate.parse(employee.getLocalDateView());
+            if (dateValue.isAfter(LocalDate.now())){
+                employee.setLocalDate(LocalDate.now());
+            }
+            else if (dateValue.getYear() < 2019){
+                employee.setLocalDate(LocalDate.of(2019, 01, 01));
+            }
+            else {
+                employee.setLocalDate(dateValue);
+            }
+
         } catch (DateTimeParseException e) {
             employee.setLocalDate(LocalDate.now());
         }
-
 
         if (result.hasErrors()) {
             model.addAttribute("employee", employee);
@@ -208,10 +224,38 @@ public class EmployeeController {
 
         LOGGER.debug("Get filter employees by date: ({} : {})", localDateStart, localDateEnd);
 
-        LocalDate localDateStartView = LocalDate.parse(localDateStart);
+
         LocalDate localDateEndView = LocalDate.parse(localDateEnd);
+        LocalDate localDateStartView = LocalDate.now();
+
+        try{
+            localDateStartView = LocalDate.parse(localDateStart);
+
+            if (localDateStartView.isAfter(LocalDate.now())){
+                localDateStartView = LocalDate.now();
+            }
+            else if (localDateStartView.getYear() < 2019){
+                localDateStartView = LocalDate.of(2019, 01, 01);
+            }
+        }
+        catch (DateTimeParseException e){
+            localDateStartView = LocalDate.now();
+        }
+
+
+
+
+        if (localDateEndView.isAfter(LocalDate.now())){
+            localDateEndView = LocalDate.now();
+        }
+        else if (localDateEndView.getYear() < 2019){
+            localDateEndView = LocalDate.of(2019, 01, 01);
+        }
+
 
         model.addAttribute("employees", employeeService.filterEmployeeByDate(localDateStartView, localDateEndView));
+//        model.addAttribute("localDateStart", "01.02.2019");
+//        model.addAttribute("localDateEnd", "01.10.2019");
         return "employees";
     }
 }
