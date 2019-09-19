@@ -3,7 +3,6 @@ package com.epam.brest2019.courses.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Employee model
@@ -11,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Employee {
 
-
     /**
-     * Department Id.
+     * Department id is the foreign key (employee to department).
      */
     private Integer departmentId;
 
@@ -23,7 +21,7 @@ public class Employee {
     private String departmentName;
 
     /**
-     * Employee Id.
+     * Employee id is the primary key.
      */
     private Integer employeeId;
 
@@ -52,31 +50,11 @@ public class Employee {
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate localDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    private LocalDate localDate1;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-    private LocalDate localDate2;
 
-    private String localDate3;
-
-    public String getLocalDate11() {
-        return localDate11;
-    }
-
-    public void setLocalDate11(String localDate11) {
-        this.localDate11 = localDate11;
-    }
-
-    public String getLocalDate22() {
-        return localDate22;
-    }
-
-    public void setLocalDate22(String localDate22) {
-        this.localDate22 = localDate22;
-    }
-
-    private String localDate11;
-    private String localDate22;
+    /**
+     * Employee date (String) add of registration.
+     */
+    private String localDateView;
 
     /**
      * Constructor with parameters.
@@ -99,33 +77,7 @@ public class Employee {
     /**
      * Constructor without parameters.
      */
-
     public Employee() {
-    }
-
-
-    public LocalDate getLocalDate1() {
-        return localDate1;
-    }
-
-    public void setLocalDate1(LocalDate localDate1) {
-        this.localDate1 = localDate1;
-    }
-
-    public LocalDate getLocalDate2() {
-        return localDate2;
-    }
-
-    public void setLocalDate2(LocalDate localDate2) {
-        this.localDate2 = localDate2;
-    }
-
-    public String getLocalDate3() {
-        return localDate3;
-    }
-
-    public void setLocalDate3(String localDate3) {
-        this.localDate3 = localDate3;
     }
 
     /**
@@ -201,6 +153,16 @@ public class Employee {
     }
 
     /**
+     * Set date of registration employee.
+     *
+     * @param localDateView date.
+     */
+    public void setLocalDateView(String localDateView) {
+        this.localDateView = localDateView;
+    }
+
+
+    /**
      * Get department id.
      *
      * @return departmentId department by id).
@@ -268,25 +230,18 @@ public class Employee {
      *
      * @return localDate date of registration employee.
      */
-
     public LocalDate getLocalDate() {
         return localDate;
     }
 
     /**
-     * Get date-string of registration employee.
+     * Get date of registration employee.
      *
-     * @return localDateString date-string of registration employee.
+     * @return localDateView date of registration employee.
      */
-    public String getLocalDateString() {
-       if (localDate != null)
-       {
-           String localDateString = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-           return localDateString;
-       }
-       else return "no date";
+    public String getLocalDateView() {
+        return localDateView;
     }
-
 
     @Override
     public String toString() {

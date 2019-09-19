@@ -118,19 +118,19 @@ public class EmployeeRestController {
     /**
      * Get filter employees by date.
      *
-     * @param localDate1 local date first value.
-     * @param localDate2 local date second value.
+     * @param localDateStart local date first value.
+     * @param localDateEnd local date second value.
      * @return employees list with filter by date.
      */
-    @GetMapping(value = "/employees/{localDate1}/{localDate2}")
-    public List<Employee> filterEmployeeByDate(@PathVariable(value = "localDate1") String localDate1,
-                                               @PathVariable(value = "localDate2") String localDate2) {
-        LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
+    @GetMapping(value = "/employees/{localDateStart}/{localDateEnd}")
+    public List<Employee> filterEmployeeByDate(@PathVariable(value = "localDateStart") String localDateStart,
+                                               @PathVariable(value = "localDateEnd") String localDateEnd) {
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDateStart, localDateEnd);
 
-        LocalDate localDate11 = LocalDate.parse(localDate1);
-        LocalDate localDate22 = LocalDate.parse(localDate2);
+        LocalDate localDateStartView = LocalDate.parse(localDateStart);
+        LocalDate localDateEndView = LocalDate.parse(localDateEnd);
 
-        return employeeService.filterEmployeeByDate(localDate11, localDate22);
+        return employeeService.filterEmployeeByDate(localDateStartView, localDateEndView);
     }
 
 }

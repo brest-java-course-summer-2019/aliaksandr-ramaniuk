@@ -39,14 +39,6 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void findByDepartmentId() {
-        List<Employee> employees = employeeService.findByDepartmentId(2);
-        assertNotNull(employeeService);
-        assertTrue(employees.size() > 0);
-        assertEquals(employees.size(), 2);
-    }
-
-    @Test
     public void findById() {
         int departmentId = 3;
         int employeeId = 5;
@@ -85,9 +77,6 @@ public class EmployeeServiceImplTest {
         assertEquals(AddEmployee.getLocalDate(), newEmployee.getLocalDate());
         assertEquals(AddEmployee.getDepartmentId(), newEmployee.getDepartmentId());
         assertEquals(sizeBeforeAdd, sizeAfterAdd);
-
-        List<Employee> TotalEmployeeInDepartment = employeeService.findByDepartmentId(1);
-        assertEquals(TotalEmployeeInDepartment.size(), 2);
     }
 
     @Test

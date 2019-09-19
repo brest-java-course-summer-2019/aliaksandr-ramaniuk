@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.util.NestedServletException;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -140,11 +139,13 @@ public class EmployeeController {
                               BindingResult result, Model model) {
         LOGGER.debug("Add employee({}, {})", employee, result);
         employeeValidator.validate(employee, result);
+
         try {
-            employee.setLocalDate(LocalDate.parse(employee.getLocalDate3()));
+            employee.setLocalDate(LocalDate.parse(employee.getLocalDateView()));
         } catch (DateTimeParseException e) {
             employee.setLocalDate(LocalDate.now());
         }
+
 
         if (result.hasErrors()) {
             model.addAttribute("employee", employee);
@@ -196,36 +197,21 @@ public class EmployeeController {
     /**
      * Get filter employees by date.
      *
-     * @param localDate1 local date first value.
-     * @param localDate2 local date second value.
+     * @param localDateStart local date first value.
+     * @param localDateEnd local date second value.
      * @return employees list with filter by date.
      */
     @PostMapping(value = "/filter-date")
-    public String filterEmployeeByDate(@ModelAttribute(value = "localDate1") String localDate1,
-                                       @ModelAttribute(value = "localDate2") String localDate2,
+    public String filterEmployeeByDate(@ModelAttribute(value = "localDateStart") String localDateStart,
+                                       @ModelAttribute(value = "localDateEnd") String localDateEnd,
                                        Model model) {
 
-        LOGGER.debug("Get filter employees by date: ({} : {})", localDate1, localDate2);
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDateStart, localDateEnd);
 
-        LocalDate localDate11 = LocalDate.parse(localDate1);
-        LocalDate localDate22 = LocalDate.parse(localDate2);
+        LocalDate localDateStartView = LocalDate.parse(localDateStart);
+        LocalDate localDateEndView = LocalDate.parse(localDateEnd);
 
-//`        LocalDate dateNow = LocalDate.now();`
-
-//        if (LocalDate.parse(localDate1).isBefore(LocalDate.of(2018,01,01))) {
-//            LocalDate localDate11 = LocalDate.of(2018,01,01);
-//        } else {
-//            LocalDate localDate11 = LocalDate.parse(localDate2);
-//        }
-//
-//        if (LocalDate.parse(localDate2).isAfter(LocalDate.now())) {
-//            LocalDate localDate22 = LocalDate.now();
-//        } else {
-//            LocalDate localDate22 = LocalDate.parse(localDate2);
-//
-//        }
-
-        model.addAttribute("employees", employeeService.filterEmployeeByDate(localDate11, localDate22));
+        model.addAttribute("employees", employeeService.filterEmployeeByDate(localDateStartView, localDateEndView));
         return "employees";
     }
 }

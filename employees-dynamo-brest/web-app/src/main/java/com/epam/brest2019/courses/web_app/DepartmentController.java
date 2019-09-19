@@ -57,32 +57,29 @@ public class DepartmentController {
     @GetMapping(value = "/departments", produces = "application/json")
     public final String departments(Model model) {
         LOGGER.debug("Find all departments: ({})", model);
-        //     Department department = new Department();
         List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
 
-//         departments.stream()
-//        .filter(department -> department.getCountEmployeesInDepartment() != null)
-//                 .mapToInt(Department::getCountEmployeesInDepartment).sum();
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<Department> departmentList = mapper.convertValue(
-                departments,
+        List<Department> departmentList = mapper.convertValue(departments,
                 new TypeReference<List<Department>>(){}
         );
 
-        int counter = 0;
-        for (int i = 0; i < departmentList.size(); i++) {
+        int totalCountOfEmployees = departmentList.stream()
+        .filter(department -> department.getCountEmployeesInDepartment() != null)
+                 .mapToInt(Department::getCountEmployeesInDepartment).sum();
 
-            Department test = (Department) departmentList.get(i);
-            counter += test.getCountEmployeesInDepartment();
-        }
-//        departments.forEach((dept)->{
-//           counter += dept.getCountEmployeesInDepartment();
+
+//        int counter = 0;
+//        for (int i = 0; i < departmentList.size(); i++) {
 //
-//        });
+//            Department test = (Department) departmentList.get(i);
+//            counter += test.getCountEmployeesInDepartment();
+//        }
+
         model.addAttribute("departments", departments);
-        model.addAttribute("totalCountOfEmployees", counter);
+        model.addAttribute("totalCountOfEmployees", totalCountOfEmployees);
         return "departments";
     }
 

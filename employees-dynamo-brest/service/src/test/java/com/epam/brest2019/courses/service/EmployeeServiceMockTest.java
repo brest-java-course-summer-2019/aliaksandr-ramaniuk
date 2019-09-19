@@ -55,21 +55,6 @@ public class EmployeeServiceMockTest {
     }
 
     @Test
-    public void findByDepartmentId() {
-
-        int departmentId = 1;
-
-        Mockito.when(employeeDao.findByDepartmentId(departmentId)).thenReturn(Collections.singletonList(createEmployeeForTest()));
-        List<Employee> employees = employeeService.findByDepartmentId(departmentId);
-
-        assertNotNull(employees);
-        assertTrue(employees.size() > 0);
-        assertEquals(1, employees.size());
-
-        Mockito.verify(employeeDao).findByDepartmentId(departmentId);
-    }
-
-    @Test
     public void findById() {
 
         int employeeId = 1;

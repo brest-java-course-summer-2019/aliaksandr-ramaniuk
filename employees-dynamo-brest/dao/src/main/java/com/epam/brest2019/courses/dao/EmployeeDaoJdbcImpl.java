@@ -29,12 +29,6 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     @Value("${employee.findAll}")
     private String findAllSql;
 
-    @Value("${employee.findAll2}")
-    private String findAllSql2;
-
-    @Value("${employee.findByDepartmentId}")
-    private String findByDepartmentIdSql;
-
     @Value("${employee.findById}")
     private String findByIdSql;
 
@@ -60,8 +54,8 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     private static final String FIRST_NAME = "firstName";
     private static final String PATRONIC_NAME = "patronicName";
     private static final String LOCAL_DATE = "localDate";
-    private static final String LOCAL_DATE1 = "localDate1";
-    private static final String LOCAL_DATE2 = "localDate2";
+    private static final String LOCAL_DATE_START = "localDateStart";
+    private static final String LOCAL_DATE_END = "localDateEnd";
     private static final String FAILED_TO_UPDATE = "Failed to update employee in Database!";
     private static final String FAILED_TO_DELETE = "Failed to delete employee from Database!";
 
@@ -121,7 +115,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> filterEmployee(String lastName) {
-        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, "%" + lastName.toUpperCase() + "%");
+        SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, lastName.toUpperCase() + "%");
         List<Employee> resultsFilterEmployee = namedParameterJdbcTemplate.query(filterEmployeeSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 
@@ -129,9 +123,9 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2) {
+    public List<Employee> filterEmployeeByDate(LocalDate localDateStart, LocalDate localDateEnd) {
 
-        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue(LOCAL_DATE1, localDate1).addValue(LOCAL_DATE2, localDate2);
+        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue(LOCAL_DATE_START, localDateStart).addValue(LOCAL_DATE_END, localDateEnd);
         List<Employee> resultsFilterDate = namedParameterJdbcTemplate.query(filterEmployeeByDateSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
 

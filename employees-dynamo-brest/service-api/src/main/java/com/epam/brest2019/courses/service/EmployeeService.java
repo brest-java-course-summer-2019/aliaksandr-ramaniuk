@@ -65,9 +65,9 @@ public interface EmployeeService {
 
     /**
      * Get filter employees by date.
-     * @param localDate1 local date first value.
-     * @param localDate2 local date second value.
+     * @param localDateStart local date first value.
+     * @param localDateEnd local date second value.
      * @return employees.
      */
-    List<Employee> filterEmployeeByDate(LocalDate localDate1, LocalDate localDate2);
+    List<Employee> filterEmployeeByDate(LocalDate localDateStart, LocalDate localDateEnd);
 }

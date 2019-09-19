@@ -6,26 +6,8 @@ package com.epam.brest2019.courses.model;
 public class Department {
 
     /**
-     * Constructor with parameter.
-     *
-     * @param departmentName department name.
-     * @param departmentAccessRights department access rights.
+     * Department id is the primary key.
      */
-    public Department(String departmentName, String departmentAccessRights) {
-        this.departmentName = departmentName;
-        this.departmentAccessRights = departmentAccessRights;
-    }
-
-    /**
-     * Constructor without parameter.
-     */
-    public Department() {
-    }
-
-    /**
-     * Department id.
-     */
-
     private Integer departmentId;
 
     /**
@@ -42,6 +24,23 @@ public class Department {
      * Number of employees in the department.
      */
     private Integer countEmployeesInDepartment;
+
+    /**
+     * Constructor with parameter.
+     *
+     * @param departmentName department name.
+     * @param departmentAccessRights department access rights.
+     */
+    public Department(String departmentName, String departmentAccessRights) {
+        this.departmentName = departmentName;
+        this.departmentAccessRights = departmentAccessRights;
+    }
+
+    /**
+     * Constructor without parameter.
+     */
+    public Department() {
+    }
 
     /**
      * Set department id (departmentId).

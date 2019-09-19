@@ -43,13 +43,6 @@ public class EmployeeDaoJdbcImplTest {
         assertTrue(employees.size() > 0);
     }
 
-    @Test
-    public void findByDepartmentId() {
-        List<Employee> employees = employeeDao.findByDepartmentId(6);
-        assertNotNull(employeeDao);
-        assertTrue(employees.size() > 0);
-        assertEquals(employees.size(), 3);
-    }
 
     @Test
     public void findById() {
