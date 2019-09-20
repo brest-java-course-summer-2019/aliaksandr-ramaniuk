@@ -158,7 +158,7 @@ public class DepartmentControllerTest {
 //                .post("/department/{departmentId}", DEPARTMENT_ID_1)
 //                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 //                .param(DEPARTMENT_ID, DEPARTMENT_ID_1.toString())
- //               .sessionAttr(DEPARTMENT, new Department())
+//                .sessionAttr(DEPARTMENT, new Department())
 //        )
 //                .andExpect(status().isOk())
 //                .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
