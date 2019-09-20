@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,6 +30,8 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
@@ -145,31 +148,31 @@ public class EmployeeControllerTest {
         ;
     }
 
-//    /**
-//     * Add new employee.
-//     */
-//    @Test
-//    public void addEmployee() throws Exception {
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/employee-add")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN)
-//                .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
-//                .param(EMPLOYEE_FIRST_NAME, EMPLOYEE_LAST_NAME)
-//                .param(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_NAME)
-//        )
-//                .andExpect(MockMvcResultMatchers.status().isFound())
-//                .andExpect(MockMvcResultMatchers.view().name("redirect:/employees"))
-//                .andExpect(MockMvcResultMatchers.redirectedUrl("/employees"))
-//                .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors(EMPLOYEE))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, nullValue())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME))))
-//                //   .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, Matchers.is(EMPLOYEE_FIRST_NAME))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME))))
-//        ;
-//    }
+    /**
+     * Add new employee.
+     */
+    @Test
+    public void addEmployee() throws Exception {
+
+           mockMvc.perform(MockMvcRequestBuilders
+                .post("/employee-add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN)
+                .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
+                .param(EMPLOYEE_FIRST_NAME, EMPLOYEE_LAST_NAME)
+                .param(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_NAME)
+        )
+                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/employees"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/employees"))
+                .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors(EMPLOYEE))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, nullValue())))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN))))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME))))
+                //   .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, Matchers.is(EMPLOYEE_FIRST_NAME))))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME))))
+        ;
+    }
 
 //    /**
 //     * Update department.
@@ -281,7 +284,6 @@ public class EmployeeControllerTest {
   //              .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEES, hasSize(2)))
         ;
        }
-
 
         private Employee createEmployeeForTest(int employeeId) {
         Employee employee = new Employee();

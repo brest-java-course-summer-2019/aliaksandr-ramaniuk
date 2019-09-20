@@ -76,8 +76,7 @@ public class EmployeeController {
     public final String employees(Model model) {
         LOGGER.debug("Find all employees: ({})", model);
         model.addAttribute("employees", employeeService.findAll());
-//        model.addAttribute("localDateStart", "01.02.2019");
-//        model.addAttribute("localDateEnd", "01.10.2019");
+
         return "employees";
     }
 
@@ -89,7 +88,6 @@ public class EmployeeController {
     @GetMapping(value = "/employee-edit/{employeeId}")
     public final String findById(@PathVariable Integer employeeId, Model model) {
         LOGGER.debug("Go to edit employee page({},{})", employeeId, model);
-        //  Employee employee = employeeService.findById(employeeId);
         model.addAttribute("employee", employeeService.findById(employeeId));
         model.addAttribute("departments", departmentService.findAll());
         return "employee-edit";
@@ -104,7 +102,13 @@ public class EmployeeController {
     public String updateEmployee(@Valid Employee employee,
                                  BindingResult result, Model model) {
         LOGGER.debug("Update employee ({}, {})", employee, result);
+        employee.setLogin(employee.getLogin().trim());
+        employee.setLastName(employee.getLastName().trim());
+        employee.setFirstName(employee.getFirstName().trim());
+        employee.setPatronicName(employee.getPatronicName().trim());
+
         employeeValidator.validate(employee, result);
+
         if (result.hasErrors()) {
             model.addAttribute("employee", employee);
             model.addAttribute("departments", departmentService.findAll());
@@ -137,13 +141,14 @@ public class EmployeeController {
      * @return view name
      */
     @PostMapping(value = "/employee-add")
-    public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
+    public String addEmployee(@Valid Employee employee,
                               BindingResult result, Model model) {
         LOGGER.debug("Add employee({}, {})", employee, result);
 
         employee.setLogin(employee.getLogin().trim());
         employee.setLastName(employee.getLastName().trim());
         employee.setFirstName(employee.getFirstName().trim());
+        employee.setPatronicName(employee.getPatronicName().trim());
 
         employeeValidator.validate(employee, result);
 

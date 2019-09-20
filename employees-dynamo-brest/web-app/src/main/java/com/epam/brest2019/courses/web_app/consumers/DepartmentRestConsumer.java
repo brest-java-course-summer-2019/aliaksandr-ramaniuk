@@ -60,7 +60,7 @@ public class DepartmentRestConsumer implements DepartmentService {
     public void delete(Integer departmentId) {
         LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
         restTemplate.delete(url + "/" + departmentId);
-//
+
     }
 
     @Override

@@ -146,6 +146,8 @@ public class DepartmentController {
     public String updateDepartment(@Valid Department department,
                                    BindingResult result) {
         LOGGER.debug("Update department({}, {})", department, result);
+
+        department.setDepartmentName(department.getDepartmentName().trim());
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {

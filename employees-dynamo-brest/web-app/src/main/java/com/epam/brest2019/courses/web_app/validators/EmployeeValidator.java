@@ -38,12 +38,9 @@ public class EmployeeValidator implements Validator {
         checkField(EMPLOYEE_LAST_NAME, employee.getLastName(), errors);
         checkField(EMPLOYEE_FIRST_NAME, employee.getFirstName(), errors);
         checkField(EMPLOYEE_PATRONIC_NAME, employee.getPatronicName(), errors);
-
     }
 
     private void checkField(String fieldName, String fieldValue, Errors errors){
-
-        fieldValue = fieldValue.trim();
 
         ValidationUtils.rejectIfEmpty(errors, fieldName, fieldName + EMPLOYEE_IS_EMPTY);
 

@@ -1,10 +1,105 @@
 package com.epam.brest2019.courses.web_app.consumers;
 
+import com.epam.brest2019.courses.model.Department;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import static org.mockito.MockitoAnnotations.initMocks;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DepartmentRestConsumerTest {
+
+    private static final String DEPARTMENT_ID = "departmentId";
+    private static final String DEPARTMENT_NAME = "departmentName";
+    private static final String DEPARTMENT_ACCESS_RIGHTS = "departmentAccessRights";
+    private static final Integer DEPARTMENT_ID_1 = 1;
+    private String url = "/departments";
+
+    @Mock
+    private RestTemplate mockRestTemplate;
+
+    private DepartmentRestConsumer departmentRestConsumerTest;
+
+    @BeforeEach
+    public void setUp() {
+        initMocks(this);
+        departmentRestConsumerTest = new DepartmentRestConsumer("url", mockRestTemplate);
+    }
+
+    @Test
+    public void findAll() {
+        List<Department> departments = Arrays.asList();
+        Mockito.when(mockRestTemplate.getForEntity("url/departments", List.class))
+                .thenReturn(new ResponseEntity<>(new ArrayList(), HttpStatus.OK));
+
+        List<Department> department = departmentRestConsumerTest.findAll();
+
+        Assert.assertEquals(departments, department);
+
+        Mockito.verifyNoMoreInteractions(mockRestTemplate);
+
+    }
+
+    @Test
+    public void add() {
+        Department department = createDepartmentForTest(1);
+
+        Mockito.when(mockRestTemplate.postForEntity("url", createDepartmentForTest(1), Department.class));
+
+        departmentRestConsumerTest.add(department);
+
+        Mockito.verifyNoMoreInteractions(mockRestTemplate);
+
+    }
+
+    private Department createDepartmentForTest(int departmentId) {
+        Department department = new Department();
+        department.setDepartmentId(departmentId);
+        department.setDepartmentName(DEPARTMENT_NAME + departmentId);
+        department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS + departmentId);
+        return department;
+    }
+
+
+//
+//
+//
+//    @Test
+//    public void findById() {
+//        Mockito.when(restTemplate.getForEntity(url + "/" + DEPARTMENT_ID_1, Department.class))
+//          .thenReturn(new ResponseEntity<>(createDepartmentForTest(DEPARTMENT_ID_1), HttpStatus.OK));
+//
+//        Department department = departmentRestConsumer.findById(DEPARTMENT_ID_1);
+//
+//        Assert.assertNotNull(department);
+//        Assert.assertEquals(createDepartmentForTest(DEPARTMENT_ID_1), department);
+//
+//        Mockito.verify(restTemplate, Mockito.times(1))
+//                .getForEntity(url + "/" + DEPARTMENT_ID_1, Department.class);
+//        Mockito.verifyNoMoreInteractions(departmentService);
+//    }
+//
+//    private Department createDepartmentForTest(int departmentId) {
+//        Department department = new Department();
+//        department.setDepartmentId(departmentId);
+//        department.setDepartmentName(DEPARTMENT_NAME + departmentId);
+//        department.setDepartmentAccessRights(DEPARTMENT_ACCESS_RIGHTS + departmentId);
+//        return department;
+//    }
 
 
 }
-
 
 
 //
