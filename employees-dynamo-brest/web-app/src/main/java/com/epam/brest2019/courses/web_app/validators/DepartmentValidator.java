@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 @Component
 public class DepartmentValidator implements Validator {
 
-    public static final String IS_NULL = " is null!";
+    public static final String IS_NULL = " is null! ";
 
     public static final Integer DEPARTMENT_NAME_MAX_SIZE = 40;
     public static final String DEPARTMENT_NAME = "departmentName";
@@ -31,7 +31,7 @@ public class DepartmentValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, DEPARTMENT_NAME, DEPARTMENT_NAME_IS_EMPTY);
 
         if(department.getDepartmentName() == null){
-            errors.rejectValue(DEPARTMENT_NAME, IS_NULL);
+            errors.rejectValue(DEPARTMENT_NAME, IS_NULL + DEPARTMENT_NAME_IS_EMPTY);
         }
 
         if (StringUtils.hasLength(department.getDepartmentName())

@@ -59,17 +59,15 @@ public class DepartmentController {
         LOGGER.debug("Find all departments: ({})", model);
         List<Department> departments = departmentService.findAllCountEmployeesInDepartment();
 
-
         ObjectMapper mapper = new ObjectMapper();
-
         List<Department> departmentList = mapper.convertValue(departments,
-                new TypeReference<List<Department>>(){}
+                new TypeReference<List<Department>>() {
+                }
         );
 
         int totalCountOfEmployees = departmentList.stream()
-        .filter(department -> department.getCountEmployeesInDepartment() != null)
-                 .mapToInt(Department::getCountEmployeesInDepartment).sum();
-
+                .filter(department -> department.getCountEmployeesInDepartment() != null)
+                .mapToInt(Department::getCountEmployeesInDepartment).sum();
 
 //        int counter = 0;
 //        for (int i = 0; i < departmentList.size(); i++) {
@@ -91,8 +89,8 @@ public class DepartmentController {
     @GetMapping(value = "/department/{departmentId}")
     public final String findById(@PathVariable Integer departmentId, Model model) {
         LOGGER.debug("Go to edit department page({},{})", departmentId, model);
-        Department department = departmentService.findById(departmentId);
-        model.addAttribute("department", department);
+
+        model.addAttribute("department", departmentService.findById(departmentId));
         return "department";
     }
 
@@ -122,6 +120,7 @@ public class DepartmentController {
                                 BindingResult result) {
 
         LOGGER.debug("Add department({}, {})", department, result);
+        department.setDepartmentName(department.getDepartmentName().trim());
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {
@@ -148,6 +147,7 @@ public class DepartmentController {
                                    BindingResult result) {
         LOGGER.debug("Update department({}, {})", department, result);
         departmentValidator.validate(department, result);
+
         if (result.hasErrors()) {
             return "department";
         } else {

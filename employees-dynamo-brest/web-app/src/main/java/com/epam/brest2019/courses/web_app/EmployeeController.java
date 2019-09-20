@@ -149,13 +149,11 @@ public class EmployeeController {
 
         try {
             LocalDate dateValue = LocalDate.parse(employee.getLocalDateView());
-            if (dateValue.isAfter(LocalDate.now())){
+            if (dateValue.isAfter(LocalDate.now())) {
                 employee.setLocalDate(LocalDate.now());
-            }
-            else if (dateValue.getYear() < 2019){
+            } else if (dateValue.getYear() < 2019) {
                 employee.setLocalDate(LocalDate.of(2019, 01, 01));
-            }
-            else {
+            } else {
                 employee.setLocalDate(dateValue);
             }
 
@@ -214,7 +212,7 @@ public class EmployeeController {
      * Get filter employees by date.
      *
      * @param localDateStart local date first value.
-     * @param localDateEnd local date second value.
+     * @param localDateEnd   local date second value.
      * @return employees list with filter by date.
      */
     @PostMapping(value = "/filter-date")
@@ -224,38 +222,23 @@ public class EmployeeController {
 
         LOGGER.debug("Get filter employees by date: ({} : {})", localDateStart, localDateEnd);
 
+        LocalDate localDateStartView;
+        LocalDate localDateEndView;
 
-        LocalDate localDateEndView = LocalDate.parse(localDateEnd);
-        LocalDate localDateStartView = LocalDate.now();
+        try {
+           localDateStartView = LocalDate.parse(localDateStart);
+            localDateEndView = LocalDate.parse(localDateEnd);
 
-        try{
-            localDateStartView = LocalDate.parse(localDateStart);
-
-            if (localDateStartView.isAfter(LocalDate.now())){
-                localDateStartView = LocalDate.now();
+            if (localDateStartView.isAfter(localDateEndView) || localDateEndView.isBefore(localDateStartView)) {
+                localDateStartView = localDateEndView;
             }
-            else if (localDateStartView.getYear() < 2019){
-                localDateStartView = LocalDate.of(2019, 01, 01);
-            }
-        }
-        catch (DateTimeParseException e){
-            localDateStartView = LocalDate.now();
-        }
 
-
-
-
-        if (localDateEndView.isAfter(LocalDate.now())){
+        } catch (Exception e) {
+           localDateStartView = LocalDate.of(2019, 01, 01);
             localDateEndView = LocalDate.now();
         }
-        else if (localDateEndView.getYear() < 2019){
-            localDateEndView = LocalDate.of(2019, 01, 01);
-        }
-
 
         model.addAttribute("employees", employeeService.filterEmployeeByDate(localDateStartView, localDateEndView));
-//        model.addAttribute("localDateStart", "01.02.2019");
-//        model.addAttribute("localDateEnd", "01.10.2019");
         return "employees";
     }
 }
