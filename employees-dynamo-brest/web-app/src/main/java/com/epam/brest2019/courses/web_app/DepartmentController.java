@@ -68,7 +68,6 @@ public class DepartmentController {
         int totalCountOfEmployees = departmentList.stream()
                 .filter(department -> department.getCountEmployeesInDepartment() != null)
                 .mapToInt(Department::getCountEmployeesInDepartment).sum();
-
 //        int counter = 0;
 //        for (int i = 0; i < departmentList.size(); i++) {
 //

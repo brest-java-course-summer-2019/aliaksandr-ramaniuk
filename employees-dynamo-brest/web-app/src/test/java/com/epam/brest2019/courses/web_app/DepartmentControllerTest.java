@@ -2,11 +2,11 @@ package com.epam.brest2019.courses.web_app;
 
 import com.epam.brest2019.courses.model.Department;
 import com.epam.brest2019.courses.service.DepartmentService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,11 +22,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
@@ -47,6 +49,7 @@ public class DepartmentControllerTest {
     @Autowired
     private DepartmentService departmentService;
 
+
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -66,7 +69,7 @@ public class DepartmentControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/departments"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.view().name(DEPARTMENTS))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Departments List</title>")))
@@ -78,7 +81,7 @@ public class DepartmentControllerTest {
                                 hasProperty(DEPARTMENT_ACCESS_RIGHTS, Matchers.is(DEPARTMENT_ACCESS_RIGHTS + DEPARTMENT_ID_1))
                         )
                 )))
-                .andExpect(model().attribute(DEPARTMENTS, hasItem(
+                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENTS, hasItem(
                         allOf(
                                 hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_2)),
                                 hasProperty(DEPARTMENT_NAME, Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_2)),
@@ -88,7 +91,6 @@ public class DepartmentControllerTest {
         ;
 
         Mockito.verify(departmentService, times(1)).findAllCountEmployeesInDepartment();
-        //  Mockito.verifyNoMoreInteractions(departmentService);
     }
 
     /**
@@ -102,7 +104,7 @@ public class DepartmentControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/department/{departmentId}", DEPARTMENT_ID_1))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_1))))
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_1))))
@@ -121,7 +123,7 @@ public class DepartmentControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/department"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Department</title>")))
         ;
@@ -134,33 +136,33 @@ public class DepartmentControllerTest {
     public void addDepartment() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/department")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param(DEPARTMENT_NAME, DEPARTMENT_NAME)
-                        .param(DEPARTMENT_ACCESS_RIGHTS, DEPARTMENT_ACCESS_RIGHTS)
+                .post("/department")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param(DEPARTMENT_NAME, DEPARTMENT_NAME)
+                .param(DEPARTMENT_ACCESS_RIGHTS, DEPARTMENT_ACCESS_RIGHTS)
         )
-                .andExpect(status().isFound())
+                .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/departments"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/departments"))
-                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, nullValue())))
+                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, nullValue())))
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, Matchers.is(DEPARTMENT_NAME))))
                 .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ACCESS_RIGHTS, Matchers.is(DEPARTMENT_ACCESS_RIGHTS))))
         ;
     }
 
 //    /**
-//     * Update department.
+//     * Update empty department.
 //     */
 //    @Test
 //    public void updateEmptyDepartment() throws Exception {
 //
 //        mockMvc.perform(MockMvcRequestBuilders
 //                .post("/department/{departmentId}", DEPARTMENT_ID_1)
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+//                .contentType(MediaType.APPLICATION_JSON)
 //                .param(DEPARTMENT_ID, DEPARTMENT_ID_1.toString())
 //                .sessionAttr(DEPARTMENT, new Department())
 //        )
-//                .andExpect(status().isOk())
+//                .andExpect(MockMvcResultMatchers.status().isOk())
 //                .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
 //                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_1))))
 //                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, isEmptyOrNullString())))
@@ -205,12 +207,12 @@ public class DepartmentControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/department/{departmentId}/delete", DEPARTMENT_ID_1)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isFound())
+                .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/departments"))
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/departments"))
         ;
 
-        Mockito.verify(departmentService, Mockito.times(1)).delete(Mockito.anyInt());
+        Mockito.verify(departmentService, times(1)).delete(Mockito.anyInt());
     }
 
     private Department createDepartmentForTest(int departmentId) {
