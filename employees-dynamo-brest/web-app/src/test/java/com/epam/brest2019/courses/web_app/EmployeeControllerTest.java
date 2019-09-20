@@ -261,7 +261,6 @@ public class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Employees List</title>")))
             //    .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEES, hasSize(2)))
         ;
-
          }
 
     /**
