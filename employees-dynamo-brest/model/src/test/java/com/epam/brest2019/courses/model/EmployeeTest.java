@@ -10,9 +10,8 @@ import static org.junit.Assert.assertTrue;
 
 public class EmployeeTest {
 
-
     private static final Integer DEPARTMENT_ID = 8;
-    private static final String DEPARTMENT_NAME = "DEPARTMEN NAME";
+    private static final String DEPARTMENT_NAME = "DEPARTMENT NAME";
     private static final Integer EMPLOYEE_ID = 10;
     private static final String EMPLOYEE_LOGIN = "login";
     private static final String EMPLOYEE_FIRST_NAME = "first name";
@@ -38,7 +37,6 @@ public class EmployeeTest {
         employee.setDepartmentName(DEPARTMENT_NAME);
         assertTrue(employee.getDepartmentName().equals(DEPARTMENT_NAME));
     }
-
 
     @Test
     public void getLogin() {
@@ -73,8 +71,18 @@ public class EmployeeTest {
         assertEquals(employee.getLocalDate(), localDateTest);
     }
 
+    @Test
+    public void getLocalDateView() {
+        LocalDate localDate = LocalDate.of(2019, 01, 01);
+        LocalDate localDateTest = LocalDate.of(2019, 01, 01);
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String localDateView = localDate.format(formatter);
+        String localDateViewTest = localDateTest.format(formatter);
 
+        employee.setLocalDateView(localDateView);
+        assertEquals(employee.getLocalDateView(), localDateViewTest);
+    }
 
     /**
      * Constructor Employee Test

@@ -34,12 +34,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
 public class DepartmentRestControllerTest {
 
-    private static final String DEPARTMENT_ID = "departmentId";
     private static final String DEPARTMENT_NAME = "departmentName";
     private static final String DEPARTMENT_ACCESS_RIGHTS = "departmentAccessRights";
     private static final Integer DEPARTMENT_ID_1 = 1;
     private static final Integer DEPARTMENT_ID_2 = 2;
-    private static final Integer DEPARTMENT_ID_3 = 3;
 
     @Autowired
     private DepartmentRestController departmentRestController;
@@ -115,7 +113,7 @@ public class DepartmentRestControllerTest {
                 .content(asJsonString(new Department(DEPARTMENT_NAME, DEPARTMENT_ACCESS_RIGHTS)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-   //             .andExpect(status().isCreated())
+                .andExpect(status().isCreated())
                 .andReturn().getResponse()
         ;
 
@@ -144,7 +142,6 @@ public class DepartmentRestControllerTest {
         )
                 .andExpect(status().isAccepted())
         ;
-
     }
 
     @Test
@@ -159,30 +156,6 @@ public class DepartmentRestControllerTest {
 
         Mockito.verify(departmentService).delete(DEPARTMENT_ID_1);
         Mockito.verify(departmentService, times(1)).delete(DEPARTMENT_ID_1);
-        Mockito.verifyNoMoreInteractions(departmentService);
-    }
-
-    @Test
-    public void findAllCountEmployeesInDepartment() throws Exception {
-
-        Mockito.when(departmentService.findAllCountEmployeesInDepartment()).thenReturn(Arrays.asList(createDepartmentForTest(DEPARTMENT_ID_1), createDepartmentForTest(DEPARTMENT_ID_2)));
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .get("/departments/with_total_count_employees")
-                .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentId", Matchers.is(DEPARTMENT_ID_1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentName", Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS + DEPARTMENT_ID_1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentId", Matchers.is(DEPARTMENT_ID_2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentName", Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS + DEPARTMENT_ID_2)))
-        ;
-
-        Mockito.verify(departmentService).findAllCountEmployeesInDepartment();
         Mockito.verifyNoMoreInteractions(departmentService);
     }
 

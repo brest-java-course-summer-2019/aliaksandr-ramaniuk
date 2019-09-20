@@ -190,7 +190,12 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @PostMapping(value = "/filter")
+    /**
+     * Get filter employee by last name.
+     * @param lastName last name.
+     * @return employees.
+     */
+    @PostMapping(value = "/filter-name")
     public String filterEmployee(@ModelAttribute("lastName") String lastName,
                                  BindingResult result, Model model) {
         LOGGER.debug("Get filter employees by last name: ({})", result);

@@ -100,15 +100,4 @@ public class DepartmentRestController {
         LOGGER.debug("Delete department with specified id (departmentId): ({})", departmentId);
         departmentService.delete(departmentId);
     }
-
-    /**
-     * Find all departments with the count of employees in each department.
-     *
-     * @return list of all departments with the count of employees in each department.
-     */
-    @GetMapping(value = "/departments/with_total_count_employees")
-    public List<Department> findAllCountEmployeesInDepartment() {
-        LOGGER.debug("Find all departments with the count of employees in each department");
-        return departmentService.findAllCountEmployeesInDepartment();
-    }
 }

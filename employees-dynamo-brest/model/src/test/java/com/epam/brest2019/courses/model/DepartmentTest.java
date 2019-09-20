@@ -32,6 +32,12 @@ public class DepartmentTest {
         assertEquals(department.getDepartmentAccessRights(), DEPARTMENT_ACCESS_RIGHTS);
     }
 
+    @Test
+    public void getCountEmployeesInDepartment() {
+        department.setCountEmployeesInDepartment(COUNT_EMPLOYEES_IN_DEPARTMENT);
+        assertEquals(department.getCountEmployeesInDepartment(), COUNT_EMPLOYEES_IN_DEPARTMENT);
+    }
+
     /**
      * Constructor Department Test
      */
