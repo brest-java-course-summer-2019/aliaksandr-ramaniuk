@@ -53,12 +53,12 @@ public class DepartmentRestConsumerTest {
     @Test
     public void findById() throws Exception {
 
-        final Department departments = createDepartmentForTest(DEPARTMENT_ID_1);
+        Department departments = createDepartmentForTest(DEPARTMENT_ID_1);
 
         Mockito.when(mockRestTemplate.getForEntity("url/" + DEPARTMENT_ID_1, Department.class))
                 .thenReturn(new ResponseEntity<>(createDepartmentForTest(DEPARTMENT_ID_1), HttpStatus.OK));
 
-        final Department department = departmentRestConsumerTest.findById(DEPARTMENT_ID_1);
+        Department department = departmentRestConsumerTest.findById(DEPARTMENT_ID_1);
 
         assertEquals(departments.getDepartmentId(), department.getDepartmentId());
         assertEquals(departments.getDepartmentName(), department.getDepartmentName());
