@@ -37,14 +37,24 @@ public class EmployeeValidator implements Validator {
         checkField(EMPLOYEE_LOGIN, employee.getLogin(), errors);
         checkField(EMPLOYEE_LAST_NAME, employee.getLastName(), errors);
         checkField(EMPLOYEE_FIRST_NAME, employee.getFirstName(), errors);
-        checkField(EMPLOYEE_PATRONIC_NAME, employee.getPatronicName(), errors);
+        checkFieldPatronicName(EMPLOYEE_PATRONIC_NAME, employee.getPatronicName(), errors);
     }
 
-    private void checkField(String fieldName, String fieldValue, Errors errors){
-
+    private void checkField(String fieldName, String fieldValue, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, fieldName, fieldName + EMPLOYEE_IS_EMPTY);
 
-        if(fieldValue == null){
+        if (fieldValue == null) {
+            errors.rejectValue(fieldName, IS_NULL + fieldName + EMPLOYEE_IS_EMPTY);
+        }
+        if (StringUtils.hasLength(fieldValue)
+                && fieldValue.length() > EMPLOYEE_MAX_SIZE) {
+            errors.rejectValue(fieldName, fieldName + EMPLOYEE_MAX_SIZE_40);
+        }
+    }
+
+    private void checkFieldPatronicName(String fieldName, String fieldValue, Errors errors) {
+
+        if (fieldValue == null) {
             errors.rejectValue(fieldName, IS_NULL + fieldName + EMPLOYEE_IS_EMPTY);
         }
         if (StringUtils.hasLength(fieldValue)

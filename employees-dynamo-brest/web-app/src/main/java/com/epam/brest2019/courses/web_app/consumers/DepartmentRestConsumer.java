@@ -66,7 +66,7 @@ public class DepartmentRestConsumer implements DepartmentService {
     @Override
     public List<Department> findAllCountEmployeesInDepartment() {
         LOGGER.debug("Find all departments with the count of employees in each department");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/with_total_count_employees", List.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/with-total-count-employees", List.class);
         return (List<Department>) responseEntity.getBody();
 
     }

@@ -99,7 +99,7 @@ public class DepartmentRestConsumerTest {
     @Test
     public void findAllCountEmployeesInDepartment() throws Exception {
         List<Department> departments = Arrays.asList();
-        Mockito.when(mockRestTemplate.getForEntity("url/with_total_count_employees", List.class))
+        Mockito.when(mockRestTemplate.getForEntity("url/with-total-count-employees", List.class))
                 .thenReturn(new ResponseEntity<>(new ArrayList(), HttpStatus.OK));
 
         List<Department> department = departmentRestConsumerTest.findAllCountEmployeesInDepartment();

@@ -159,6 +159,31 @@ public class DepartmentRestControllerTest {
         Mockito.verifyNoMoreInteractions(departmentService);
     }
 
+    @Test
+    public void findAllCountEmployeesInDepartment() throws Exception {
+
+        Mockito.when(departmentService.findAllCountEmployeesInDepartment()).thenReturn(Arrays.asList(createDepartmentForTest(DEPARTMENT_ID_1), createDepartmentForTest(DEPARTMENT_ID_2)));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/departments/with-total-count-employees")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentId", Matchers.is(DEPARTMENT_ID_1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentName", Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS + DEPARTMENT_ID_1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentId", Matchers.is(DEPARTMENT_ID_2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentName", Matchers.is(DEPARTMENT_NAME + DEPARTMENT_ID_2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].departmentAccessRights", Matchers.is(DEPARTMENT_ACCESS_RIGHTS + DEPARTMENT_ID_2)))
+        ;
+
+        Mockito.verify(departmentService).findAllCountEmployeesInDepartment();
+        Mockito.verifyNoMoreInteractions(departmentService);
+    }
+
+
     private Department createDepartmentForTest(int departmentId) {
         Department department = new Department();
         department.setDepartmentId(departmentId);
