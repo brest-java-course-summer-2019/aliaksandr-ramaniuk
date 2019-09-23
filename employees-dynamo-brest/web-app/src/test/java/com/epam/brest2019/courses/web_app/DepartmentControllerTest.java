@@ -4,9 +4,9 @@ import com.epam.brest2019.courses.model.Department;
 import com.epam.brest2019.courses.service.DepartmentService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,17 +43,16 @@ public class DepartmentControllerTest {
     private static final Integer DEPARTMENT_ID_1 = 1;
     private static final Integer DEPARTMENT_ID_2 = 2;
 
+    private MockMvc mockMvc;
+
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
     private DepartmentService departmentService;
 
-
-    private MockMvc mockMvc;
-
     @BeforeEach
-    public void setup() {
+    public void setup(WebApplicationContext wac) {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .build();
     }
@@ -151,25 +150,26 @@ public class DepartmentControllerTest {
         ;
     }
 
-//    /**
-//     * Update empty department.
-//     */
-//    @Test
-//    public void updateEmptyDepartment() throws Exception {
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/department/{departmentId}", DEPARTMENT_ID_1)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .param(DEPARTMENT_ID, DEPARTMENT_ID_1.toString())
-//                .sessionAttr(DEPARTMENT, new Department())
-//        )
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
-//                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_1))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, isEmptyOrNullString())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ACCESS_RIGHTS, isEmptyOrNullString())))
-//        ;
-//    }
+    /**
+     * Update empty department.
+     */
+    @Disabled ("Test doesn't run. Caused by: java.lang.NullPointerException")
+    @Test
+    public void updateEmptyDepartment() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/department/{departmentId}", DEPARTMENT_ID_1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .param(DEPARTMENT_ID, DEPARTMENT_ID_1.toString())
+                .sessionAttr(DEPARTMENT, new Department())
+        )
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
+                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_1))))
+                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, isEmptyOrNullString())))
+                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ACCESS_RIGHTS, isEmptyOrNullString())))
+        ;
+    }
 
     /**
      * Update department with specified id (departmentId).

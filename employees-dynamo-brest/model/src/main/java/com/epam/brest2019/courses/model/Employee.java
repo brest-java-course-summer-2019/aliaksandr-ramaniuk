@@ -15,9 +15,6 @@ public class Employee {
      */
     private Integer departmentId;
 
-    /**
-     * Department name.
-     */
     private String departmentName;
 
     /**
@@ -25,24 +22,12 @@ public class Employee {
      */
     private Integer employeeId;
 
-    /**
-     * Employee login.
-     */
     private String login;
 
-    /**
-     * Employee last name.
-     */
     private String lastName;
 
-    /**
-     * Employee first name.
-     */
     private String firstName;
 
-    /**
-     * Employee patronic name.
-     */
     private String patronicName;
 
     /**
@@ -52,7 +37,7 @@ public class Employee {
     private LocalDate localDate;
 
     /**
-     * Employee date (String) add of registration.
+     * Employee date (String) of registration.
      */
     private String localDateView;
 
@@ -63,7 +48,7 @@ public class Employee {
      * @param login        login.
      * @param firstName    First Name.
      * @param patronicName Patronic Name.
-     * @param localDate    Date.
+     * @param localDate    Date of registration..
      */
     public Employee(Integer departmentId, String login, String lastName, String firstName, String patronicName, LocalDate localDate) {
         this.departmentId = departmentId;
@@ -153,7 +138,7 @@ public class Employee {
     }
 
     /**
-     * Set date of registration employee.
+     * Set date (String) of registration employee.
      *
      * @param localDateView date.
      */
@@ -235,7 +220,7 @@ public class Employee {
     }
 
     /**
-     * Get date of registration employee.
+     * Get date (String) of registration employee.
      *
      * @return localDateView date of registration employee.
      */

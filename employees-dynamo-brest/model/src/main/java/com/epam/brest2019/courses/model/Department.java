@@ -10,14 +10,8 @@ public class Department {
      */
     private Integer departmentId;
 
-    /**
-     * Department name.
-     */
     private String departmentName;
 
-    /**
-     * DepartmentAccessRights.
-     */
     private String departmentAccessRights;
 
     /**

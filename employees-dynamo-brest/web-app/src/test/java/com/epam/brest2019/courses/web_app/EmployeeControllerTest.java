@@ -1,15 +1,14 @@
 package com.epam.brest2019.courses.web_app;
 
 import com.epam.brest2019.courses.model.Employee;
-import com.epam.brest2019.courses.service.DepartmentService;
 import com.epam.brest2019.courses.service.EmployeeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,9 +19,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
@@ -31,15 +27,10 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.times;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
@@ -47,7 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EmployeeControllerTest {
 
     private static final String EMPLOYEE_EDIT = "employee-edit";
-    private static final String EMPLOYEE_ADD = "employee-add";
     private static final String EMPLOYEES = "employees";
     private static final String EMPLOYEE = "employee";
     private static final String EMPLOYEE_ID = "employeeId";
@@ -58,21 +48,17 @@ public class EmployeeControllerTest {
     private static final Integer EMPLOYEE_ID_1 = 1;
     private static final Integer EMPLOYEE_ID_2 = 2;
 
+    private MockMvc mockMvc;
+
     @Autowired
     private WebApplicationContext wac;
 
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private DepartmentService departmentService;
-
-
-    private MockMvc mockMvc;
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac)
-                .build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     /**
@@ -99,7 +85,7 @@ public class EmployeeControllerTest {
                                 hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME + EMPLOYEE_ID_1))
                         )
                 )))
-                .andExpect(model().attribute(EMPLOYEES, hasItem(
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEES, hasItem(
                         allOf(
                                 hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_2)),
                                 hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN + EMPLOYEE_ID_2)),
@@ -149,59 +135,61 @@ public class EmployeeControllerTest {
         ;
     }
 
+    /**
+     * Add new employee.
+     */
+    @Disabled ("Test doesn't run. Caused by: java.lang.NullPointerException")
+    @Test
+    public void addEmployee() throws Exception {
 
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/employee-add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN)
+                .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
+                .param(EMPLOYEE_FIRST_NAME, EMPLOYEE_LAST_NAME)
+                .param(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_NAME)
+                .sessionAttr(EMPLOYEE, new Employee())
+        )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/employees"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/employees"))
+                .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors(EMPLOYEE))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, nullValue())))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN))))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME))))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME))))
+        ;
+    }
 
-//    /**
-//     * Add new employee.
-//     */
-//    @Test
-//    public void addEmployee() throws Exception {
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/employee-add")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .param(EMPLOYEE_LOGIN, EMPLOYEE_LOGIN)
-//                .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
-//                .param(EMPLOYEE_FIRST_NAME, EMPLOYEE_LAST_NAME)
-//                .param(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_NAME)
-//                .sessionAttr(EMPLOYEE, new Employee())
-//        )
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isFound())
-//                .andExpect(MockMvcResultMatchers.view().name("redirect:/employees"))
-//                .andExpect(MockMvcResultMatchers.redirectedUrl("/employees"))
-//                .andExpect(MockMvcResultMatchers.model().attributeHasNoErrors(EMPLOYEE))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, nullValue())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, Matchers.is(EMPLOYEE_LOGIN))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME))))
-//                //   .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, Matchers.is(EMPLOYEE_FIRST_NAME))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME))))
-//        ;
-//    }
+    /**
+     * Update department.
+     */
+    @Disabled("Test doesn't run. Caused by: java.lang.NullPointerException")
+    @Test
+    public void updateEmptyEmployee() throws Exception {
 
+        Mockito.doNothing().doThrow(new NullPointerException())
+                .when(employeeService).update(createEmployeeForTest(0));
 
-//    /**
-//     * Update department.
-//     */
-//    @Test
-//    public void updateEmptyEmployee() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .post("/employee-edit/{employeeId}", EMPLOYEE_ID_1)
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//                .param(EMPLOYEE_ID, EMPLOYEE_ID_1.toString())
-//                .sessionAttr(EMPLOYEE, new Employee())
-//        )
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE_EDIT))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_1))))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, isEmptyOrNullString())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, isEmptyOrNullString())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, isEmptyOrNullString())))
-//                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, isEmptyOrNullString())))
-//        ;
-//
-//    }
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/employee-edit/{employeeId}", EMPLOYEE_ID_1)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param(EMPLOYEE_ID, EMPLOYEE_ID_1.toString())
+                .sessionAttr(EMPLOYEE, new Employee())
+        )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE_EDIT))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_1))))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, isEmptyOrNullString())))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, isEmptyOrNullString())))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, isEmptyOrNullString())))
+                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, isEmptyOrNullString())))
+        ;
+
+    }
 
     /**
      * Update department with specified id (departmentId).
@@ -266,7 +254,6 @@ public class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.view().name(EMPLOYEES))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Employees List</title>")))
-        //    .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEES, hasSize(2)))
         ;
     }
 
@@ -287,9 +274,9 @@ public class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.view().name(EMPLOYEES))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("<title>Employees List</title>")))
-        //              .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEES, hasSize(2)))
         ;
     }
+
 
     private Employee createEmployeeForTest(int employeeId) {
         Employee employee = new Employee();
