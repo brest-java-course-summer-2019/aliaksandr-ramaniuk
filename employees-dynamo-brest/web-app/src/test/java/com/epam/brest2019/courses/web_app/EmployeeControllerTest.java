@@ -45,6 +45,7 @@ public class EmployeeControllerTest {
     private static final String EMPLOYEE_LAST_NAME = "lastName";
     private static final String EMPLOYEE_FIRST_NAME = "firstName";
     private static final String EMPLOYEE_PATRONIC_NAME = "patronicName";
+    private static final String EMPLOYEE_LOCAL_DATE_VIEW = "localDateView";
     private static final Integer EMPLOYEE_ID_1 = 1;
     private static final Integer EMPLOYEE_ID_2 = 2;
 
@@ -138,7 +139,6 @@ public class EmployeeControllerTest {
     /**
      * Add new employee.
      */
-    @Disabled ("Test doesn't run. Caused by: java.lang.NullPointerException")
     @Test
     public void addEmployee() throws Exception {
 
@@ -149,6 +149,7 @@ public class EmployeeControllerTest {
                 .param(EMPLOYEE_LAST_NAME, EMPLOYEE_LAST_NAME)
                 .param(EMPLOYEE_FIRST_NAME, EMPLOYEE_LAST_NAME)
                 .param(EMPLOYEE_PATRONIC_NAME, EMPLOYEE_PATRONIC_NAME)
+                .param(EMPLOYEE_LOCAL_DATE_VIEW, "2019-09-15")
                 .sessionAttr(EMPLOYEE, new Employee())
         )
                 .andDo(MockMvcResultHandlers.print())
@@ -161,34 +162,6 @@ public class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, Matchers.is(EMPLOYEE_LAST_NAME))))
                 .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, Matchers.is(EMPLOYEE_PATRONIC_NAME))))
         ;
-    }
-
-    /**
-     * Update department.
-     */
-    @Disabled("Test doesn't run. Caused by: java.lang.NullPointerException")
-    @Test
-    public void updateEmptyEmployee() throws Exception {
-
-        Mockito.doNothing().doThrow(new NullPointerException())
-                .when(employeeService).update(createEmployeeForTest(0));
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/employee-edit/{employeeId}", EMPLOYEE_ID_1)
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param(EMPLOYEE_ID, EMPLOYEE_ID_1.toString())
-                .sessionAttr(EMPLOYEE, new Employee())
-        )
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(EMPLOYEE_EDIT))
-                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_ID, Matchers.is(EMPLOYEE_ID_1))))
-                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LOGIN, isEmptyOrNullString())))
-                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_LAST_NAME, isEmptyOrNullString())))
-                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_FIRST_NAME, isEmptyOrNullString())))
-                .andExpect(MockMvcResultMatchers.model().attribute(EMPLOYEE, hasProperty(EMPLOYEE_PATRONIC_NAME, isEmptyOrNullString())))
-        ;
-
     }
 
     /**

@@ -110,14 +110,14 @@ public class DepartmentController {
                                 BindingResult result) {
 
         LOGGER.debug("Add department({}, {})", department, result);
-        department.setDepartmentName(department.getDepartmentName().trim());
+//        department.setDepartmentName(department.getDepartmentName().trim());
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {
             return "department";
         } else {
             try {
-                this.departmentService.add(department);
+                departmentService.add(department);
                 return "redirect:/departments";
             } catch (HttpServerErrorException e) {
                 FieldError ssoError = new FieldError("department", "departmentName", "This name is used");
@@ -137,14 +137,14 @@ public class DepartmentController {
                                    BindingResult result) {
         LOGGER.debug("Update department({}, {})", department, result);
 
-        department.setDepartmentName(department.getDepartmentName().trim());
+//        department.setDepartmentName(department.getDepartmentName().trim());
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {
             return "department";
         } else {
             try {
-                this.departmentService.update(department);
+                departmentService.update(department);
                 return "redirect:/departments";
             } catch (Exception error) {
                 FieldError ssoError = new FieldError("department", "departmentName", "This name is used");

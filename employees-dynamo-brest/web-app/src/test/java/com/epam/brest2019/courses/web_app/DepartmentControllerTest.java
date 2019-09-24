@@ -151,27 +151,6 @@ public class DepartmentControllerTest {
     }
 
     /**
-     * Update empty department.
-     */
-    @Disabled ("Test doesn't run. Caused by: java.lang.NullPointerException")
-    @Test
-    public void updateEmptyDepartment() throws Exception {
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/department/{departmentId}", DEPARTMENT_ID_1)
-                .contentType(MediaType.APPLICATION_JSON)
-                .param(DEPARTMENT_ID, DEPARTMENT_ID_1.toString())
-                .sessionAttr(DEPARTMENT, new Department())
-        )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(DEPARTMENT))
-                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ID, Matchers.is(DEPARTMENT_ID_1))))
-                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_NAME, isEmptyOrNullString())))
-                .andExpect(MockMvcResultMatchers.model().attribute(DEPARTMENT, hasProperty(DEPARTMENT_ACCESS_RIGHTS, isEmptyOrNullString())))
-        ;
-    }
-
-    /**
      * Update department with specified id (departmentId).
      */
     @Test

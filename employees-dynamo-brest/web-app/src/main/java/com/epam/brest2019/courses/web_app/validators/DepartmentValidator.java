@@ -28,11 +28,13 @@ public class DepartmentValidator implements Validator {
 
         Department department = (Department) target;
 
-        ValidationUtils.rejectIfEmpty(errors, DEPARTMENT_NAME, DEPARTMENT_NAME_IS_EMPTY);
-
         if(department.getDepartmentName() == null){
             errors.rejectValue(DEPARTMENT_NAME, IS_NULL + DEPARTMENT_NAME_IS_EMPTY);
         }
+
+//        department.setDepartmentName(department.getDepartmentName().trim());
+
+        ValidationUtils.rejectIfEmpty(errors, DEPARTMENT_NAME, DEPARTMENT_NAME_IS_EMPTY);
 
         if (StringUtils.hasLength(department.getDepartmentName())
                 && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
