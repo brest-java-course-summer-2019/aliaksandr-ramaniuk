@@ -4,7 +4,8 @@ import com.epam.brest2019.courses.dao.EmployeeDao;
 import com.epam.brest2019.courses.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
  * Employee Service Interface implementation.z
  */
 
-@Service
+@Component
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static final String FAILED_TO_GET_EMPLOYEE = "Failed to get employee from Database by id";
