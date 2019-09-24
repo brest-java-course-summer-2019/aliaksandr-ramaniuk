@@ -3,6 +3,8 @@ package com.epam.brest2019.courses.dao;
 import com.epam.brest2019.courses.model.Department;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -25,6 +27,8 @@ import java.util.Optional;
 public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoJdbcImpl.class);
 
     @Value("${department.findAll}")
     private String findAllSql;
@@ -56,6 +60,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public List<Department> findAll() {
+        LOGGER.debug("Find all departments");
         List<Department> departments =
                 namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(Department.class));
         return departments;
@@ -63,6 +68,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public Optional<Department> findById(Integer departmentId) {
+        LOGGER.debug("Find department with specified id: ({})", departmentId);
         SqlParameterSource namedParameters = new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         List<Department> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Department.class));
@@ -71,6 +77,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public Department add(Department department) {
+        LOGGER.debug("Add new department: ({})", department);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(DEPARTMENT_NAME, department.getDepartmentName().toUpperCase());
         parameters.addValue(DEPARTMENT_ACCESS_RIGHTS, department.getDepartmentAccessRights().toLowerCase());
@@ -83,6 +90,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void update(Department department) {
+        LOGGER.debug("Update department: ({})", department);
         department.setDepartmentName(department.getDepartmentName().toUpperCase());
         Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)))
                 .filter(this::successfullyUpdated)
@@ -91,6 +99,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void delete(Integer departmentId) {
+        LOGGER.debug("Delete department with specified id: ({})", departmentId);
         MapSqlParameterSource deleteParameter = new MapSqlParameterSource();
         deleteParameter.addValue(DEPARTMENT_ID, departmentId);
         Optional.of(namedParameterJdbcTemplate.update(deleteSql, deleteParameter))
@@ -99,6 +108,7 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     }
 
     public List<Department> findAllCountEmployeesInDepartment() {
+        LOGGER.debug("Find all departments with the count of employees in each department");
         List<Department> departments = namedParameterJdbcTemplate.query(findAllCountEmployeesInDepartmentSql,
                 BeanPropertyRowMapper.newInstance(Department.class));
         return departments;

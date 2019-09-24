@@ -4,15 +4,9 @@ import com.epam.brest2019.courses.model.Employee;
 import com.epam.brest2019.courses.service.DepartmentService;
 import com.epam.brest2019.courses.service.EmployeeService;
 import com.epam.brest2019.courses.web_app.validators.EmployeeValidator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,15 +51,6 @@ public class EmployeeController {
     @Autowired
     EmployeeValidator employeeValidator;
 
-    @Bean(name = "OBJECT_MAPPER_BEAN")
-    public ObjectMapper jsonObjectMapper() {
-        return Jackson2ObjectMapperBuilder.json()
-                .serializationInclusion(JsonInclude.Include.NON_NULL) // Don’t include null values
-                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS) //ISODate
-                .modules(new JSR310Module())
-                .build();
-    }
-
     /**
      * Go to employees list page.
      *
@@ -102,6 +87,7 @@ public class EmployeeController {
     public String updateEmployee(@Valid Employee employee,
                                  BindingResult result, Model model) {
         LOGGER.debug("Update employee ({}, {})", employee, result);
+
         employee.setLogin(employee.getLogin().trim());
         employee.setLastName(employee.getLastName().trim());
         employee.setFirstName(employee.getFirstName().trim());

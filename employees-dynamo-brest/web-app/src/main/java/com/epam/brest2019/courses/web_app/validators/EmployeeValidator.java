@@ -34,17 +34,17 @@ public class EmployeeValidator implements Validator {
     public void validate(Object target, Errors errors) {
         employee = (Employee) target;
 
-        checkField(EMPLOYEE_LOGIN, employee.getLogin(), errors);
-        checkField(EMPLOYEE_LAST_NAME, employee.getLastName(), errors);
-        checkField(EMPLOYEE_FIRST_NAME, employee.getFirstName(), errors);
+        checkFieldLoginLastAndFirstName(EMPLOYEE_LOGIN, employee.getLogin(), errors);
+        checkFieldLoginLastAndFirstName(EMPLOYEE_LAST_NAME, employee.getLastName(), errors);
+        checkFieldLoginLastAndFirstName(EMPLOYEE_FIRST_NAME, employee.getFirstName(), errors);
         checkFieldPatronicName(EMPLOYEE_PATRONIC_NAME, employee.getPatronicName(), errors);
     }
 
-    private void checkField(String fieldName, String fieldValue, Errors errors) {
+    private void checkFieldLoginLastAndFirstName(String fieldName, String fieldValue, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, fieldName, fieldName + EMPLOYEE_IS_EMPTY);
 
         if (fieldValue == null) {
-            errors.rejectValue(fieldName, IS_NULL + fieldName + EMPLOYEE_IS_EMPTY);
+            errors.rejectValue(fieldName, fieldName + IS_NULL);
         }
         if (StringUtils.hasLength(fieldValue)
                 && fieldValue.length() > EMPLOYEE_MAX_SIZE) {
@@ -55,7 +55,7 @@ public class EmployeeValidator implements Validator {
     private void checkFieldPatronicName(String fieldName, String fieldValue, Errors errors) {
 
         if (fieldValue == null) {
-            errors.rejectValue(fieldName, IS_NULL + fieldName + EMPLOYEE_IS_EMPTY);
+            errors.rejectValue(fieldName, fieldName + IS_NULL);
         }
         if (StringUtils.hasLength(fieldValue)
                 && fieldValue.length() > EMPLOYEE_MAX_SIZE) {
@@ -63,5 +63,4 @@ public class EmployeeValidator implements Validator {
         }
 
     }
-
 }

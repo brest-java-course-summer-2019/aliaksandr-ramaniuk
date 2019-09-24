@@ -110,7 +110,9 @@ public class DepartmentController {
                                 BindingResult result) {
 
         LOGGER.debug("Add department({}, {})", department, result);
-//        department.setDepartmentName(department.getDepartmentName().trim());
+
+        department.setDepartmentName(department.getDepartmentName().trim());
+
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {
@@ -137,7 +139,8 @@ public class DepartmentController {
                                    BindingResult result) {
         LOGGER.debug("Update department({}, {})", department, result);
 
-//        department.setDepartmentName(department.getDepartmentName().trim());
+        department.setDepartmentName(department.getDepartmentName().trim());
+
         departmentValidator.validate(department, result);
 
         if (result.hasErrors()) {

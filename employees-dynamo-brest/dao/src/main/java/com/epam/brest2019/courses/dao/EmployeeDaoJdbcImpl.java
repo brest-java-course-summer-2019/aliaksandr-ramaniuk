@@ -1,6 +1,8 @@
 package com.epam.brest2019.courses.dao;
 
 import com.epam.brest2019.courses.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -25,6 +27,9 @@ import java.util.Optional;
 public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(EmployeeDaoJdbcImpl.class);
+
 
     @Value("${employee.findAll}")
     private String findAllSql;
@@ -65,6 +70,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> findAll() {
+        LOGGER.debug("Find all employees");
         List<Employee> employees =
                 namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;
@@ -72,6 +78,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public Optional<Employee> findById(Integer employeeId) {
+        LOGGER.debug("Find employee with specified id: ({})", employeeId);
         SqlParameterSource namedParameters = new MapSqlParameterSource(EMPLOYEE_ID, employeeId);
         List<Employee> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
@@ -80,6 +87,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public Employee add(Employee employee) {
+        LOGGER.debug("Add new employee: ({})", employee);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(LOGIN, employee.getLogin().toLowerCase());
         parameters.addValue(LAST_NAME, employee.getLastName().toUpperCase());
@@ -96,6 +104,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public void update(Employee employee) {
+        LOGGER.debug("Update employee: ({})", employee);
         employee.setLastName(employee.getLastName().toUpperCase());
         employee.setFirstName(employee.getFirstName().toUpperCase());
         employee.setPatronicName(employee.getPatronicName().toUpperCase());
@@ -106,6 +115,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public void delete(Integer employeeId) {
+        LOGGER.debug("Delete employee with specified id: ({})", employeeId);
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(EMPLOYEE_ID, employeeId);
         Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
@@ -115,6 +125,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> filterEmployee(String lastName) {
+        LOGGER.debug("Get filter employees by last name: ({})", lastName);
         SqlParameterSource namedParameters = new MapSqlParameterSource(LAST_NAME, lastName.toUpperCase() + "%");
         List<Employee> resultsFilterEmployee = namedParameterJdbcTemplate.query(filterEmployeeSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
@@ -124,7 +135,7 @@ public class EmployeeDaoJdbcImpl implements EmployeeDao {
 
     @Override
     public List<Employee> filterEmployeeByDate(LocalDate localDateStart, LocalDate localDateEnd) {
-
+        LOGGER.debug("Get filter employees by date: ({} : {})", localDateStart, localDateEnd);
         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue(LOCAL_DATE_START, localDateStart).addValue(LOCAL_DATE_END, localDateEnd);
         List<Employee> resultsFilterDate = namedParameterJdbcTemplate.query(filterEmployeeByDateSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Employee.class));
